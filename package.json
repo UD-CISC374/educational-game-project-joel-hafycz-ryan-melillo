@@ -18,7 +18,7 @@
     "url": "https://github.com/acbart/educational-phaser-game-template.git"
   },
   "scripts": {
-    "start": "webpack-dev-server --config config/webpack.dev.js",
+    w"start": "webpack-dev-server --config config/webpack.dev.js",
     "build": "webpack --config config/webpack.prod.js",
     "deploy-dev": "webpack --config config/webpack.deploy.js --env.endpoint=dev && gh-pages -d dist",
     "deploy-alpha": "webpack --config config/webpack.deploy.js --env.endpoint=alpha && gh-pages -d dist",
