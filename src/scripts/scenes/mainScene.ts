@@ -1,6 +1,5 @@
 
 export default class MainScene extends Phaser.Scene {
-
   //Backgrounds
   background: Phaser.GameObjects.TileSprite;
 
@@ -24,21 +23,24 @@ export default class MainScene extends Phaser.Scene {
     this.background.setOrigin(0, 0);
 
     //Sprites / Images
-    this.player = this.physics.add.sprite(0,0,"player");
+    this.player = this.physics.add.sprite(20,20,"player");
 
     //Keyboard
     this.cursorKeys = this.input.keyboard.createCursorKeys();
 
     //Set interactive
-    this.player.setInteractive();
 
 
     //Add to group
-  
+    
+    //Other
+    let PlayerSpawnX = 50;
+    let PlayerSpawnY = 50;
 
   }
 
   update() {
+    this.movePlayer();
 
     //Functions
 
@@ -50,10 +52,17 @@ export default class MainScene extends Phaser.Scene {
 
   //When dead, resets player position to the beginning of the level
   resetPlayerPos(player) {
-    player.x = 0;
-    player.y = 0;
+    player.play("death");
+    player.play("restart");
+    player.x = 50;
+    player.y = 50;
   }
 
-  movePlayer(player){
+  movePlayer(){
+    this.player
+
+    if ((this.cursorKeys.left?.isDown) {
+      //Property 'setVelocityX' does not exist on type 'Sprite'?
+      this.player.setVelocityX(10); 
   }
 }
