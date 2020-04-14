@@ -1,4 +1,3 @@
-import ExampleObject from '../objects/exampleObject';
 
 export default class MainScene extends Phaser.Scene {
 
@@ -6,12 +5,10 @@ export default class MainScene extends Phaser.Scene {
   background: Phaser.GameObjects.TileSprite;
 
   //Individual Objects (you can def change these, theyre awful)
-  private player_ONE_level_ONE: Phaser.GameObjects.Sprite;
-  private player_TWO_level_ONE: Phaser.GameObjects.Sprite;
-  private player_ONE_level_TWO: Phaser.GameObjects.Sprite;
+  private player: Phaser.GameObjects.Sprite;
 
   //Groups
-  private players: Phaser.Physics.Arcade.Group;
+  private pickups: Phaser.Physics.Arcade.Group;
 
   //Other
   private cursorKeys: Phaser.Types.Input.Keyboard.CursorKeys;
@@ -27,19 +24,18 @@ export default class MainScene extends Phaser.Scene {
     this.background.setOrigin(0, 0);
 
     //Sprites / Images
+    this.player = this.physics.add.sprite(0,0,"player");
 
     //Keyboard
     this.cursorKeys = this.input.keyboard.createCursorKeys();
 
     //Set interactive
-    this.player_ONE_level_ONE.setInteractive();
-    this.player_TWO_level_ONE.setInteractive();
-    this.player_ONE_level_TWO.setInteractive();
+    this.player.setInteractive();
+
 
     //Add to group
-    this.players.add(this.player_ONE_level_ONE);
-    this.players.add(this.player_TWO_level_ONE);
-    this.players.add(this.player_ONE_level_TWO);
+  
+
   }
 
   update() {
@@ -59,6 +55,5 @@ export default class MainScene extends Phaser.Scene {
   }
 
   movePlayer(player){
-    //
   }
 }
