@@ -1,7 +1,7 @@
 
 export default class MainScene extends Phaser.Scene {
   //Backgrounds
-  background: Phaser.GameObjects.TileSprite;
+  private background: Phaser.GameObjects.TileSprite;
 
   //Individual Objects (you can def change these, theyre awful)
   private player: Phaser.GameObjects.Sprite;
@@ -19,11 +19,11 @@ export default class MainScene extends Phaser.Scene {
   create() {
 
     //Background Scenes
-    this.background = this.add.tileSprite(0, 0, this.scale.width, this.scale.height, "background");
+    this.background = this.add.tileSprite(0, 0, this.scale.width, this.scale.height, "backgroundlvl1.png");
     this.background.setOrigin(0, 0);
 
     //Sprites / Images
-    this.player = this.physics.add.sprite(20,20,"player");
+    this.player = this.physics.add.sprite(80,20,"player");
 
     //Keyboard
     this.cursorKeys = this.input.keyboard.createCursorKeys();
@@ -40,7 +40,7 @@ export default class MainScene extends Phaser.Scene {
   }
 
   update() {
-    this.movePlayer();
+    //this.movePlayer();
 
     //Functions
 
@@ -58,11 +58,11 @@ export default class MainScene extends Phaser.Scene {
     player.y = 50;
   }
 
-  movePlayer(){
+  /*movePlayer(){
     this.player
 
     if ((this.cursorKeys.left?.isDown) {
       //Property 'setVelocityX' does not exist on type 'Sprite'?
       this.player.setVelocityX(10); 
-  }
+  }*/
 }

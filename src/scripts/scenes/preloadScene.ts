@@ -6,7 +6,7 @@ export default class PreloadScene extends Phaser.Scene {
   preload() {
 
     //Load Images
-    this.load.image("backgroundlvl1", "assets/images/backgroundlvl1.png");
+    this.load.image("backgroundlvl1.png", "assets/images/backgroundlvl1.png");
     this.load.image("player", "assets/images/player.png");
     
     //Load SpriteSheets
@@ -18,7 +18,6 @@ export default class PreloadScene extends Phaser.Scene {
       frameWidth: 16,
       frameHeight: 16
     });
-
 
   }
 
