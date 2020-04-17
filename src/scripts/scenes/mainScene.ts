@@ -5,6 +5,8 @@ export default class MainScene extends Phaser.Scene {
 
   //Individual Objects (you can def change these, theyre awful)
   private player: Phaser.Physics.Arcade.Sprite;
+
+  private drag = 250;
   
   private box: Phaser.Physics.Arcade.Sprite;
   private enemy: Phaser.Physics.Arcade.Sprite;
@@ -46,6 +48,7 @@ export default class MainScene extends Phaser.Scene {
     this.enemy = this.physics.add.sprite(300,300,"enemy");*/
 
     //Movable objects
+
     
     //Spikes
     this.spikes = this.physics.add.group({
@@ -56,8 +59,9 @@ export default class MainScene extends Phaser.Scene {
     //Enemies
     this.enemies = this.physics.add.group({
       immovable:true,
-      allowGravity:true
+      allowGravity:false
     });
+
 
     //Pickups
     this.coins = this.physics.add.group({
@@ -150,6 +154,9 @@ export default class MainScene extends Phaser.Scene {
     this.createBox(280, 70, "box1");
     this.createBox(320, 70, "box2");
     this.createBox(360, 70, "box3");
+   // for(var i=0; i<this.boxes.getLength(); i++){
+     // this.boxes[i].setCollideWorldBounds(true);
+   // }
 
     this.createDoor(790,527,"door1");
     this.createDoor(820,527,"door2");
@@ -192,15 +199,23 @@ export default class MainScene extends Phaser.Scene {
       function(box,machine){
         
       });
+
+      this.physics.add.overlap(this.player, this.coins, this.pickupCoin);
+      this.physics.add.overlap(this.player, this.enemies, this.hurtPlayer);
+      this.physics.add.overlap(this.player, this.spikes, this.hurtPlayer);
+      
     /*this.physics.add.collider(this.coins, this.player,         //Crashes when you touch the coin
       function(coin, player){
         coin.destroy();
-      })/*
-    
-    /*this.physics.add.collider(this.enemies, this.player,        //Crashes when you touch an enemy
+      })
+    */
+/*
+    this.physics.add.collider(this.enemies, this.player,        //Crashes when you touch an enemy
       function(enemy, player){
         player.destroy();
-      });*/
+        console.log("destroy player?");
+      });
+      */
 
 
     //Add to group
@@ -241,14 +256,24 @@ export default class MainScene extends Phaser.Scene {
     }
   }
 
+  hurtPlayer(player, enemy){
+    player.x = 80;
+    player.y = 20;
+  }
+
+
+  pickupCoin(player, coin){
+    coin.disableBody(true, true);
+  }
+
   createPlatform(xpos, ypos){
-    var platform = this.add.sprite(xpos, ypos, "platform");
+    var platform = this.physics.add.sprite(xpos, ypos, "platform");
     this.platforms.add(platform);
   }
 
   createLongPlatforms(x,y,length){
     for (let i = 0; i < length; i++){
-      var platform = this.add.sprite(x,y, "platform");
+      var platform = this.physics.add.sprite(x,y, "platform");
       this.platforms.add(platform);
       x += 30;
     }
@@ -256,7 +281,7 @@ export default class MainScene extends Phaser.Scene {
 
   createWalls(x,y,length){
     for (let i = 0; i < length; i++){
-      var wall = this.add.sprite(x,y, "wall");
+      var wall = this.physics.add.sprite(x,y, "wall");
       this.walls.add(wall);
       y += 30;
     }
@@ -264,57 +289,62 @@ export default class MainScene extends Phaser.Scene {
 
   createLongSpike(x,y,length){
     for (let i = 0; i < length; i++){
-      var spike = this.add.sprite(x,y, "spike");
+      var spike = this.physics.add.sprite(x,y, "spike");
       this.spikes.add(spike);
       x += 30;
     }
   }
 
   createCoin(x,y){
-    var coin = this.add.sprite(x,y, "coin");
+    var coin = this.physics.add.sprite(x,y, "coin");
     this.coins.add(coin);
   }
 
   createSpike(x,y){
-    var spike = this.add.sprite(x,y, "spike");
-    this.coins.add(spike);
+    var spike = this.physics.add.sprite(x,y, "spike");
+    this.spikes.add(spike);
   }
 
   createEnemy(x,y){
-    var enemy = this.add.sprite(x,y, "enemy");
-    this.coins.add(enemy);
+    var enemy = this.physics.add.sprite(x,y, "enemy");
+    this.enemies.add(enemy);
+    //enemy.setCollideWorldBounds(true);
+    //enemy.setDragX(this.drag);
   }
 
   createBox(x,y, num){
-    var box = this.add.sprite(x,y, num);
+    var box = this.physics.add.sprite(x,y, num);
     this.boxes.add(box);
+    box.setCollideWorldBounds(true);
+    box.setDragX(this.drag);
   }
 
   createDoor(x,y, num){
-    var door = this.add.sprite(x,y,num);
+    var door = this.physics.add.sprite(x,y,num);
     this.doors.add(door);
   }
 
   createMachine(x,y,type){
-    var machine_increase = this.add.sprite(x,y,type);
+    var machine_increase = this.physics.add.sprite(x,y,type);
     this.machines.add(machine_increase);
   }
 
   movePlayerManager(){
-    this.player.setVelocityX(0);
+   
 
     if(this.cursorKeys.left?.isDown){
-      this.player.setVelocityX(-170);
+      this.player.setVelocityX(-175);
       this.player.flipX= false;
     }
     else if(this.cursorKeys.right?.isDown) {
-      this.player.setVelocityX(170);
+      this.player.setVelocityX(175);
       this.player.flipX = true;
     }
 
-    //else{
-     // this.player.setDragX(200);//cool sliding stuff
-    //}
+    else{
+       //this.player.setVelocityX(0);
+      this.player.setDragX(this.drag);//cool sliding stuff
+    }
 
     if((this.cursorKeys.up?.isDown ||  this.cursorKeys.space?.isDown) && this.canJump<1000) {
       this.player.setVelocityY(-320);
