@@ -5,7 +5,7 @@ export default class MainScene extends Phaser.Scene {
 
   //Individual Objects (you can def change these, theyre awful)
   private player: Phaser.Physics.Arcade.Sprite;
-  private coin: Phaser.Physics.Arcade.Sprite;
+  
   private box: Phaser.Physics.Arcade.Sprite;
   private enemy: Phaser.Physics.Arcade.Sprite;
   private spike: Phaser.Physics.Arcade.Sprite;
@@ -13,9 +13,11 @@ export default class MainScene extends Phaser.Scene {
   //Groups
   private pickups: Phaser.Physics.Arcade.Group;
   private enemies: Phaser.Physics.Arcade.Group;
+  private spikes: Phaser.Physics.Arcade.Group;
 
   //plaftorms
   private platforms: Phaser.Physics.Arcade.Group;
+  private coins: Phaser.Physics.Arcade.Group;
 
 
   //Other
@@ -40,16 +42,32 @@ export default class MainScene extends Phaser.Scene {
     /*this.spike = this.physics.add.sprite(200,200,"spike");
     this.enemy = this.physics.add.sprite(300,300,"enemy");*/
 
-  
+    //Spikes
+    this.spikes = this.physics.add.group({
+      immovable:true,
+      allowGravity:false
+    });
+
+    //Enemies
+    this.enemies = this.physics.add.group({
+      immovable:true,
+      allowGravity:true
+    });
 
     //Pickups
-    this.coin = this.physics.add.sprite(35,250,"coin");
+    this.coins = this.physics.add.group({
+      immovable: true,
+      allowGravity: false
+    });
 
+    this.createCoin(300,300);
+    
     //Platforms
     this.platforms=this.physics.add.group({
       immovable: true,
       allowGravity: false
     });
+
     this.createPlatform(240, 17);
     this.createPlatform(240, 47);
     this.createPlatform(240, 77);
@@ -71,12 +89,12 @@ export default class MainScene extends Phaser.Scene {
 
     this.physics.add.collider(this.platforms,this.player);
 
-    this.physics.add.collider(this.coin, this.player,
+    /*this.physics.add.collider(this.coins, this.player,         //Crashes when you touch the coin
       function(coin, player){
         coin.destroy();
-      })
+      })/*
     
-    /*this.physics.add.collider(this.enemies, this.player,
+    /*this.physics.add.collider(this.enemies, this.player,        //Crashes when you touch an enemy
       function(enemy, player){
         player.destroy();
       });*/
@@ -95,7 +113,6 @@ export default class MainScene extends Phaser.Scene {
   }
 
   update() {
-    this.coin.setVelocityY(-10);
     this.movePlayerManager();
 
 
@@ -120,8 +137,23 @@ export default class MainScene extends Phaser.Scene {
   }
 
   createPlatform(xpos, ypos){
-      var platform = this.add.sprite(xpos, ypos, "player");
-      this.platforms.add(platform);
+    var platform = this.add.sprite(xpos, ypos, "platform");
+    this.platforms.add(platform);
+  }
+
+  createCoin(x,y){
+    var coin = this.add.sprite(x,y, "coin");
+    this.coins.add(coin);
+  }
+
+  createSpike(x,y){
+    var spike = this.add.sprite(x,y, "spike");
+    this.coins.add(spike);
+  }
+
+  createEnemy(x,y){
+    var enemy = this.add.sprite(x,y, "enemy");
+    this.coins.add(enemy);
   }
 
   movePlayerManager(){
