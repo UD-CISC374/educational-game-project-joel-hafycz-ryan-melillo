@@ -60,27 +60,43 @@ export default class MainScene extends Phaser.Scene {
       allowGravity: false
     });
 
-    this.createCoin(300,300);
     
     //Platforms
     this.platforms=this.physics.add.group({
       immovable: true,
       allowGravity: false
     });
+    
 
-    this.createPlatform(240, 17);
-    this.createPlatform(240, 47);
-    this.createPlatform(240, 77);
-    this.createPlatform(240, 107);
-    this.createPlatform(240, 137);
-    this.createPlatform(240, 167);
-    this.createPlatform(240, 197);
-    this.createPlatform(210, 197);
-    this.createPlatform(180, 197);
-    this.createPlatform(150, 197);
-    this.createPlatform(120, 197);
-    this.createPlatform(90, 197);
-    this.createPlatform(60, 197);
+    //Build Level
+    this.createVerticalPlatforms(240,17,15);
+    this.createHorizontalPlatforms(60,167, 7);
+  
+    this.createHorizontalPlatforms(0,300,6);
+    this.createSpike(90,270);
+    this.add.text(90,205, "Avoid Spikes", {
+      font: "10px Arial",
+      fill: "white"
+    });
+
+    this.createHorizontalPlatforms(60, 437, 7);
+    this.createEnemy(120,407);
+    this.add.text(90,340, "And Enemies", {
+      font: "10px Arial",
+      fill: "white"
+    });
+
+    this.createHorizontalPlatforms(0, 560, 31);
+    this.createCoin(120,515);
+    this.add.text(90,475, "Collect Coins", {
+      font: "10px Arial",
+      fill: "white"
+    });
+//
+    
+
+    
+
 
     //Keyboard
     this.cursorKeys = this.input.keyboard.createCursorKeys();
@@ -109,6 +125,8 @@ export default class MainScene extends Phaser.Scene {
     let PlayerSpawnY = 50;
 
     this.canJump = 0;//allow player to jump
+
+
 
   }
 
@@ -139,6 +157,22 @@ export default class MainScene extends Phaser.Scene {
   createPlatform(xpos, ypos){
     var platform = this.add.sprite(xpos, ypos, "platform");
     this.platforms.add(platform);
+  }
+
+  createHorizontalPlatforms(x,y,length){
+    for (let i = 0; i < length; i++){
+      var platform = this.add.sprite(x,y, "platform");
+      this.platforms.add(platform);
+      x += 30;
+    }
+  }
+
+  createVerticalPlatforms(x,y,length){
+    for (let i = 0; i < length; i++){
+      var platform = this.add.sprite(x,y, "platform");
+      this.platforms.add(platform);
+      y += 30;
+    }
   }
 
   createCoin(x,y){
@@ -172,7 +206,7 @@ export default class MainScene extends Phaser.Scene {
      // this.player.setDragX(200);//cool sliding stuff
     //}
 
-    if((this.cursorKeys.up?.isDown ||  this.cursorKeys.space?.isDown) && this.canJump<100) {
+    if((this.cursorKeys.up?.isDown ||  this.cursorKeys.space?.isDown) && this.canJump<1000) {
       this.player.setVelocityY(-320);
       this.canJump+=1;
       console.log(this.canJump);
