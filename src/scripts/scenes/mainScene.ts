@@ -9,21 +9,20 @@ export default class MainScene extends Phaser.Scene {
   private box: Phaser.Physics.Arcade.Sprite;
   private enemy: Phaser.Physics.Arcade.Sprite;
   private spike: Phaser.Physics.Arcade.Sprite;
+  private door: Phaser.Physics.Arcade.Sprite;
 
   //Groups
   private pickups: Phaser.Physics.Arcade.Group;
   private enemies: Phaser.Physics.Arcade.Group;
   private spikes: Phaser.Physics.Arcade.Group;
-
-  //plaftorms
+  private boxes: Phaser.Physics.Arcade.Group;
   private platforms: Phaser.Physics.Arcade.Group;
   private coins: Phaser.Physics.Arcade.Group;
-
+  private doors: Phaser.Physics.Arcade.Group;
 
   //Other
   private canJump; //set to 1 when jumps so cant again -- maybe a powerup for double jump, so canJump can be 0 then 1 THEN set to two to only allow 2 jumps
   private cursorKeys: Phaser.Types.Input.Keyboard.CursorKeys;
-
 
   constructor() {
     super({ key: 'MainScene' });
@@ -41,6 +40,10 @@ export default class MainScene extends Phaser.Scene {
 
     /*this.spike = this.physics.add.sprite(200,200,"spike");
     this.enemy = this.physics.add.sprite(300,300,"enemy");*/
+
+    //Movable objects
+    
+
 
     //Spikes
     this.spikes = this.physics.add.group({
@@ -60,9 +63,20 @@ export default class MainScene extends Phaser.Scene {
       allowGravity: false
     });
 
-    
     //Platforms
     this.platforms=this.physics.add.group({
+      immovable: true,
+      allowGravity: false
+    });
+
+    //Boxes
+    this.boxes = this.physics.add.group({
+      immovable: false,
+      allowGravity: true
+    });
+
+    //Doors
+    this.doors = this.physics.add.group({
       immovable: true,
       allowGravity: false
     });
@@ -121,21 +135,27 @@ export default class MainScene extends Phaser.Scene {
       fill: "white"
     });
 
+    this.createBox(340, 70, "box1");
+    this.createBox(380, 70, "box2");
+    this.createBox(300, 70, "box3");
 
-
-
-//
-    
-
-    
-
+    this.createDoor(790,527,"door1");
+    this.createDoor(820,527,"door2");
+    this.createDoor(850,527,"door3");
 
     //Keyboard
     this.cursorKeys = this.input.keyboard.createCursorKeys();
 
     //Set interactive
-
+    this.physics.add.collider(this.platforms,this.boxes);
+    this.physics.add.collider(this.boxes,this.boxes);
+    this.physics.add.collider(this.boxes,this.player);
     this.physics.add.collider(this.platforms,this.player);
+    this.physics.add.collider(this.boxes,this.doors,
+      function(box,door){
+        door.destroy();
+        box.destroy();
+      })
 
     /*this.physics.add.collider(this.coins, this.player,         //Crashes when you touch the coin
       function(coin, player){
@@ -228,6 +248,16 @@ export default class MainScene extends Phaser.Scene {
   createEnemy(x,y){
     var enemy = this.add.sprite(x,y, "enemy");
     this.coins.add(enemy);
+  }
+
+  createBox(x,y, num){
+    var box = this.add.sprite(x,y, num);
+    this.boxes.add(box);
+  }
+
+  createDoor(x,y, num){
+    var door = this.add.sprite(x,y,num);
+    this.doors.add(door);
   }
 
   movePlayerManager(){
