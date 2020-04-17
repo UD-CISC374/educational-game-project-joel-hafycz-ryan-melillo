@@ -7,9 +7,12 @@ export default class MainScene extends Phaser.Scene {
   private player: Phaser.Physics.Arcade.Sprite;
   private coin: Phaser.Physics.Arcade.Sprite;
   private box: Phaser.Physics.Arcade.Sprite;
+  private enemy: Phaser.Physics.Arcade.Sprite;
+  private spike: Phaser.Physics.Arcade.Sprite;
 
   //Groups
   private pickups: Phaser.Physics.Arcade.Group;
+  private enemies: Phaser.Physics.Arcade.Group;
 
   //plaftorms
   private platforms: Phaser.Physics.Arcade.Group;
@@ -34,6 +37,11 @@ export default class MainScene extends Phaser.Scene {
     this.player = this.physics.add.sprite(80,20,"player");
     this.player.setCollideWorldBounds(true);
 
+    /*this.spike = this.physics.add.sprite(200,200,"spike");
+    this.enemy = this.physics.add.sprite(300,300,"enemy");*/
+
+  
+
     //Pickups
     this.coin = this.physics.add.sprite(35,250,"coin");
 
@@ -49,35 +57,35 @@ export default class MainScene extends Phaser.Scene {
     this.createPlatform(240, 137);
     this.createPlatform(240, 167);
     this.createPlatform(240, 197);
+    this.createPlatform(210, 197);
+    this.createPlatform(180, 197);
     this.createPlatform(150, 197);
     this.createPlatform(120, 197);
     this.createPlatform(90, 197);
     this.createPlatform(60, 197);
-    this.createPlatform(30, 197);
-    this.createPlatform(0, 197);
-
-
-  
-
-    
-    
-
-    
-
 
     //Keyboard
     this.cursorKeys = this.input.keyboard.createCursorKeys();
 
-
     //Set interactive
- 
-    this.physics.add.collider(this.platforms,this.player);
-    this.physics.add.collider(this.coin, this.player);
 
+    this.physics.add.collider(this.platforms,this.player);
+
+    this.physics.add.collider(this.coin, this.player,
+      function(coin, player){
+        coin.destroy();
+      })
+    
+    /*this.physics.add.collider(this.enemies, this.player,
+      function(enemy, player){
+        player.destroy();
+      });*/
 
 
     //Add to group
-    
+    /*this.enemies.add(this.enemy);
+    this.enemies.add(this.spike);*/
+
     //Other
     let PlayerSpawnX = 50;
     let PlayerSpawnY = 50;
@@ -98,17 +106,13 @@ export default class MainScene extends Phaser.Scene {
     }
 
     //Functions
-
-
   }
-
- 
 
   //Helper Functions (movement, collecting, you name it)
 
 
    //currently unused, supposed to be for double jumping on key activation
-   handleJump(){
+  handleJump(){
     if(this.canJump<2){
       this.player.setVelocityY(-320);
       this.canJump+=1;
@@ -118,14 +122,6 @@ export default class MainScene extends Phaser.Scene {
   createPlatform(xpos, ypos){
       var platform = this.add.sprite(xpos, ypos, "player");
       this.platforms.add(platform);
-  }
-
-  //When dead, resets player position to the beginning of the level
-  resetPlayerPos(player) {
-    player.play("death");
-    player.play("restart");
-    player.x = 50;
-    player.y = 50;
   }
 
   movePlayerManager(){
