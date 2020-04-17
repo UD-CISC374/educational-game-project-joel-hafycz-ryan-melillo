@@ -70,7 +70,7 @@ export default class MainScene extends Phaser.Scene {
 
     //Build Level
     this.createVerticalPlatforms(240,17,15);
-    this.createHorizontalPlatforms(60,167, 7);
+    this.createHorizontalPlatforms(60,167,12);
   
     this.createHorizontalPlatforms(0,300,6);
     this.createSpike(90,270);
@@ -86,12 +86,44 @@ export default class MainScene extends Phaser.Scene {
       fill: "white"
     });
 
-    this.createHorizontalPlatforms(0, 560, 31);
+    this.createHorizontalPlatforms(0, 560, 26);
     this.createCoin(120,515);
     this.add.text(90,475, "Collect Coins", {
       font: "10px Arial",
       fill: "white"
     });
+
+    this.createHorizontalPlatforms(0, 590, 31);
+
+    this.createHorizontalPlatforms(770, 467, 5);
+    this.createPlatform(890, 560);
+    this.createLongSpike(790,497,3);
+    this.add.text(830, 460, "To Next Function", {
+      font: "10px Arial",
+      fill: "white"
+    });
+
+    this.add.text(720, 550, "Memory", {
+      font: "10px Arial",
+      fill: "white"
+    });
+
+    this.add.text(780, 580, "1", {
+      font: "10px Arial",
+      fill: "white"
+    });
+    this.add.text(815, 580, "2", {
+      font: "10px Arial",
+      fill: "white"
+    });
+    this.add.text(850, 580, "3", {
+      font: "10px Arial",
+      fill: "white"
+    });
+
+
+
+
 //
     
 
@@ -172,6 +204,14 @@ export default class MainScene extends Phaser.Scene {
       var platform = this.add.sprite(x,y, "platform");
       this.platforms.add(platform);
       y += 30;
+    }
+  }
+
+  createLongSpike(x,y,length){
+    for (let i = 0; i < length; i++){
+      var spike = this.add.sprite(x,y, "spike");
+      this.spikes.add(spike);
+      x += 30;
     }
   }
 
