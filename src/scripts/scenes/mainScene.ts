@@ -10,6 +10,8 @@ export default class MainScene extends Phaser.Scene {
   private enemy: Phaser.Physics.Arcade.Sprite;
   private spike: Phaser.Physics.Arcade.Sprite;
   private door: Phaser.Physics.Arcade.Sprite;
+  private wall: Phaser.Physics.Arcade.Sprite;
+  private machine_increase: Phaser.Physics.Arcade.Sprite
 
   //Groups
   private pickups: Phaser.Physics.Arcade.Group;
@@ -17,8 +19,10 @@ export default class MainScene extends Phaser.Scene {
   private spikes: Phaser.Physics.Arcade.Group;
   private boxes: Phaser.Physics.Arcade.Group;
   private platforms: Phaser.Physics.Arcade.Group;
+  private walls: Phaser.Physics.Arcade.Group;
   private coins: Phaser.Physics.Arcade.Group;
   private doors: Phaser.Physics.Arcade.Group;
+  private machines: Phaser.Physics.Arcade.Group;
 
   //Other
   private canJump; //set to 1 when jumps so cant again -- maybe a powerup for double jump, so canJump can be 0 then 1 THEN set to two to only allow 2 jumps
@@ -43,8 +47,6 @@ export default class MainScene extends Phaser.Scene {
 
     //Movable objects
     
-
-
     //Spikes
     this.spikes = this.physics.add.group({
       immovable:true,
@@ -80,39 +82,49 @@ export default class MainScene extends Phaser.Scene {
       immovable: true,
       allowGravity: false
     });
+
+    this.walls = this.physics.add.group({
+      immovable: true,
+      allowGravity: false
+    });
+
+    this.machines = this.physics.add.group({
+      immovable:true,
+      allowGravity:false
+    });
     
 
     //Build Level
-    this.createVerticalPlatforms(240,17,15);
-    this.createHorizontalPlatforms(60,167,12);
+    this.createWalls(240,17,16);
+    this.createLongPlatforms(60,167,11);
   
-    this.createHorizontalPlatforms(0,300,6);
+    this.createLongPlatforms(0,300,6);
     this.createSpike(90,270);
     this.add.text(90,205, "Avoid Spikes", {
       font: "10px Arial",
       fill: "white"
     });
 
-    this.createHorizontalPlatforms(60, 437, 7);
+    this.createLongPlatforms(60, 437, 7);
     this.createEnemy(120,407);
     this.add.text(90,340, "And Enemies", {
       font: "10px Arial",
       fill: "white"
     });
 
-    this.createHorizontalPlatforms(0, 560, 26);
+    this.createLongPlatforms(0, 560, 26);
     this.createCoin(120,515);
     this.add.text(90,475, "Collect Coins", {
       font: "10px Arial",
       fill: "white"
     });
 
-    this.createHorizontalPlatforms(0, 590, 31);
+    this.createLongPlatforms(0, 590, 31);
 
-    this.createHorizontalPlatforms(770, 467, 5);
+    this.createLongPlatforms(770, 467, 5);
     this.createPlatform(890, 560);
     this.createLongSpike(790,497,3);
-    this.add.text(830, 460, "To Next Function", {
+    this.add.text(820, 460, "To Next Function", {
       font: "10px Arial",
       fill: "white"
     });
@@ -135,13 +147,24 @@ export default class MainScene extends Phaser.Scene {
       fill: "white"
     });
 
-    this.createBox(340, 70, "box1");
-    this.createBox(380, 70, "box2");
-    this.createBox(300, 70, "box3");
+    this.createBox(280, 70, "box1");
+    this.createBox(320, 70, "box2");
+    this.createBox(360, 70, "box3");
 
     this.createDoor(790,527,"door1");
     this.createDoor(820,527,"door2");
     this.createDoor(850,527,"door3");
+
+    this.createLongPlatforms(660,350,9);
+    this.createLongPlatforms(489,270,3);
+    this.createLongPlatforms(240,350,5);
+
+    this.createWalls(920,0,17);
+
+    this.createEnemy(300, 270);
+    this.createCoin(520,230);
+
+    this.createMachine(880,300,"machine_increase");
 
     //Keyboard
     this.cursorKeys = this.input.keyboard.createCursorKeys();
@@ -151,12 +174,24 @@ export default class MainScene extends Phaser.Scene {
     this.physics.add.collider(this.boxes,this.boxes);
     this.physics.add.collider(this.boxes,this.player);
     this.physics.add.collider(this.platforms,this.player);
+    this.physics.add.collider(this.walls, this.player);
     this.physics.add.collider(this.boxes,this.doors,
       function(box,door){
         door.destroy();
         box.destroy();
-      })
+      });
 
+      //reverse the x velocity of the box
+    this.physics.add.collider(this.boxes,this.walls,
+      function(box,wall){
+        
+      });
+
+      //spawns new box
+    this.physics.add.collider(this.boxes, this.machines,
+      function(box,machine){
+        
+      });
     /*this.physics.add.collider(this.coins, this.player,         //Crashes when you touch the coin
       function(coin, player){
         coin.destroy();
@@ -211,7 +246,7 @@ export default class MainScene extends Phaser.Scene {
     this.platforms.add(platform);
   }
 
-  createHorizontalPlatforms(x,y,length){
+  createLongPlatforms(x,y,length){
     for (let i = 0; i < length; i++){
       var platform = this.add.sprite(x,y, "platform");
       this.platforms.add(platform);
@@ -219,10 +254,10 @@ export default class MainScene extends Phaser.Scene {
     }
   }
 
-  createVerticalPlatforms(x,y,length){
+  createWalls(x,y,length){
     for (let i = 0; i < length; i++){
-      var platform = this.add.sprite(x,y, "platform");
-      this.platforms.add(platform);
+      var wall = this.add.sprite(x,y, "wall");
+      this.walls.add(wall);
       y += 30;
     }
   }
@@ -258,6 +293,11 @@ export default class MainScene extends Phaser.Scene {
   createDoor(x,y, num){
     var door = this.add.sprite(x,y,num);
     this.doors.add(door);
+  }
+
+  createMachine(x,y,type){
+    var machine_increase = this.add.sprite(x,y,type);
+    this.machines.add(machine_increase);
   }
 
   movePlayerManager(){
