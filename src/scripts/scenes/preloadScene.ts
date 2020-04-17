@@ -8,6 +8,7 @@ export default class PreloadScene extends Phaser.Scene {
     //Load Images
     this.load.image("backgroundlvl1.png", "assets/images/backgroundlvl1.png");
     this.load.image("player", "assets/images/player.png");
+    this.load.image("coin", "assets/images/coin.png");
     
     //Load SpriteSheets
     this.load.spritesheet("death", "assets/spritesheets/death.png",{

@@ -5,7 +5,8 @@ export default class MainScene extends Phaser.Scene {
 
   //Individual Objects (you can def change these, theyre awful)
   private player: Phaser.Physics.Arcade.Sprite;
-  private canJump; //set to 1 when jumps so cant again -- maybe a powerup for double jump, so canJump can be 0 then 1 THEN set to two to only allow 2 jumps
+  private coin: Phaser.Physics.Arcade.Sprite;
+  private box: Phaser.Physics.Arcade.Sprite;
 
   //Groups
   private pickups: Phaser.Physics.Arcade.Group;
@@ -13,7 +14,9 @@ export default class MainScene extends Phaser.Scene {
   //plaftorms
   private platforms: Phaser.Physics.Arcade.Group;
 
+
   //Other
+  private canJump; //set to 1 when jumps so cant again -- maybe a powerup for double jump, so canJump can be 0 then 1 THEN set to two to only allow 2 jumps
   private cursorKeys: Phaser.Types.Input.Keyboard.CursorKeys;
 
 
@@ -31,12 +34,34 @@ export default class MainScene extends Phaser.Scene {
     this.player = this.physics.add.sprite(80,20,"player");
     this.player.setCollideWorldBounds(true);
 
+    //Pickups
+    this.coin = this.physics.add.sprite(35,250,"coin");
+
     //Platforms
     this.platforms=this.physics.add.group({
       immovable: true,
       allowGravity: false
     });
-    this.createPlatform(250, 320);
+    this.createPlatform(240, 17);
+    this.createPlatform(240, 47);
+    this.createPlatform(240, 77);
+    this.createPlatform(240, 107);
+    this.createPlatform(240, 137);
+    this.createPlatform(240, 167);
+    this.createPlatform(240, 197);
+    this.createPlatform(150, 197);
+    this.createPlatform(120, 197);
+    this.createPlatform(90, 197);
+    this.createPlatform(60, 197);
+    this.createPlatform(30, 197);
+    this.createPlatform(0, 197);
+
+
+  
+
+    
+    
+
     
 
 
@@ -47,6 +72,7 @@ export default class MainScene extends Phaser.Scene {
     //Set interactive
  
     this.physics.add.collider(this.platforms,this.player);
+    this.physics.add.collider(this.coin, this.player);
 
 
 
@@ -61,6 +87,7 @@ export default class MainScene extends Phaser.Scene {
   }
 
   update() {
+    this.coin.setVelocityY(-10);
     this.movePlayerManager();
 
 
@@ -102,6 +129,8 @@ export default class MainScene extends Phaser.Scene {
   }
 
   movePlayerManager(){
+    this.player.setVelocityX(0);
+
     if(this.cursorKeys.left?.isDown){
       this.player.setVelocityX(-170);
       this.player.flipX= false;
@@ -111,15 +140,14 @@ export default class MainScene extends Phaser.Scene {
       this.player.flipX = true;
     }
 
-    else{
-      this.player.setDragX(200);//cool sliding stuff
-    }
+    //else{
+     // this.player.setDragX(200);//cool sliding stuff
+    //}
 
-     if((this.cursorKeys.up?.isDown || this.cursorKeys.space?.isDown) && this.canJump<7) {
+    if((this.cursorKeys.up?.isDown ||  this.cursorKeys.space?.isDown) && this.canJump<100) {
       this.player.setVelocityY(-320);
       this.canJump+=1;
       console.log(this.canJump);
     }
-    
   }
 }
