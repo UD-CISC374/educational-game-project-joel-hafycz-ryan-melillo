@@ -49,7 +49,6 @@ export default class MainScene extends Phaser.Scene {
 
     //Movable objects
 
-    
     //Spikes
     this.spikes = this.physics.add.group({
       immovable:true,
@@ -61,7 +60,6 @@ export default class MainScene extends Phaser.Scene {
       immovable:true,
       allowGravity:false
     });
-
 
     //Pickups
     this.coins = this.physics.add.group({
@@ -96,7 +94,6 @@ export default class MainScene extends Phaser.Scene {
       immovable:true,
       allowGravity:false
     });
-    
 
     //Build Level
     this.createWalls(240,17,16);
@@ -188,22 +185,10 @@ export default class MainScene extends Phaser.Scene {
         box.destroy();
       });
 
-      //reverse the x velocity of the box
-    this.physics.add.collider(this.boxes,this.walls,
-      function(box,wall){
-        
-      });
+    this.physics.add.overlap(this.player, this.coins, this.pickupCoin);
+    this.physics.add.overlap(this.player, this.enemies, this.hurtPlayer);
+    this.physics.add.overlap(this.player, this.spikes, this.hurtPlayer); 
 
-      //spawns new box
-    this.physics.add.collider(this.boxes, this.machines,
-      function(box,machine){
-        
-      });
-
-      this.physics.add.overlap(this.player, this.coins, this.pickupCoin);
-      this.physics.add.overlap(this.player, this.enemies, this.hurtPlayer);
-      this.physics.add.overlap(this.player, this.spikes, this.hurtPlayer);
-      
     /*this.physics.add.collider(this.coins, this.player,         //Crashes when you touch the coin
       function(coin, player){
         coin.destroy();
@@ -330,12 +315,11 @@ export default class MainScene extends Phaser.Scene {
   }
 
   movePlayerManager(){
-   
-
     if(this.cursorKeys.left?.isDown){
       this.player.setVelocityX(-175);
       this.player.flipX= false;
     }
+
     else if(this.cursorKeys.right?.isDown) {
       this.player.setVelocityX(175);
       this.player.flipX = true;
