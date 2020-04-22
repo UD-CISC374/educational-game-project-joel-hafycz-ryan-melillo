@@ -23,7 +23,7 @@ These [package.json](package.json) settings are for configuring the metadata of 
 * `repository`:
     * `url`: https://github.com/UD-CISC374/educational-game-design-document-joel-hafycz-ryan-melillo
 * `homepage`: https://ud-cisc374.github.io/educational-game-project-joel-hafycz-ryan-melillo/final
-* `contributors`: This should be an array (list) of strings, where each string is like `"Barney Rubble <b@rubble.com> (http://barnyrubble.tumblr.com/)"`.
+* `contributors`: `"Joel Hafycz <jhaf@udel.edu>, Ryan Melillo <rmelillo@udel.edu>"`.
 
 You should edit the following images to create icons for your game, if it gets installed as a [Progressive Web App](https://medium.com/@amberleyjohanna/seriously-though-what-is-a-progressive-web-app-56130600a093):
 
