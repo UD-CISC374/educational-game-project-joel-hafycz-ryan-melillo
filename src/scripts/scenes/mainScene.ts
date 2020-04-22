@@ -3,7 +3,7 @@ export default class MainScene extends Phaser.Scene {
   //Backgrounds
   private background: Phaser.GameObjects.TileSprite;
 
-  //Individual Objects (you can def change these, theyre awful)
+  //Indiviual objects
   private player: Phaser.Physics.Arcade.Sprite;
 
   private drag = 250;

@@ -14,15 +14,15 @@ These files are for documenting your game:
 
 These [package.json](package.json) settings are for configuring the metadata of your game and should be updated:
 
-* `name`: This must be a lower-case version of your repository name on GitHub, without spaces.
-* `description`: Give a quick, one sentence summary of your game.
+* `name`: educational-game-design-document-joel-hafycz-ryan-melillo
+* `description`: Play as a robot completeing the functions of a program
 * `game`:
-    * `url`: Change this to be the EXACT name of your repository on GitHub.
-    * `shortName`: Choose a short name for your game for [Progressive Web App](https://medium.com/@amberleyjohanna/seriously-though-what-is-a-progressive-web-app-56130600a093) packaging.
-    * `name`: Choose a longer, complete name for your game.
+    * `url`: https://ud-cisc374.github.io/educational-game-project-joel-hafycz-ryan-melillo/alpha/
+    * `shortName`: RobotHelper
+    * `name`: RobotHelper
 * `repository`:
-    * `url`: Change this URL to be a link to your GitHub repository.
-* `homepage`: Change this URL to be a link to the final version of your game's EGDD.
+    * `url`: https://github.com/UD-CISC374/educational-game-design-document-joel-hafycz-ryan-melillo
+* `homepage`: https://ud-cisc374.github.io/educational-game-project-joel-hafycz-ryan-melillo/final
 * `contributors`: This should be an array (list) of strings, where each string is like `"Barney Rubble <b@rubble.com> (http://barnyrubble.tumblr.com/)"`.
 
 You should edit the following images to create icons for your game, if it gets installed as a [Progressive Web App](https://medium.com/@amberleyjohanna/seriously-though-what-is-a-progressive-web-app-56130600a093):
