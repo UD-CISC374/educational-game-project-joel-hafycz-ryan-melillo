@@ -1,3 +1,5 @@
+import Box from '../objects/box';
+import { Bodies } from 'matter';
 
 export default class MainScene extends Phaser.Scene {
   //Backgrounds
@@ -19,7 +21,7 @@ export default class MainScene extends Phaser.Scene {
   private pickups: Phaser.Physics.Arcade.Group;
   private enemies: Phaser.Physics.Arcade.Group;
   private spikes: Phaser.Physics.Arcade.Group;
-  private boxes: Phaser.Physics.Arcade.Group;
+  private boxes;
   private platforms: Phaser.Physics.Arcade.Group;
   private walls: Phaser.Physics.Arcade.Group;
   private coins: Phaser.Physics.Arcade.Group;
@@ -76,8 +78,13 @@ export default class MainScene extends Phaser.Scene {
     //Boxes
     this.boxes = this.physics.add.group({
       immovable: false,
-      allowGravity: true
+      allowGravity: true,
+      collideWorldBounds: true,
+      dragX: 150,
+      bounceX: 1
     });
+
+    //this.boxes.class= Box;
 
     //Doors
     this.doors = this.physics.add.group({
@@ -148,12 +155,22 @@ export default class MainScene extends Phaser.Scene {
       fill: "white"
     });
 
-    this.createBox(280, 70, "box1");
-    this.createBox(320, 70, "box2");
-    this.createBox(360, 70, "box3");
-   // for(var i=0; i<this.boxes.getLength(); i++){
-     // this.boxes[i].setCollideWorldBounds(true);
-   // }
+/*
+    var box1 = new Box(this, 360, 70, 1);
+    var box2 = new Box(this, 320, 70, 2);
+    var box3 = new Box(this, 280, 70, 3);
+    var testbox = new Box(this, 810, 320, 1);
+    this.boxes.add(testbox);
+    this.boxes.add(box1);
+    this.boxes.add(box2);
+    this.boxes.add(box3);
+    */
+
+    this.createBox(360, 70, 1);
+    this.createBox(320, 70, 2);
+    this.createBox(280, 70, 3);
+    this.createBox(810, 320, 1);
+
 
     this.createDoor(790,527,"door1");
     this.createDoor(820,527,"door2");
@@ -177,13 +194,26 @@ export default class MainScene extends Phaser.Scene {
     this.physics.add.collider(this.platforms,this.boxes);
     this.physics.add.collider(this.boxes,this.boxes);
     this.physics.add.collider(this.boxes,this.player);
+    this.physics.add.collider(this.boxes, this.walls);
     this.physics.add.collider(this.platforms,this.player);
-    this.physics.add.collider(this.walls, this.player);
+    //this.physics.add.collider(this.walls, this.player);
     this.physics.add.collider(this.boxes,this.doors,
       function(box,door){
         door.destroy();
         box.destroy();
       });
+
+
+    this.physics.add.collider(this.boxes, this.machines, this.addOne);
+      //this.physics.add.overlap(this.boxes, this.machines, this.addOne); 
+      /*
+      function addOne(
+        box: Phaser.GameObjects.Sprite,
+        machine: Phaser.GameObjects.Sprite){
+          box.state = +box.state +1;
+          box.setTexture('box' + box.state);
+        }
+      );*/
 
     this.physics.add.overlap(this.player, this.coins, this.pickupCoin);
     this.physics.add.overlap(this.player, this.enemies, this.hurtPlayer);
@@ -241,11 +271,26 @@ export default class MainScene extends Phaser.Scene {
     }
   }
 
+
   hurtPlayer(player, enemy){
     player.x = 80;
     player.y = 20;
   }
 
+  addOne(box, machine){
+    if(box.z ==1){
+
+    var temp = box.z +1;
+    //var newbox = this.physics.add.sprite(820, 320, "box" +temp);
+   //newbox.state = temp;
+    //var newBox = new Box(this, 820, 320, temp);
+    //box.destroy();
+    box.state = 0;//cant change again
+    box.setZ(temp);
+    box.setTexture("box" + box.z);
+    }
+
+  }
 
   pickupCoin(player, coin){
     coin.disableBody(true, true);
@@ -297,11 +342,16 @@ export default class MainScene extends Phaser.Scene {
     //enemy.setDragX(this.drag);
   }
 
+   //Unused now with custom class
   createBox(x,y, num){
-    var box = this.physics.add.sprite(x,y, num);
+    var box = this.physics.add.sprite(x,y, 'box' +num);
+    box.state = 1;
+    box.setZ(num);
     this.boxes.add(box);
     box.setCollideWorldBounds(true);
     box.setDragX(this.drag);
+    box.setBounceX(1);
+
   }
 
   createDoor(x,y, num){
@@ -333,7 +383,7 @@ export default class MainScene extends Phaser.Scene {
     if((this.cursorKeys.up?.isDown ||  this.cursorKeys.space?.isDown) && this.canJump<1000) {
       this.player.setVelocityY(-320);
       this.canJump+=1;
-      console.log(this.canJump);
+      //console.log(this.canJump);
     }
   }
 }
