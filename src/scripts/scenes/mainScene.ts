@@ -31,12 +31,14 @@ export default class MainScene extends Phaser.Scene {
   //Other
   private canJump; //set to 1 when jumps so cant again -- maybe a powerup for double jump, so canJump can be 0 then 1 THEN set to two to only allow 2 jumps
   private cursorKeys: Phaser.Types.Input.Keyboard.CursorKeys;
+  private spacebar;
 
   constructor() {
     super({ key: 'MainScene' });
   }
 
   create() {
+    this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
     //Background Scenes
     this.background = this.add.tileSprite(0, 0, this.scale.width, this.scale.height, "backgroundlvl1.png");
@@ -44,6 +46,7 @@ export default class MainScene extends Phaser.Scene {
 
     //Sprites / Images
     this.player = this.physics.add.sprite(80,20,"player");
+    this.player.state = "nobox"
     this.player.setCollideWorldBounds(true);
 
     /*this.spike = this.physics.add.sprite(200,200,"spike");
@@ -103,6 +106,18 @@ export default class MainScene extends Phaser.Scene {
     });
 
     //Build Level
+    this.add.text(500, 100, "Complete the function!", {
+      font: "10px Arial",
+      fill: "white"
+    });
+    this.add.text(500, 120, "Bring the boxes to the +1 to complete the loop", {
+      font: "10px Arial",
+      fill: "white"
+    });
+    this.add.text(500, 140, "Then bring them to their spot in the array to complete the function!", {
+      font: "10px Arial",
+      fill: "white"
+    });
     this.createWalls(240,17,16);
     this.createLongPlatforms(60,167,11);
   
@@ -155,26 +170,15 @@ export default class MainScene extends Phaser.Scene {
       fill: "white"
     });
 
-/*
-    var box1 = new Box(this, 360, 70, 1);
-    var box2 = new Box(this, 320, 70, 2);
-    var box3 = new Box(this, 280, 70, 3);
-    var testbox = new Box(this, 810, 320, 1);
-    this.boxes.add(testbox);
-    this.boxes.add(box1);
-    this.boxes.add(box2);
-    this.boxes.add(box3);
-    */
-
     this.createBox(360, 70, 1);
     this.createBox(320, 70, 2);
     this.createBox(280, 70, 3);
     this.createBox(810, 320, 1);
 
 
-    this.createDoor(790,527,"door1");
-    this.createDoor(820,527,"door2");
-    this.createDoor(850,527,"door3");
+    this.createDoor(790,527,"door1", 2);
+    this.createDoor(820,527,"door2", 3);
+    this.createDoor(850,527,"door3", 4);
 
     this.createLongPlatforms(660,350,9);
     this.createLongPlatforms(489,270,3);
@@ -196,74 +200,39 @@ export default class MainScene extends Phaser.Scene {
     this.physics.add.collider(this.boxes,this.player);
     this.physics.add.collider(this.boxes, this.walls);
     this.physics.add.collider(this.platforms,this.player);
+
     //this.physics.add.collider(this.walls, this.player);
-    this.physics.add.collider(this.boxes,this.doors,
-      function(box,door){
-        door.destroy();
-        box.destroy();
-      });
 
-
+    this.physics.add.overlap(this.boxes,this.doors, this.doorBox);
     this.physics.add.collider(this.boxes, this.machines, this.addOne);
-      //this.physics.add.overlap(this.boxes, this.machines, this.addOne); 
-      /*
-      function addOne(
-        box: Phaser.GameObjects.Sprite,
-        machine: Phaser.GameObjects.Sprite){
-          box.state = +box.state +1;
-          box.setTexture('box' + box.state);
-        }
-      );*/
-
     this.physics.add.overlap(this.player, this.coins, this.pickupCoin);
     this.physics.add.overlap(this.player, this.enemies, this.hurtPlayer);
     this.physics.add.overlap(this.player, this.spikes, this.hurtPlayer); 
 
-    /*this.physics.add.collider(this.coins, this.player,         //Crashes when you touch the coin
-      function(coin, player){
-        coin.destroy();
-      })
-    */
-/*
-    this.physics.add.collider(this.enemies, this.player,        //Crashes when you touch an enemy
-      function(enemy, player){
-        player.destroy();
-        console.log("destroy player?");
-      });
-      */
-
-
-    //Add to group
-    /*this.enemies.add(this.enemy);
-    this.enemies.add(this.spike);*/
-
-    //Other
     let PlayerSpawnX = 50;
     let PlayerSpawnY = 50;
-
     this.canJump = 0;//allow player to jump
-
-
-
   }
 
   update() {
     this.movePlayerManager();
 
-
-
     if(this.player.body.blocked.down){
       this.canJump = 0;
-      //console.log("jump at 0");
     }
-
     //Functions
   }
 
   //Helper Functions (movement, collecting, you name it)
 
-
    //currently unused, supposed to be for double jumping on key activation
+  handlePickup(box, player){
+    if(Phaser.Input.Keyboard.JustDown(this.spacebar)){
+      this.player.state = "yesbox" + box.z;
+    }
+
+  }
+
   handleJump(){
     if(this.canJump<2){
       this.player.setVelocityY(-320);
@@ -271,6 +240,12 @@ export default class MainScene extends Phaser.Scene {
     }
   }
 
+  doorBox(door, box){
+    if (door.z == box.z){
+      door.destroy();
+      box.destroy();
+    }
+  }
 
   hurtPlayer(player, enemy){
     player.x = 80;
@@ -354,8 +329,9 @@ export default class MainScene extends Phaser.Scene {
 
   }
 
-  createDoor(x,y, num){
+  createDoor(x,y, num, val){
     var door = this.physics.add.sprite(x,y,num);
+    door.setZ(val);
     this.doors.add(door);
   }
 
@@ -380,7 +356,7 @@ export default class MainScene extends Phaser.Scene {
       this.player.setDragX(this.drag);//cool sliding stuff
     }
 
-    if((this.cursorKeys.up?.isDown ||  this.cursorKeys.space?.isDown) && this.canJump<1000) {
+    if((this.cursorKeys.up?.isDown) && this.canJump<1000) {
       this.player.setVelocityY(-320);
       this.canJump+=1;
       //console.log(this.canJump);
