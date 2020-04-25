@@ -12,12 +12,8 @@ meta:
     - Benjamin Stanley
 ---
 
-# Overview
-
-*Notes written in italics must be deleted in the final version.*
-
 # Game Name 
-(we dont have one yet)
+Function Robot
 
 ## Elevator Pitch
 
@@ -45,7 +41,9 @@ Platforming, to reach areas to complete puzzles
   Use arrows keys(or WASD) to navigate and spacebar to jump
 
 Puzzles, which allow you to reach extra areas and the end of levels
-   Tasks emulating the theme of coding ideas such as for loops -- a bin of colored soccer balls, put all the soccer balls in the net(is this too detailed?)
+   Tasks emulating the theme of coding ideas such as for loops 
+   - a bin of colored soccer balls, put all the soccer balls in the net
+   - robot pushes boxes that represent the elements in an array, to the end, dodging workers and spikes
 
 Power-ups that only last through one level or one world(series of levels), to illustrate variable scope
 
@@ -54,32 +52,35 @@ Power-ups that only last through one level or one world(series of levels), to il
 
 ## Learning Domains
 
-(dont really know what this is)
+Introductory Computer Science game that focuses on Cognitive learning
 
 
 ## Target Audiences
 
-Newer audiences, like those in k-12 who would play this during computer labs and gain interest, or those of our age, becoming interested in Computer Science (intimidated by computer science)
+Introductory Computer Science students
+Children on videogame websites, like CoolMathGames
 
 ## Target Contexts
 
-K-12 computer labs during free time, high school labs during free time, possibly college 
+For children and teenagers to gain interest in Computer Science and become interested in it
 
 ## Learning Objectives
 
-By the end of the game, players will be able to predict the behavior of a for loop in the context of the game, and match the in-game components to components of a real coding for loop
-
-By the end of the game, players will be able to predict the behavior of a for while loop in the context of the game, and match the in-game components to components of a real coding for loop
-
-By the end of the game, players will be able to identify whether a variable(power-up) is global or local
+By the end of the game, players will be able to predict the behavior of
+  - Assigning a value to a variable
+  - A for loop
+  - A while loop
+  - (Not complete)
 
 
 ## Prerequisite Knowledge
 
-Participants should have knowledge of highschool level math
+Participants should have knowledge of fundamental math concepts
+  - Addition
+  - Subtraction
+  - etc.
 
-Participants would have a much easier time with basic programming knowledge
-
+Participants would have a much easier time with basic programming knowledge, however it is not necessary
 
 ## Assessment Measures
 
@@ -100,14 +101,17 @@ Students in early computer labs class tend to play games on coolmathgames.com, o
 
 ## Player Interaction Pattern
 
-A singular player (as of now unless we can add multiplayer somehow) will traverse through levels with platforming and puzzles. Until we begin level designing, I couldn’t give any examples
+A singular player (as of now unless we can add multiplayer somehow) will traverse through levels with platforming and puzzles
+
+Puzzles include
+  - Creating an array, pushing boxes, that represent values in the array, into place to "form" an array while avoiding enemies and spikes
+  - Moving the same vales in the array, and changing them (adding +1 or -1) to show how the function would take each part of the array one at a time and add one
+  - etc.
 
 
 ## Player Modes
 
-Player mode #1: Playthrough mode, where the player is able to play through the game like normal, completing puzzles and platforming
-
-Player mode #2: Help mode, where the player is able to consult the game for help, and direction, most likely coming through after a certain number of attempts, or a time limit is reached
+Player mode: Playthrough mode, where the player is able to play through the game like normal, completing puzzles and platforming
 
 # Gameplay Objectives
 
@@ -119,10 +123,6 @@ Player mode #2: Help mode, where the player is able to consult the game for help
     - Description: Finding extra power ups, or point pickups to increase your score
         Alignment: Scope of variables 
 
-- *Primary Objective #3*:
-    - Description: Beat the game as quickly as possible
-        Alignment: To show the importance of speed and efficiency in a program and teach deadlines
-
 # Procedures/Actions
 Players interact with their character with the arrow keys
 
@@ -130,7 +130,8 @@ Left → left movement
 Right → right movement
 Up → jump action
 Down → possible crouch action?
-E → use or interact with an object
+Space → pickup boxes
+
 R → possible shoot ability if we add one
 
 
@@ -143,11 +144,13 @@ These rules will make it so there is some challenge implemented into the game
 
 # Objects/Entities
 
-We need to design levels to get through
-We need to design enemies (if we add any)
-We need to design puzzles
-We need to design power ups / pickups
-We need to design a lot of things now that I think about it
+- Player
+- Walls (verticle surface)
+- Platforms (horizontal surface)
+- Spikes (kills player on hit)
+- Workers (enemies, kills player on hit)
+- Boxes (can open doors, and be fitted into place)
+- Doors
 
 
 ## Core Gameplay Mechanics (Detailed)
@@ -166,7 +169,7 @@ Core Gameplay Mechanics: As of now, the main concepts of the puzzles are that th
 
 ## Presentation of Rules
 
-Players will hopefully be given short animated tutorials on game objectives, like collecting keys, opening doors, etc. Small signs with pop up text may be added for extra, but will not interfere with gameplay
+Players will be given short text instructions on what to do, while the rest will be taught through level design.
 
 
 ## Presentation of Content
@@ -175,35 +178,39 @@ Our game won’t teach someone how to program, rather it is meant to strengthen 
 
 ## Story (Brief)
 
-*The Summary or TL;DR version of below*
+You are in an IDE, as a robot, and you complete puzzles to run programs while avoiding spikes and enemies (workers)
 
 ## Storyboarding
 
-We aren’t really sure yet how to take the story of our game, however we are deciding and hopefully will come up with something between our options throughout the week
+The game starts with a title screen of code being written
+You press on the start button and a level select screen comes up, all levels being locked except for the first one
+You click on the first level and start it
+You are a robot completing the functions displayed in each level.
+You move boxes, avoid enemies, ect, to emulate the action of completing a function
 
 # Assets Needed
 
 ## Aethestics
 
-*Give a sense of the aesthetics of your game, the spirit and atmosphere. Use descriptive, evocative words that can help the reader understand the emotional response of your game.*
+The map should look like a factory, with machines and crates and such around. Metal walls, floors, background. There will be workers around too (enemies). The music will be in a style similar to metroid.
 
 ## Graphical
 
 - Characters List
-  - *Characters 1*
-  - *Characters 2*
-  - *...*
+  - Player one (robot)
+  - Workers (enemies)
 - Textures:
-  - *Texture 1*
-  - *Texture 2*
-  - *...*
+  - Spike Texture
+  - Worker Texture
+  - Door Texture
+  - Coin Texture
 - Environment Art/Textures:
-  - *Environment Texture 1*
-  - *Environment Texture 2*
-  - *...*
+  - Background Texture
+  - Wall Texture
+  - Platform Texture
 
 
-## Audio
+## Audio  (Have not worked on yet)
 
 
 *Game region/phase/time are ways of designating a particularly important place in the game.*
