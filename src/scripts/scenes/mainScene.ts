@@ -103,57 +103,86 @@ export default class MainScene extends Phaser.Scene {
     });
 
     //Build Level
-    this.createWalls(240,17,16);
-    this.createLongPlatforms(60,167,11);
+    this.createWalls(240,14,18);
+    this.createLongPlatforms(75,100,12);
+    this.createLongPlatforms(780,100,8);
+    this.createWalls(936,0,26);
+    this.createCoin(850,60);
+
+    this.createBox(300, 70, 1);
+
   
-    this.createLongPlatforms(0,300,6);
-    this.createSpike(90,270);
-    this.add.text(90,205, "Avoid Spikes", {
+    this.createLongPlatforms(0,200,6);
+    this.createSpike(90,190);
+    this.add.text(90,130, "Avoid Spikes", {
       font: "10px Arial",
       fill: "white"
     });
 
-    this.createLongPlatforms(60, 437, 7);
-    this.createEnemy(120,407);
-    this.add.text(90,340, "And Enemies", {
+    this.createLongPlatforms(525,200,5);
+    this.createEnemy(580,170);
+
+    this.createLongPlatforms(75, 300, 12);
+    this.createEnemy(120,280);
+    this.add.text(90,220, "And Enemies", {
+      font: "10px Arial",
+      fill: "white"
+    });
+    this.createLongSpike(380,280,2);
+
+    this.createBox(850, 270, 2);
+    this.createLongPlatforms(780,300,8);
+    
+
+    this.createLongPlatforms(0,400,6);
+    this.createCoin(120,380);
+    this.add.text(90,330, "Collect Coins", {
       font: "10px Arial",
       fill: "white"
     });
 
-    this.createLongPlatforms(0, 560, 26);
-    this.createCoin(120,515);
-    this.add.text(90,475, "Collect Coins", {
+    this.createLongPlatforms(525,400,5);
+    this.createLongSpike(585,380,1);
+
+    this.createLongPlatforms(75, 500, 12);
+    this.add.text(40,420, "Push boxes into doors to open them", {
+      font: "10px Arial",
+      fill: "white"
+    });
+    this.createBox(180, 470, "1");
+    this.createDoor(90, 470, "1");
+    this.createBox(300, 470, 3);
+    this.createEnemy(340,400);
+
+    this.createLongPlatforms(780, 500, 8);
+
+    this.createLongPlatforms(0, 600, 26);
+    this.add.text(40,545, "Complete the program at the bottom to reach the next level", {
       font: "10px Arial",
       fill: "white"
     });
 
-    this.createLongPlatforms(0, 590, 31);
+    this.createPlatform(756,600);
 
-    this.createLongPlatforms(770, 467, 5);
-    this.createPlatform(890, 560);
-    this.createLongSpike(790,497,3);
-    this.add.text(820, 460, "To Next Function", {
-      font: "10px Arial",
+    this.add.text(380, 630, "Array = [1,2,3]", {
+      font: "30px Arial",
       fill: "white"
     });
 
-    this.add.text(720, 550, "Memory", {
+    this.createLongSpike(790,480,4);
+    this.createCoin(870,450);
+    this.createLongSpike(790,530,3);
+    this.add.text(820, 493, "To Next Function", {
       font: "10px Arial",
       fill: "white"
     });
 
-    this.add.text(780, 580, "1", {
-      font: "10px Arial",
-      fill: "white"
-    });
-    this.add.text(815, 580, "2", {
-      font: "10px Arial",
-      fill: "white"
-    });
-    this.add.text(850, 580, "3", {
-      font: "10px Arial",
-      fill: "white"
-    });
+    this.createLongPlatforms(885,600,3);
+
+    this.createDoor(790,575,"door1");
+    this.createDoor(820,575,"door2");
+    this.createDoor(850,575,"door3");
+
 
 /*
     var box1 = new Box(this, 360, 70, 1);
@@ -166,26 +195,8 @@ export default class MainScene extends Phaser.Scene {
     this.boxes.add(box3);
     */
 
-    this.createBox(360, 70, 1);
-    this.createBox(320, 70, 2);
-    this.createBox(280, 70, 3);
-    this.createBox(810, 320, 1);
 
 
-    this.createDoor(790,527,"door1");
-    this.createDoor(820,527,"door2");
-    this.createDoor(850,527,"door3");
-
-    this.createLongPlatforms(660,350,9);
-    this.createLongPlatforms(489,270,3);
-    this.createLongPlatforms(240,350,5);
-
-    this.createWalls(920,0,17);
-
-    this.createEnemy(300, 270);
-    this.createCoin(520,230);
-
-    this.createMachine(880,300,"machine_increase");
 
     //Keyboard
     this.cursorKeys = this.input.keyboard.createCursorKeys();
@@ -196,7 +207,7 @@ export default class MainScene extends Phaser.Scene {
     this.physics.add.collider(this.boxes,this.player);
     this.physics.add.collider(this.boxes, this.walls);
     this.physics.add.collider(this.platforms,this.player);
-    //this.physics.add.collider(this.walls, this.player);
+    this.physics.add.collider(this.walls, this.player);
     this.physics.add.collider(this.boxes,this.doors,
       function(box,door){
         door.destroy();
@@ -313,7 +324,7 @@ export default class MainScene extends Phaser.Scene {
     for (let i = 0; i < length; i++){
       var wall = this.physics.add.sprite(x,y, "wall");
       this.walls.add(wall);
-      y += 30;
+      y += 28;
     }
   }
 
