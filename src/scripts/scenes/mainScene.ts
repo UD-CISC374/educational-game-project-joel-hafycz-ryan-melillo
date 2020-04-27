@@ -106,20 +106,14 @@ export default class MainScene extends Phaser.Scene {
     });
 
     //Build Level
-    this.add.text(500, 100, "Complete the function!", {
-      font: "10px Arial",
-      fill: "white"
-    });
-    this.add.text(500, 120, "Bring the boxes to the +1 to complete the loop", {
-      font: "10px Arial",
-      fill: "white"
-    });
-    this.add.text(500, 140, "Then bring them to their spot in the array to complete the function!", {
-      font: "10px Arial",
-      fill: "white"
-    });
-    this.createWalls(240,17,16);
-    this.createLongPlatforms(60,167,11);
+    this.createWalls(240,14,18);
+    this.createLongPlatforms(75,100,12);
+    this.createLongPlatforms(780,100,8);
+    this.createWalls(936,0,26);
+    this.createCoin(850,60);
+
+    this.createBox(300, 70, 1);
+
   
     this.createLongPlatforms(0,200,6);
     this.createSpike(90,190);
