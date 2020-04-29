@@ -1,5 +1,5 @@
 import 'phaser';
-import MainScene from './scenes/mainScene';
+import Level1 from './scenes/Level1';
 import PreloadScene from './scenes/preloadScene';
 import GameConfig = Phaser.Types.Core.GameConfig;
 
@@ -13,10 +13,10 @@ const config: GameConfig = {
         parent: 'phaser-game',
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
-        width: DEFAULT_WIDTH,
+        width: DEFAULT_WIDTH, 
         height: DEFAULT_HEIGHT
     },
-    scene: [PreloadScene, MainScene],
+    scene: [PreloadScene, Level1],
     physics: {
         default: 'arcade',
         arcade: {

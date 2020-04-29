@@ -1,7 +1,7 @@
 import Box from '../objects/box';
 import { Bodies } from 'matter';
 
-export default class MainScene extends Phaser.Scene {
+export default class Level1 extends Phaser.Scene {
   //Backgrounds
   private background: Phaser.GameObjects.TileSprite;
 
@@ -34,7 +34,7 @@ export default class MainScene extends Phaser.Scene {
   private spacebar;
 
   constructor() {
-    super({ key: 'MainScene' });
+    super({ key: 'Level1' });
   }
 
   create() {
@@ -66,7 +66,6 @@ export default class MainScene extends Phaser.Scene {
       allowGravity:false
     });
 
-    //Pickups
     this.coins = this.physics.add.group({
       immovable: true,
       allowGravity: false
@@ -114,7 +113,6 @@ export default class MainScene extends Phaser.Scene {
 
     this.createBox(300, 70, 1);
 
-  
     this.createLongPlatforms(0,200,6);
     this.createSpike(90,190);
     this.add.text(90,130, "Avoid Spikes", {
@@ -135,7 +133,6 @@ export default class MainScene extends Phaser.Scene {
 
     this.createBox(850, 270, 2);
     this.createLongPlatforms(780,300,8);
-    
 
     this.createLongPlatforms(0,400,6);
     this.createCoin(120,380);

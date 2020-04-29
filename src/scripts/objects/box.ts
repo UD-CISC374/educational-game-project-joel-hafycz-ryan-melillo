@@ -12,7 +12,5 @@ export default class Box extends Phaser.Physics.Arcade.Sprite {
 
         scene.physics.world.enableBody(this);
         this.setCollideWorldBounds(true);
-
     }
-
 }
