@@ -1,5 +1,6 @@
 import 'phaser';
 import Level1 from './scenes/Level1';
+import Level2 from './scenes/Level2';
 import PreloadScene from './scenes/preloadScene';
 import GameConfig = Phaser.Types.Core.GameConfig;
 
