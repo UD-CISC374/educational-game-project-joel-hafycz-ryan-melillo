@@ -1,6 +1,3 @@
-import Box from '../objects/box';
-import { Bodies } from 'matter';
-
 export default class Level1 extends Phaser.Scene {
   //Backgrounds
   private background: Phaser.GameObjects.TileSprite;
@@ -10,7 +7,14 @@ export default class Level1 extends Phaser.Scene {
 
   private drag = 250;
   
-  private box: Phaser.Physics.Arcade.Sprite;
+  private box0: Phaser.Physics.Arcade.Sprite;
+  private box1: Phaser.Physics.Arcade.Sprite;
+  private box2: Phaser.Physics.Arcade.Sprite;
+  private box3: Phaser.Physics.Arcade.Sprite;
+  private door0: Phaser.Physics.Arcade.Sprite;
+  private door1: Phaser.Physics.Arcade.Sprite;
+  private door2: Phaser.Physics.Arcade.Sprite;
+  private door3: Phaser.Physics.Arcade.Sprite;
   private enemy: Phaser.Physics.Arcade.Sprite;
   private spike: Phaser.Physics.Arcade.Sprite;
   private door: Phaser.Physics.Arcade.Sprite;
@@ -21,7 +25,7 @@ export default class Level1 extends Phaser.Scene {
   private pickups: Phaser.Physics.Arcade.Group;
   private enemies: Phaser.Physics.Arcade.Group;
   private spikes: Phaser.Physics.Arcade.Group;
-  private boxes;
+  private boxes: Phaser.Physics.Arcade.Group;
   private platforms: Phaser.Physics.Arcade.Group;
   private walls: Phaser.Physics.Arcade.Group;
   private coins: Phaser.Physics.Arcade.Group;
@@ -40,6 +44,10 @@ export default class Level1 extends Phaser.Scene {
   create() {
     this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
+    //Groups
+    this.boxes = this.physics.add.group();
+    this.doors = this.physics.add.group();
+  
     //Background Scenes
     this.background = this.add.tileSprite(0, 0, this.scale.width, this.scale.height, "backgroundlvl1.png");
     this.background.setOrigin(0, 0);
@@ -49,9 +57,26 @@ export default class Level1 extends Phaser.Scene {
     this.player.state = "nobox"
     this.player.setCollideWorldBounds(true);
 
-    /*this.spike = this.physics.add.sprite(200,200,"spike");
-    this.enemy = this.physics.add.sprite(300,300,"enemy");*/
+    this.box0 = this.physics.add.sprite(180,470,"box0");
+    this.box1 = this.physics.add.sprite(300, 70,"box1");
+    this.box2 = this.physics.add.sprite(850,270,"box2");
+    this.box3 = this.physics.add.sprite(300,470,"box3");
 
+    this.boxes.add(this.box0);
+    this.boxes.add(this.box1);
+    this.boxes.add(this.box2);
+    this.boxes.add(this.box3);
+
+    this.door0 = this.physics.add.sprite(90,470,"door0");
+    this.door1 = this.physics.add.sprite(790,575,"door1");
+    this.door2 = this.physics.add.sprite(820,575,"door2");
+    this.door3 = this.physics.add.sprite(850,575,"door3");
+
+    this.doors.add(this.door0);
+    this.doors.add(this.door1);
+    this.doors.add(this.door2);
+    this.doors.add(this.door3);
+    
     //Movable objects
 
     //Spikes
@@ -85,15 +110,14 @@ export default class Level1 extends Phaser.Scene {
       dragX: 150,
       bounceX: 1
     });
-
-    //this.boxes.class= Box;
-
+    
     //Doors
     this.doors = this.physics.add.group({
       immovable: true,
-      allowGravity: false
+      allowGravity: false,
+      collideWorldBounds: true
     });
-
+    
     this.walls = this.physics.add.group({
       immovable: true,
       allowGravity: false
@@ -110,8 +134,6 @@ export default class Level1 extends Phaser.Scene {
     this.createLongPlatforms(780,100,8);
     this.createWalls(936,0,26);
     this.createCoin(850,60);
-
-    this.createBox(300, 70, 1);
 
     this.createLongPlatforms(0,200,6);
     this.createSpike(90,190);
@@ -131,7 +153,7 @@ export default class Level1 extends Phaser.Scene {
     });
     this.createLongSpike(380,280,2);
 
-    this.createBox(850, 270, 2);
+    
     this.createLongPlatforms(780,300,8);
 
     this.createLongPlatforms(0,400,6);
@@ -149,9 +171,7 @@ export default class Level1 extends Phaser.Scene {
       font: "10px Arial",
       fill: "white"
     });
-    this.createBox(180, 470, "1");
-    this.createDoor(90, 470, "1", 1);
-    this.createBox(300, 470, 3);
+
     this.createEnemy(340,400);
 
     this.createLongPlatforms(780, 500, 8);
@@ -179,45 +199,34 @@ export default class Level1 extends Phaser.Scene {
 
     this.createLongPlatforms(885,600,3);
 
-    this.createDoor(790,575,"door1", 1);
-    this.createDoor(820,575,"door2", 2);
-    this.createDoor(850,575,"door3", 3);
-
-
-/*
-    var box1 = new Box(this, 360, 70, 1);
-    var box2 = new Box(this, 320, 70, 2);
-    var box3 = new Box(this, 280, 70, 3);
-    var testbox = new Box(this, 810, 320, 1);
-    this.boxes.add(testbox);
-    this.boxes.add(box1);
-    this.boxes.add(box2);
-    this.boxes.add(box3);
-    */
-
-
-
 
     //Keyboard
     this.cursorKeys = this.input.keyboard.createCursorKeys();
 
     //Set interactive
-    this.physics.add.collider(this.platforms,this.boxes);
-    this.physics.add.collider(this.boxes,this.boxes);
-    this.physics.add.collider(this.boxes,this.player);
-    this.physics.add.collider(this.boxes, this.walls);
+    this.physics.add.collider(this.platforms,this.box0);
+    this.physics.add.collider(this.platforms,this.box1);
+    this.physics.add.collider(this.platforms,this.box2);
+    this.physics.add.collider(this.platforms,this.box3);
+
+    this.physics.add.collider(this.player,this.box0);
+    this.physics.add.collider(this.player,this.box1);
+    this.physics.add.collider(this.player,this.box2);
+    this.physics.add.collider(this.player,this.box3);
+
+    this.physics.add.collider(this.platforms,this.door0);
+    this.physics.add.collider(this.platforms,this.door0);
+    this.physics.add.collider(this.platforms,this.door0);
+    this.physics.add.collider(this.platforms,this.door0);
+
+    this.physics.add.collider(this.player,this.door0);
+    this.physics.add.collider(this.player,this.door1);
+    this.physics.add.collider(this.player,this.door2);
+    this.physics.add.collider(this.player,this.door3);
+
     this.physics.add.collider(this.platforms,this.player);
     this.physics.add.collider(this.walls, this.player);
-    this.physics.add.collider(this.boxes,this.doors,
-      function(box,door){
-        door.destroy();
-        box.destroy();
-      });
 
-    //this.physics.add.collider(this.walls, this.player);
-
-    this.physics.add.overlap(this.boxes,this.doors, this.doorBox);
-    this.physics.add.collider(this.boxes, this.machines, this.addOne);
     this.physics.add.overlap(this.player, this.coins, this.pickupCoin);
     this.physics.add.overlap(this.player, this.enemies, this.hurtPlayer);
     this.physics.add.overlap(this.player, this.spikes, this.hurtPlayer); 
@@ -238,14 +247,6 @@ export default class Level1 extends Phaser.Scene {
 
   //Helper Functions (movement, collecting, you name it)
 
-   //currently unused, supposed to be for double jumping on key activation
-  handlePickup(box, player){
-    if(Phaser.Input.Keyboard.JustDown(this.spacebar)){
-      this.player.state = "yesbox" + box.z;
-    }
-
-  }
-
   handleJump(){
     if(this.canJump<2){
       this.player.setVelocityY(-320);
@@ -253,19 +254,21 @@ export default class Level1 extends Phaser.Scene {
     }
   }
 
+  /*
   doorBox(door, box){
     if (door.z == box.z){
       door.destroy();
       box.destroy();
     }
   }
+  */
 
   hurtPlayer(player, enemy){
     player.x = 80;
     player.y = 20;
   }
 
-  addOne(box, machine){
+  /*addOne(box, machine){
     if(box.z ==1){
 
     var temp = box.z +1;
@@ -277,8 +280,8 @@ export default class Level1 extends Phaser.Scene {
     box.setZ(temp);
     box.setTexture("box" + box.z);
     }
-
   }
+  */
 
   pickupCoin(player, coin){
     coin.disableBody(true, true);
@@ -328,24 +331,6 @@ export default class Level1 extends Phaser.Scene {
     this.enemies.add(enemy);
     //enemy.setCollideWorldBounds(true);
     //enemy.setDragX(this.drag);
-  }
-
-   //Unused now with custom class
-  createBox(x,y, num){
-    var box = this.physics.add.sprite(x,y, 'box' +num);
-    box.state = 1;
-    box.setZ(num);
-    this.boxes.add(box);
-    box.setCollideWorldBounds(true);
-    box.setDragX(this.drag);
-    box.setBounceX(1);
-
-  }
-
-  createDoor(x,y, num, val){
-    var door = this.physics.add.sprite(x,y,num);
-    door.setZ(val);
-    this.doors.add(door);
   }
 
   createMachine(x,y,type){
