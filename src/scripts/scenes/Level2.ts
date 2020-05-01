@@ -43,7 +43,7 @@ export default class Level2 extends Phaser.Scene {
     this.background.setOrigin(0, 0);
 
       //Sprites / Images
-    this.player = this.physics.add.sprite(80,20,"player");
+    this.player = this.physics.add.sprite(35,650,"player");
     this.player.state = "nobox"
     this.player.setCollideWorldBounds(true);
 
@@ -102,84 +102,8 @@ export default class Level2 extends Phaser.Scene {
         allowGravity:false
     });
 
-     //Build Level
-     this.createWalls(240,14,18);
-     this.createLongPlatforms(75,100,12);
-     this.createLongPlatforms(780,100,8);
-     this.createWalls(936,0,26);
-     this.createCoin(850,60);
- 
-     this.createBox(300, 70, 1);
- 
-     this.createLongPlatforms(0,200,6);
-     this.createSpike(90,190);
-     this.add.text(90,130, "Avoid Spikes", {
-       font: "10px Arial",
-       fill: "white"
-     });
- 
-     this.createLongPlatforms(525,200,5);
-     this.createEnemy(580,170);
- 
-     this.createLongPlatforms(75, 300, 12);
-     this.createEnemy(120,280);
-     this.add.text(90,220, "And Enemies", {
-       font: "10px Arial",
-       fill: "white"
-     });
-     this.createLongSpike(380,280,2);
- 
-     this.createBox(850, 270, 2);
-     this.createLongPlatforms(780,300,8);
- 
-     this.createLongPlatforms(0,400,6);
-     this.createCoin(120,380);
-     this.add.text(90,330, "Collect Coins", {
-       font: "10px Arial",
-       fill: "white"
-     });
- 
-     this.createLongPlatforms(525,400,5);
-     this.createLongSpike(585,380,1);
- 
-     this.createLongPlatforms(75, 500, 12);
-     this.add.text(40,420, "Push boxes into doors to open them", {
-       font: "10px Arial",
-       fill: "white"
-     });
-     this.createBox(180, 470, "1");
-     this.createDoor(90, 470, "1", 1);
-     this.createBox(300, 470, 3);
-     this.createEnemy(340,400);
- 
-     this.createLongPlatforms(780, 500, 8);
- 
-     this.createLongPlatforms(0, 600, 26);
-     this.add.text(40,545, "Complete the program at the bottom to reach the next level", {
-       font: "10px Arial",
-       fill: "white"
-     });
- 
-     this.createPlatform(756,600);
- 
-     this.add.text(380, 630, "Array = [1,2,3]", {
-       font: "30px Arial",
-       fill: "white"
-     });
- 
-     this.createLongSpike(790,480,4);
-     this.createCoin(870,450);
-     this.createLongSpike(790,530,3);
-     this.add.text(820, 493, "To Next Function", {
-       font: "10px Arial",
-       fill: "white"
-     });
- 
-     this.createLongPlatforms(885,600,3);
- 
-     this.createDoor(790,575,"door1", 1);
-     this.createDoor(820,575,"door2", 2);
-     this.createDoor(850,575,"door3", 3);
+    this.createLongPlatforms(0, 600, 5);
+
 
 
     
@@ -245,7 +169,7 @@ doorBox(door, box){
     }
 }
 
- hurtPlayer(player, enemy){
+hurtPlayer(player, enemy){
     player.x = 80;
     player.y = 20;
 }
