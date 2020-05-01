@@ -43,7 +43,7 @@ export default class Level2 extends Phaser.Scene {
     this.background.setOrigin(0, 0);
 
       //Sprites / Images
-    this.player = this.physics.add.sprite(35,650,"player");
+    this.player = this.physics.add.sprite(35,550,"player");
     this.player.state = "nobox"
     this.player.setCollideWorldBounds(true);
 
@@ -102,7 +102,47 @@ export default class Level2 extends Phaser.Scene {
         allowGravity:false
     });
 
-    this.createLongPlatforms(0, 600, 5);
+    this.createLongPlatforms(0, 600, 32);
+    this.createLongPlatforms(0, 100, 5);
+    this.add.text(20,80, "Moves left and right + 3 boxes on top", {
+        font: "10px Arial",
+        fill: "white"
+    });
+    this.createWalls(480,0,9);
+    this.createSpike(460,30);
+    this.createSpike(460,60);
+    this.createSpike(460,90);
+    this.createSpike(460,120);
+    this.createSpike(460,150);
+
+    this.createCoin(450,190);
+
+    this.createMachine(530, 200, "machine_increase");
+
+    this.createLongPlatforms(492,240,8);
+    this.createEnemy(650, 200);
+
+    this.createLongPlatforms(800, 300, 2);
+    this.add.text(790,280, "Moves up and down", {
+        font: "10px Arial",
+        fill: "white"
+    });
+    
+    this.createLongPlatforms(170, 200, 2);
+    this.add.text(150,180, "Moves up and down", {
+        font: "10px Arial",
+        fill: "white"
+    });
+
+    this.createLongPlatforms(830, 500, 5);
+    this.add.text(800,550, "3 doors here [2,3,4] (800, 550)", {
+        font: "10px Arial",
+        fill: "white"
+    });
+
+    this.createEnemy(700, 550);
+    this.createLongSpike(830, 520, 4);
+
 
 
 
