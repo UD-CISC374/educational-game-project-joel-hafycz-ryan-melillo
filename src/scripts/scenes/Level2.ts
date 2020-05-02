@@ -3,6 +3,7 @@ import baseScene from "./baseScene";
 export default class Level2 extends baseScene {
     //Backgrounds
 
+    
     constructor(key) {
         super('Level2');
     }
@@ -59,11 +60,6 @@ export default class Level2 extends baseScene {
       //this.boxes.class= Box;
 
       //Doors
-    this.doors = this.physics.add.group({
-        immovable: true,
-        allowGravity: false
-    });
-
     this.walls = this.physics.add.group({
         immovable: true,
         allowGravity: false
@@ -85,15 +81,9 @@ export default class Level2 extends baseScene {
     this.physics.add.collider(this.boxes, this.walls);
     this.physics.add.collider(this.platforms,this.player);
     this.physics.add.collider(this.walls, this.player);
-    this.physics.add.collider(this.boxes,this.doors,
-    function(box,door){
-        door.destroy();
-        box.destroy();
-    });
-
+    
     //this.physics.add.collider(this.walls, this.player);
 
-    this.physics.add.overlap(this.boxes,this.doors, this.doorBox);
     this.physics.add.collider(this.boxes, this.machines, this.addOne);
     this.physics.add.overlap(this.player, this.coins, this.pickupCoin);
     this.physics.add.overlap(this.player, this.enemies, this.hurtPlayer);

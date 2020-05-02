@@ -14,15 +14,19 @@ export default class Level1 extends baseScene{
   public box1: Phaser.Physics.Arcade.Sprite;
   public box2: Phaser.Physics.Arcade.Sprite;
   public box3: Phaser.Physics.Arcade.Sprite;
-  public door0: Phaser.Physics.Arcade.Sprite;
-  public door1: Phaser.Physics.Arcade.Sprite;
-  public door2: Phaser.Physics.Arcade.Sprite;
-  public door3: Phaser.Physics.Arcade.Sprite;
+  public box1complete: Phaser.Physics.Arcade.Image;
+  public box2complete: Phaser.Physics.Arcade.Image;
+  public box3complete: Phaser.Physics.Arcade.Image; 
+  public door0: Phaser.Physics.Arcade.Image;
+  public door1: Phaser.Physics.Arcade.Image;
+  public door2: Phaser.Physics.Arcade.Image;
+  public door3: Phaser.Physics.Arcade.Image;
   public enemy: Phaser.Physics.Arcade.Sprite;
   public spike: Phaser.Physics.Arcade.Sprite;
   public door: Phaser.Physics.Arcade.Sprite;
   public wall: Phaser.Physics.Arcade.Sprite;
   public machine_increase: Phaser.Physics.Arcade.Sprite
+  public nextlevel: Phaser.Physics.Arcade.Image
 
   //Groups
   public pickups: Phaser.Physics.Arcade.Group;
@@ -32,8 +36,10 @@ export default class Level1 extends baseScene{
   public platforms: Phaser.Physics.Arcade.Group;
   public walls: Phaser.Physics.Arcade.Group;
   public coins: Phaser.Physics.Arcade.Group;
-  public doors: Phaser.Physics.Arcade.Group;
   public machines: Phaser.Physics.Arcade.Group;
+
+  //Flags
+  public level1complete: boolean = false;
 
   //Other
   public canJump; //set to 1 when jumps so cant again -- maybe a powerup for double jump, so canJump can be 0 then 1 THEN set to two to only allow 2 jumps
@@ -49,7 +55,6 @@ export default class Level1 extends baseScene{
 
     //Groups
     this.boxes = this.physics.add.group();
-    this.doors = this.physics.add.group();
   
     //Background Scenes
     this.background = this.add.tileSprite(0, 0, this.scale.width, this.scale.height, "backgroundlvl1.png");
@@ -65,20 +70,16 @@ export default class Level1 extends baseScene{
     this.box2 = this.physics.add.sprite(850,270,"box2");
     this.box3 = this.physics.add.sprite(300,470,"box3");
 
-    this.boxes.add(this.box0);
-    this.boxes.add(this.box1);
-    this.boxes.add(this.box2);
-    this.boxes.add(this.box3);
+    this.box1complete;
+    this.box2complete;
+    this.box3complete;
 
-    this.door0 = this.physics.add.sprite(90,470,"door0");
-    this.door1 = this.physics.add.sprite(790,575,"door1");
-    this.door2 = this.physics.add.sprite(820,575,"door2");
-    this.door3 = this.physics.add.sprite(850,575,"door3");
+    this.door0 = this.physics.add.staticImage(90,470,"door0");
+    this.door1 = this.physics.add.staticImage(790,575,"door1");
+    this.door2 = this.physics.add.staticImage(820,575,"door2");
+    this.door3 = this.physics.add.staticImage(850,575,"door3");
 
-    this.doors.add(this.door0);
-    this.doors.add(this.door1);
-    this.doors.add(this.door2);
-    this.doors.add(this.door3);
+    this.nextlevel = this.physics.add.staticImage(900, 575, "nextlevel");
     
     //Movable objects
 
@@ -112,13 +113,6 @@ export default class Level1 extends baseScene{
       collideWorldBounds: true,
       dragX: 150,
       bounceX: 1
-    });
-    
-    //Doors
-    this.doors = this.physics.add.group({
-      immovable: true,
-      allowGravity: false,
-      collideWorldBounds: true
     });
     
     this.walls = this.physics.add.group({
@@ -212,6 +206,11 @@ export default class Level1 extends baseScene{
     this.physics.add.collider(this.platforms,this.box2);
     this.physics.add.collider(this.platforms,this.box3);
 
+    this.physics.add.collider(this.walls,this.box0);
+    this.physics.add.collider(this.walls,this.box1);
+    this.physics.add.collider(this.walls,this.box2);
+    this.physics.add.collider(this.walls,this.box3);
+
     this.physics.add.collider(this.player,this.box0);
     this.physics.add.collider(this.player,this.box1);
     this.physics.add.collider(this.player,this.box2);
@@ -226,6 +225,36 @@ export default class Level1 extends baseScene{
     this.physics.add.collider(this.player,this.door1);
     this.physics.add.collider(this.player,this.door2);
     this.physics.add.collider(this.player,this.door3);
+
+    this.physics.add.collider(this.box3,this.door1);
+    this.physics.add.collider(this.box3,this.door2);
+    this.physics.add.collider(this.box2,this.door1);
+
+    /*this.physics.add.collider(this.player, this.nextlevel,
+      function(){
+        level1complete = true;
+      });
+      */
+    this.physics.add.collider(this.box0,this.door0,
+      function(box,door){
+          //door.body.reset(100,200);
+          box.destroy();
+      });
+    this.physics.add.collider(this.box1,this.door1,
+      function(box,door){
+          //door.body.o        ;//(790,600);
+          box.destroy();
+      });
+    this.physics.add.collider(this.box2,this.door2,
+      function(box,door){
+          door.destroy();
+          box.destroy();
+      });
+    this.physics.add.collider(this.box3,this.door3,
+      function(box,door){
+          door.destroy();
+          box.destroy();
+      });
 
     this.physics.add.collider(this.platforms,this.player);
     this.physics.add.collider(this.walls, this.player);

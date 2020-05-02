@@ -26,6 +26,9 @@ export default class baseScene extends Phaser.Scene  {
     public doors: Phaser.Physics.Arcade.Group;
     public machines: Phaser.Physics.Arcade.Group;
 
+    //Flags
+    public level1complete: boolean = false;
+
     //Other
     public canJump; //set to 1 when jumps so cant again -- maybe a powerup for double jump, so canJump can be 0 then 1 THEN set to two to only allow 2 jumps
     public cursorKeys: Phaser.Types.Input.Keyboard.CursorKeys;
@@ -45,6 +48,8 @@ update() {
     if(this.player.body.blocked.down){
     this.canJump = 0;
     }
+
+
     //Functions
 }
 
@@ -89,7 +94,6 @@ addOne(box, machine){
     box.setZ(temp);
     box.setTexture("box" + box.z);
     }
-
 }
 
 pickupCoin(player, coin){
@@ -151,13 +155,6 @@ createBox(x,y, num){
     box.setCollideWorldBounds(true);
     box.setDragX(this.drag);
     box.setBounceX(1);
-
-}
-
-createDoor(x,y, num, val){
-    var door = this.physics.add.sprite(x,y,num);
-    door.setZ(val);
-    this.doors.add(door);
 }
 
 createMachine(x,y,type){
