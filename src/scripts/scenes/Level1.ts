@@ -1,41 +1,44 @@
-export default class Level1 extends Phaser.Scene {
+import Level2 from "./Level2";
+import baseScene from "./baseScene";
+
+export default class Level1 extends baseScene{
   //Backgrounds
-  private background: Phaser.GameObjects.TileSprite;
+  public background: Phaser.GameObjects.TileSprite;
 
   //Indiviual objects
-  private player: Phaser.Physics.Arcade.Sprite;
+  public player: Phaser.Physics.Arcade.Sprite;
 
-  private drag = 250;
+  public drag = 250;
   
-  private box0: Phaser.Physics.Arcade.Sprite;
-  private box1: Phaser.Physics.Arcade.Sprite;
-  private box2: Phaser.Physics.Arcade.Sprite;
-  private box3: Phaser.Physics.Arcade.Sprite;
-  private door0: Phaser.Physics.Arcade.Sprite;
-  private door1: Phaser.Physics.Arcade.Sprite;
-  private door2: Phaser.Physics.Arcade.Sprite;
-  private door3: Phaser.Physics.Arcade.Sprite;
-  private enemy: Phaser.Physics.Arcade.Sprite;
-  private spike: Phaser.Physics.Arcade.Sprite;
-  private door: Phaser.Physics.Arcade.Sprite;
-  private wall: Phaser.Physics.Arcade.Sprite;
-  private machine_increase: Phaser.Physics.Arcade.Sprite
+  public box0: Phaser.Physics.Arcade.Sprite;
+  public box1: Phaser.Physics.Arcade.Sprite;
+  public box2: Phaser.Physics.Arcade.Sprite;
+  public box3: Phaser.Physics.Arcade.Sprite;
+  public door0: Phaser.Physics.Arcade.Sprite;
+  public door1: Phaser.Physics.Arcade.Sprite;
+  public door2: Phaser.Physics.Arcade.Sprite;
+  public door3: Phaser.Physics.Arcade.Sprite;
+  public enemy: Phaser.Physics.Arcade.Sprite;
+  public spike: Phaser.Physics.Arcade.Sprite;
+  public door: Phaser.Physics.Arcade.Sprite;
+  public wall: Phaser.Physics.Arcade.Sprite;
+  public machine_increase: Phaser.Physics.Arcade.Sprite
 
   //Groups
-  private pickups: Phaser.Physics.Arcade.Group;
-  private enemies: Phaser.Physics.Arcade.Group;
-  private spikes: Phaser.Physics.Arcade.Group;
-  private boxes: Phaser.Physics.Arcade.Group;
-  private platforms: Phaser.Physics.Arcade.Group;
-  private walls: Phaser.Physics.Arcade.Group;
-  private coins: Phaser.Physics.Arcade.Group;
-  private doors: Phaser.Physics.Arcade.Group;
-  private machines: Phaser.Physics.Arcade.Group;
+  public pickups: Phaser.Physics.Arcade.Group;
+  public enemies: Phaser.Physics.Arcade.Group;
+  public spikes: Phaser.Physics.Arcade.Group;
+  public boxes: Phaser.Physics.Arcade.Group;
+  public platforms: Phaser.Physics.Arcade.Group;
+  public walls: Phaser.Physics.Arcade.Group;
+  public coins: Phaser.Physics.Arcade.Group;
+  public doors: Phaser.Physics.Arcade.Group;
+  public machines: Phaser.Physics.Arcade.Group;
 
   //Other
-  private canJump; //set to 1 when jumps so cant again -- maybe a powerup for double jump, so canJump can be 0 then 1 THEN set to two to only allow 2 jumps
-  private cursorKeys: Phaser.Types.Input.Keyboard.CursorKeys;
-  private spacebar;
+  public canJump; //set to 1 when jumps so cant again -- maybe a powerup for double jump, so canJump can be 0 then 1 THEN set to two to only allow 2 jumps
+  public cursorKeys: Phaser.Types.Input.Keyboard.CursorKeys;
+  public spacebar;
 
   constructor() {
     super({ key: 'Level1' });
