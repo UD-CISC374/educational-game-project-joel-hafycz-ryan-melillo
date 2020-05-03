@@ -10,7 +10,7 @@ export default class PreloadScene extends Phaser.Scene {
     this.load.image("backgroundlvl2.png", "assets/images/backgroundlvl2.png");
     this.load.image("backgroundlvl3.png", "assets/images/backgroundlvl3.png");
 
-    this.load.image("player", "assets/images/player.png");
+    this.load.image("player", "assets/images/robotstanding.png");
     this.load.image("coin", "assets/images/coin.png");
     this.load.image("enemy", "assets/images/enemy.png");
     this.load.image("spike", "assets/images/spike.png");
@@ -19,7 +19,7 @@ export default class PreloadScene extends Phaser.Scene {
     this.load.image("emptybox","assets/images/emptybox.png");
     this.load.image("nextlevel", "assets/images/nextlevel");
     
-    this.load.image("box0", "assets/images/box0.png");
+    this.load.image("box0", "assets/images/emptybox.png");
     this.load.image("box1", "assets/images/box1.png");
     this.load.image("box2", "assets/images/box2.png");
     this.load.image("box3", "assets/images/box3.png");
