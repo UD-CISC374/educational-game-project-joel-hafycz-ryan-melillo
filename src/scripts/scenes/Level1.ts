@@ -61,7 +61,7 @@ export default class Level1 extends baseScene{
     this.background.setOrigin(0, 0);
 
     //Sprites / Images
-    this.player = this.physics.add.sprite(80,20,"player");
+    this.player = this.physics.add.sprite(190,20,"player");
     this.player.state = "nobox"
     this.player.setCollideWorldBounds(true);
 
@@ -126,44 +126,47 @@ export default class Level1 extends baseScene{
     });
 
     //Build Level
+    this.createLongPlatforms(0,8,20);
+    this.createWalls(6,14,25);
     this.createWalls(240,14,18);
-    this.createLongPlatforms(75,100,12);
-    this.createLongPlatforms(780,100,8);
+    this.createLongPlatforms(0,693,20);
+    this.createLongPlatforms(130,100,6);
+    this.createLongPlatforms(780,100,4);
     this.createWalls(936,0,26);
     this.createCoin(850,60);
 
-    this.createLongPlatforms(0,200,6);
-    this.createSpike(90,190);
+    this.createLongPlatforms(0,200,4);
+    this.createSpike(160,180);
     this.add.text(90,130, "Avoid Spikes", {
       font: "10px Arial",
       fill: "white"
     });
 
-    this.createLongPlatforms(525,200,5);
+    this.createLongPlatforms(525,200,3);
     this.createEnemy(580,170);
 
-    this.createLongPlatforms(75, 300, 12);
-    this.createEnemy(120,280);
-    this.add.text(90,220, "And Enemies", {
+    this.createLongPlatforms(130, 300, 6);
+    this.createEnemy(120,270);
+    this.add.text(90,220, "And Workers", {
       font: "10px Arial",
       fill: "white"
     });
     this.createLongSpike(380,280,2);
 
     
-    this.createLongPlatforms(780,300,8);
+    this.createLongPlatforms(780,300,4);
 
-    this.createLongPlatforms(0,400,6);
-    this.createCoin(120,380);
+    this.createLongPlatforms(0,400,4);
+    this.createCoin(120,360);
     this.add.text(90,330, "Collect Coins", {
       font: "10px Arial",
       fill: "white"
     });
 
-    this.createLongPlatforms(525,400,5);
+    this.createLongPlatforms(525,400,3);
     this.createLongSpike(585,380,1);
 
-    this.createLongPlatforms(75, 500, 12);
+    this.createLongPlatforms(130, 500, 6);
     this.add.text(40,420, "Push boxes into doors to open them", {
       font: "10px Arial",
       fill: "white"
@@ -173,28 +176,26 @@ export default class Level1 extends baseScene{
 
     this.createLongPlatforms(780, 500, 8);
 
-    this.createLongPlatforms(0, 600, 26);
+    this.createLongPlatforms(0, 600, 16);
     this.add.text(40,545, "Complete the program at the bottom to reach the next level", {
       font: "10px Arial",
       fill: "white"
     });
-
-    this.createPlatform(756,600);
 
     this.add.text(380, 630, "Array = [1,2,3]", {
       font: "30px Arial",
       fill: "white"
     });
 
-    this.createLongSpike(790,480,4);
-    this.createCoin(870,450);
-    this.createLongSpike(790,530,3);
+    this.createLongSpike(770,480,4);
+    this.createCoin(890,450);
+    this.createLongSpike(780,530,3);
     this.add.text(820, 493, "To Next Function", {
       font: "10px Arial",
       fill: "white"
     });
 
-    this.createLongPlatforms(885,600,3);
+    this.createLongPlatforms(890,600,2);
 
 
     //Keyboard
@@ -245,17 +246,17 @@ export default class Level1 extends baseScene{
       });
     this.physics.add.collider(this.box1,this.door1,
       function(box,door){
-          (door.body as Phaser.Physics.Arcade.StaticBody).reset(790, 613);
+          (door.body as Phaser.Physics.Arcade.StaticBody).reset(790, 609);
           box.destroy();
       });
     this.physics.add.collider(this.box2,this.door2,
       function(box,door){
-          (door.body as Phaser.Physics.Arcade.StaticBody).reset(820, 613);
+          (door.body as Phaser.Physics.Arcade.StaticBody).reset(820, 609);
           box.destroy();
       });
     this.physics.add.collider(this.box3,this.door3,
       function(box,door){
-          (door.body as Phaser.Physics.Arcade.StaticBody).reset(850, 613);
+          (door.body as Phaser.Physics.Arcade.StaticBody).reset(850, 609);
           box.destroy();
       });
 

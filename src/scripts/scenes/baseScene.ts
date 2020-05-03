@@ -109,7 +109,7 @@ createLongPlatforms(x,y,length){
     for (let i = 0; i < length; i++){
     var platform = this.physics.add.sprite(x,y, "platform");
     this.platforms.add(platform);
-    x += 30;
+    x += 50;
     }
 }
 
@@ -125,7 +125,7 @@ createLongSpike(x,y,length){
     for (let i = 0; i < length; i++){
     var spike = this.physics.add.sprite(x,y, "spike");
     this.spikes.add(spike);
-    x += 30;
+    x += 18;
     }
 }
 
