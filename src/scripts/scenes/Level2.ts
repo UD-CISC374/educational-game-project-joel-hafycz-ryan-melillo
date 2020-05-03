@@ -1,7 +1,52 @@
 import baseScene from "./baseScene";
 
 export default class Level2 extends baseScene {
-    //Backgrounds
+     //Backgrounds
+public background: Phaser.GameObjects.TileSprite;
+
+  //Indiviual objects
+public player: Phaser.Physics.Arcade.Sprite;
+
+public drag = 250;
+
+public box1: Phaser.Physics.Arcade.Sprite;
+public box2: Phaser.Physics.Arcade.Sprite;
+public box3: Phaser.Physics.Arcade.Sprite;
+
+
+
+public box1complete: Phaser.Physics.Arcade.Image;
+public box2complete: Phaser.Physics.Arcade.Image;
+public box3complete: Phaser.Physics.Arcade.Image; 
+public door0: Phaser.Physics.Arcade.Image;
+public door1: Phaser.Physics.Arcade.Image;
+public door2: Phaser.Physics.Arcade.Image;
+public door3: Phaser.Physics.Arcade.Image;
+public enemy: Phaser.Physics.Arcade.Sprite;
+public spike: Phaser.Physics.Arcade.Sprite;
+public door: Phaser.Physics.Arcade.Sprite;
+public wall: Phaser.Physics.Arcade.Sprite;
+public machine_increase: Phaser.Physics.Arcade.Sprite
+public nextlevel: Phaser.Physics.Arcade.Image
+
+  //Groups
+public pickups: Phaser.Physics.Arcade.Group;
+public enemies: Phaser.Physics.Arcade.Group;
+public spikes: Phaser.Physics.Arcade.Group;
+public boxes: Phaser.Physics.Arcade.Group;
+public platforms: Phaser.Physics.Arcade.Group;
+public walls: Phaser.Physics.Arcade.Group;
+public coins: Phaser.Physics.Arcade.Group;
+public machines: Phaser.Physics.Arcade.Group;
+
+  //Flags
+public level1complete: boolean = false;
+
+  //Other
+  public canJump; //set to 1 when jumps so cant again -- maybe a powerup for double jump, so canJump can be 0 then 1 THEN set to two to only allow 2 jumps
+public cursorKeys: Phaser.Types.Input.Keyboard.CursorKeys;
+public spacebar;
+
 
     
     constructor(key) {

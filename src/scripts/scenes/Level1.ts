@@ -230,29 +230,32 @@ export default class Level1 extends baseScene{
     this.physics.add.collider(this.box3,this.door2);
     this.physics.add.collider(this.box2,this.door1);
 
+
+    //attempt at changing the level
     /*this.physics.add.collider(this.player, this.nextlevel,
       function(){
         level1complete = true;
       });
       */
+    
     this.physics.add.collider(this.box0,this.door0,
       function(box,door){
-          //door.body.reset(100,200);
+          door.destroy();
           box.destroy();
       });
     this.physics.add.collider(this.box1,this.door1,
       function(box,door){
-          //door.body.o        ;//(790,600);
+          (door.body as Phaser.Physics.Arcade.StaticBody).reset(790, 613);
           box.destroy();
       });
     this.physics.add.collider(this.box2,this.door2,
       function(box,door){
-          door.destroy();
+          (door.body as Phaser.Physics.Arcade.StaticBody).reset(820, 613);
           box.destroy();
       });
     this.physics.add.collider(this.box3,this.door3,
       function(box,door){
-          door.destroy();
+          (door.body as Phaser.Physics.Arcade.StaticBody).reset(850, 613);
           box.destroy();
       });
 
