@@ -17,7 +17,7 @@ export default class PreloadScene extends Phaser.Scene {
     this.load.image("platform", "assets/images/platform.png");
     this.load.image("wall", "assets/images/wall.png");
     this.load.image("emptybox","assets/images/emptybox.png");
-    this.load.image("nextlevel", "assets/images/nextlevel");
+    this.load.image("levelchanger1", "assets/images/levelchanger");
     
     this.load.image("box0", "assets/images/emptybox.png");
     this.load.image("box1", "assets/images/box1.png");
@@ -62,6 +62,6 @@ export default class PreloadScene extends Phaser.Scene {
     //Other Stuff
 
 
-    this.scene.start('Level1');
+    this.scene.start('Level2');
   }
 }

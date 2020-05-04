@@ -18,6 +18,7 @@ export default class Level1 extends baseScene{
     //Background Scenes
     this.background = this.add.tileSprite(0, 0, this.scale.width, this.scale.height, "backgroundlvl1.png");
     this.background.setOrigin(0, 0);
+    
 
     //Sprites / Images
     this.player = new Player(this, 190,20);
@@ -32,8 +33,9 @@ export default class Level1 extends baseScene{
     this.createBox(this,300, 70,3);
     this.createBox(this,850,270,2);
     this.createBox(this,300,470,1);
+
+    //this.createLevelChanger(800,575,1);
   
-    this.nextlevel = this.physics.add.staticImage(900, 575, "nextlevel");
     this.door = this.physics.add.staticImage(800,575,"door");
     
     //Movable objects
@@ -41,12 +43,13 @@ export default class Level1 extends baseScene{
     //Build Level
     this.createLongPlatforms(0,8,20);
     this.createWalls(6,14,25);
-    this.createWalls(240,14,18);
+    this.createWalls(240,14,16);
     this.createLongPlatforms(0,693,20);
     this.createLongPlatforms(130,100,6);
     this.createLongPlatforms(780,100,4);
-    this.createWalls(936,0,26);
+    this.createWalls(936,14,16);
     this.createCoin(850,60);
+    this.createWalls(936,610,4);
 
     this.createLongPlatforms(0,200,4);
     this.createSpike(160,180);
@@ -80,7 +83,7 @@ export default class Level1 extends baseScene{
     this.createLongSpike(585,380,1);
 
     this.createLongPlatforms(130, 500, 6);
-    this.add.text(40,420, "Push boxes into doors to open them", {
+    this.add.text(20,420, "Pickup boxes, and put them in the correct spots", {
       font: "10px Arial",
       fill: "white"
     });
@@ -111,34 +114,24 @@ export default class Level1 extends baseScene{
     });
 
     this.createLongPlatforms(890,600,2);
-
-    //this.createDoor(800,575);
+    //this.createLevelChanger(800,575,1);
 
     //Keyboard
     this.cursorKeys = this.input.keyboard.createCursorKeys();
 
     //Set interactive
-    
-    //attempt at changing the level
-    /*this.physics.add.collider(this.player, this.nextlevel,
-      function(){
-        level1complete = true;
-      });
-      */
-    
   
     this.physics.add.collider(this.boxes, this.platforms);
     this.physics.add.collider(this.boxes,this.boxes);
-     //this.physics.add.collider(this.boxes,this.player);
-    this.physics.add.overlap(this.player, this.boxes,  this.handlePickup);
     this.physics.add.collider(this.boxes, this.walls);
     this.physics.add.collider(this.player, this.slots);
- 
+    //this.physics.add.collider(this.player, this.door);
     this.physics.add.collider(this.boxes, this.slots, this.handleSlot);
-
     this.physics.add.collider(this.platforms,this.player);
     this.physics.add.collider(this.walls, this.player);
+    this.physics.add.collider(this.player, this.levelchanger, this.handleLevelchange);
 
+    this.physics.add.overlap(this.player, this.boxes,  this.handlePickup);
     this.physics.add.overlap(this.player, this.coins, this.pickupCoin);
     this.physics.add.overlap(this.player, this.enemies, this.hurtPlayer);
     this.physics.add.overlap(this.player, this.spikes, this.hurtPlayer); 

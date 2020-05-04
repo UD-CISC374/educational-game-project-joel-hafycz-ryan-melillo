@@ -5,19 +5,19 @@ import Player from "../objects/player";
 export default class Level2 extends baseScene {
 
     
-    constructor(key) {
-        super('Level2');
+    constructor() {
+        super({ key: 'Level2' });
     }
 
     create() {
-      this.createCommon();
+    this.createCommon();
 
       //Background Scenes
     this.background = this.add.tileSprite(0, 0, this.scale.width, this.scale.height, "backgroundlvl1.png");
     this.background.setOrigin(0, 0);
 
       //Sprites / Images
-      this.player = new Player(this, 35, 550);
+    this.player = new Player(this, 35, 550);
     this.player.setCollideWorldBounds(true);
 
     //Keyboard

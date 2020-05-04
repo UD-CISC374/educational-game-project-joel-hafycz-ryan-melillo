@@ -3,49 +3,50 @@ import Player from "../objects/player";
 
 export default class baseScene extends Phaser.Scene  {
 //Backgrounds
-  public background: Phaser.GameObjects.TileSprite;
+public background: Phaser.GameObjects.TileSprite;
 
   //Indiviual objects
-  public player: Player;
+public player: Player;
 
-  public drag = 250;
-  
-  public box0: Phaser.Physics.Arcade.Sprite;
-  public box1: Phaser.Physics.Arcade.Sprite;
-  public box2: Phaser.Physics.Arcade.Sprite;
-  public box3: Phaser.Physics.Arcade.Sprite;
-  public box1complete: Phaser.Physics.Arcade.Image;
-  public box2complete: Phaser.Physics.Arcade.Image;
-  public box3complete: Phaser.Physics.Arcade.Image; 
-  public slot0: Phaser.Physics.Arcade.Image;
-  public slot1: Phaser.Physics.Arcade.Image;
-  public slot2: Phaser.Physics.Arcade.Image;
-  public slot3: Phaser.Physics.Arcade.Image;
-  public enemy: Phaser.Physics.Arcade.Sprite;
-  public spike: Phaser.Physics.Arcade.Sprite;
-  public door: Phaser.Physics.Arcade.Image;
-  public wall: Phaser.Physics.Arcade.Sprite;
-  public machine_increase: Phaser.Physics.Arcade.Sprite
-  public nextlevel: Phaser.Physics.Arcade.Image
+public drag = 250;
+
+public box0: Phaser.Physics.Arcade.Sprite;
+public box1: Phaser.Physics.Arcade.Sprite;
+public box2: Phaser.Physics.Arcade.Sprite;
+public box3: Phaser.Physics.Arcade.Sprite;
+public box1complete: Phaser.Physics.Arcade.Image;
+public box2complete: Phaser.Physics.Arcade.Image;
+public box3complete: Phaser.Physics.Arcade.Image; 
+public slot0: Phaser.Physics.Arcade.Image;
+public slot1: Phaser.Physics.Arcade.Image;
+public slot2: Phaser.Physics.Arcade.Image;
+public slot3: Phaser.Physics.Arcade.Image;
+public enemy: Phaser.Physics.Arcade.Sprite;
+public spike: Phaser.Physics.Arcade.Sprite;
+public door: Phaser.Physics.Arcade.Image;
+public wall: Phaser.Physics.Arcade.Sprite;
+public machine_increase: Phaser.Physics.Arcade.Sprite;
+public levelchanger: Phaser.Physics.Arcade.Image;
+public platform_leftright: Phaser.Physics.Arcade.Sprite;
+public platform_updown: Phaser.Physics.Arcade.Sprite;
+public invisablewall: Phaser.Physics.Arcade.Image;
 
   //Groups
-  public pickups: Phaser.Physics.Arcade.Group;
-  public enemies: Phaser.Physics.Arcade.Group;
-  public spikes: Phaser.Physics.Arcade.Group;
-  public boxes: Phaser.Physics.Arcade.Group;
-  public platforms: Phaser.Physics.Arcade.Group;
-  public walls: Phaser.Physics.Arcade.Group;
-  public coins: Phaser.Physics.Arcade.Group;
-  public machines: Phaser.Physics.Arcade.Group;
-  public slots: Phaser.Physics.Arcade.StaticGroup;
-
-  //Flags
-  public level1complete: boolean = false;
+public pickups: Phaser.Physics.Arcade.Group;
+public enemies: Phaser.Physics.Arcade.Group;
+public spikes: Phaser.Physics.Arcade.Group;
+public boxes: Phaser.Physics.Arcade.Group;
+public platforms: Phaser.Physics.Arcade.Group;
+public walls: Phaser.Physics.Arcade.Group;
+public coins: Phaser.Physics.Arcade.Group;
+public machines: Phaser.Physics.Arcade.Group;
+public slots: Phaser.Physics.Arcade.StaticGroup;
+public levelchangers:Phaser.Physics.Arcade.Group;
 
   //Other
-  public canJump; //set to 1 when jumps so cant again -- maybe a powerup for double jump, so canJump can be 0 then 1 THEN set to two to only allow 2 jumps
-  public cursorKeys: Phaser.Types.Input.Keyboard.CursorKeys;
-  public spacebar; 
+public canJump; //set to 1 when jumps so cant again -- maybe a powerup for double jump, so canJump can be 0 then 1 THEN set to two to only allow 2 jumps
+public cursorKeys: Phaser.Types.Input.Keyboard.CursorKeys;
+public spacebar; 
     constructor(key) {
         super(key);
     }
@@ -55,47 +56,47 @@ createCommon(){
     this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
       //Spikes
-      this.spikes = this.physics.add.group({
+    this.spikes = this.physics.add.group({
         immovable:true,
         allowGravity:false
-      });
-  
+    });
+
       //Enemies
-      this.enemies = this.physics.add.group({
+    this.enemies = this.physics.add.group({
         immovable:true,
         allowGravity:false
-      });
-  
-      this.coins = this.physics.add.group({
+    });
+
+    this.coins = this.physics.add.group({
         immovable: true,
         allowGravity: false
-      });
-  
+    });
+
       //Platforms
-      this.platforms=this.physics.add.group({
+    this.platforms=this.physics.add.group({
         immovable: true,
         allowGravity: false
-      });
-  
+    });
+
       //Boxes
-      this.boxes = this.physics.add.group({
+    this.boxes = this.physics.add.group({
         immovable: false,
         allowGravity: true,
         collideWorldBounds: true,
         dragX: 150,
         bounceX: 1
-      });
-      
-      this.walls = this.physics.add.group({
+    });
+    
+    this.walls = this.physics.add.group({
         immovable: true,
         allowGravity: false
-      });
-  
-      this.machines = this.physics.add.group({
+    });
+
+    this.machines = this.physics.add.group({
         immovable:true,
         allowGravity:false
-      });
-      
+    });
+    
     this.slots=this.physics.add.staticGroup();
 
 
@@ -116,7 +117,7 @@ update() {
         //console.log("in holding");
         const holding = this.player.holding as Box;
         //holding.setGravity(0);
-       holding.x = this.player.x;
+        holding.x = this.player.x;
         holding.y=this.player.y;
         //console.log(holding);
     }
@@ -126,8 +127,8 @@ update() {
 
 handleSlot(box, slot){
     let counter = 0;
-    let flag = false;
     if (box.customValue == slot.state){
+        counter++;
         if (box.customValue == 0){
             box.destroy();
             slot.destroy();
@@ -135,26 +136,20 @@ handleSlot(box, slot){
         if (box.customValue == 1){
             box.destroy();
             (slot.body as Phaser.Physics.Arcade.StaticBody).reset(490, 607);
-            counter++;
         }
         if (box.customValue == 2){
             box.destroy();
             (slot.body as Phaser.Physics.Arcade.StaticBody).reset(520, 607);
-            counter++;
         }
         if (box.customValue == 3){
             box.destroy();
             (slot.body as Phaser.Physics.Arcade.StaticBody).reset(550, 607);
-            counter++;
         }
         if (counter == 3){
         this.door.destroy(); // doesnt work yet, but should destroy door
         }
     }
 }
-
-
-//handleLevelchange(player, )
 
 handlePickup(player, box){
     //if(Phaser.Input.Keyboard.JustDown(this.spacebar)){
@@ -204,7 +199,7 @@ createWalls(x,y,length){
     for (let i = 0; i < length; i++){
     var wall = this.physics.add.sprite(x,y, "wall");
     this.walls.add(wall);
-    y += 28;
+    y += 31;
     }
 }
 
@@ -234,12 +229,22 @@ createEnemy(x,y){
 }
 
 //used with custom class now
-   createBox(scene, x,y, num){
+createBox(scene, x,y, num){
     var box = new Box (scene, x, y, num);
     this.boxes.add(box);
     box.setCollideWorldBounds(true);
     box.setDragX(this.drag);
     box.setBounceX(1);
+} 
+
+createLevelChanger(x,y,num){
+    var levelchanger = this.physics.add.staticImage(x,y,"levelchanger"+num);
+    levelchanger.state = num;
+    this.levelchangers.add(levelchanger);
+}
+
+handleLevelchange(){
+    this.scene.start('level2');
 }
 
 createSlot(x,y, num){
