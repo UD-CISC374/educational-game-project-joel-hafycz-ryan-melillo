@@ -17,13 +17,13 @@ export default class baseScene extends Phaser.Scene  {
   public box1complete: Phaser.Physics.Arcade.Image;
   public box2complete: Phaser.Physics.Arcade.Image;
   public box3complete: Phaser.Physics.Arcade.Image; 
-  public door0: Phaser.Physics.Arcade.Image;
-  public door1: Phaser.Physics.Arcade.Image;
-  public door2: Phaser.Physics.Arcade.Image;
-  public door3: Phaser.Physics.Arcade.Image;
+  public slot0: Phaser.Physics.Arcade.Image;
+  public slot1: Phaser.Physics.Arcade.Image;
+  public slot2: Phaser.Physics.Arcade.Image;
+  public slot3: Phaser.Physics.Arcade.Image;
   public enemy: Phaser.Physics.Arcade.Sprite;
   public spike: Phaser.Physics.Arcade.Sprite;
-  public door: Phaser.Physics.Arcade.Sprite;
+  public door: Phaser.Physics.Arcade.Image;
   public wall: Phaser.Physics.Arcade.Sprite;
   public machine_increase: Phaser.Physics.Arcade.Sprite
   public nextlevel: Phaser.Physics.Arcade.Image
@@ -37,7 +37,7 @@ export default class baseScene extends Phaser.Scene  {
   public walls: Phaser.Physics.Arcade.Group;
   public coins: Phaser.Physics.Arcade.Group;
   public machines: Phaser.Physics.Arcade.Group;
-  public doors: Phaser.Physics.Arcade.StaticGroup;
+  public slots: Phaser.Physics.Arcade.StaticGroup;
 
   //Flags
   public level1complete: boolean = false;
@@ -96,7 +96,7 @@ createCommon(){
         allowGravity:false
       });
       
-    this.doors=this.physics.add.staticGroup();
+    this.slots=this.physics.add.staticGroup();
 
 
     this.cursorKeys = this.input.keyboard.createCursorKeys();
@@ -124,12 +124,37 @@ update() {
 
   //Helper Functions (movement, collecting, you name it)
 
-handleDoor(box, door){
-    if (box.customValue == door.state){
-        box.destroy();
-        door.destroy();
+handleSlot(box, slot){
+    let counter = 0;
+    let flag = false;
+    if (box.customValue == slot.state){
+        if (box.customValue == 0){
+            box.destroy();
+            slot.destroy();
+        }
+        if (box.customValue == 1){
+            box.destroy();
+            (slot.body as Phaser.Physics.Arcade.StaticBody).reset(490, 607);
+            counter++;
+        }
+        if (box.customValue == 2){
+            box.destroy();
+            (slot.body as Phaser.Physics.Arcade.StaticBody).reset(520, 607);
+            counter++;
+        }
+        if (box.customValue == 3){
+            box.destroy();
+            (slot.body as Phaser.Physics.Arcade.StaticBody).reset(550, 607);
+            counter++;
+        }
+        if (counter == 3){
+        this.door.destroy(); // doesnt work yet, but should destroy door
+        }
     }
 }
+
+
+//handleLevelchange(player, )
 
 handlePickup(player, box){
     //if(Phaser.Input.Keyboard.JustDown(this.spacebar)){
@@ -217,10 +242,10 @@ createEnemy(x,y){
     box.setBounceX(1);
 }
 
-createDoor(x,y, num){
-    var door = this.physics.add.staticImage(x,y,"door"+num);
-    door.state = num;
-    this.doors.add(door);
+createSlot(x,y, num){
+    var slot = this.physics.add.staticImage(x,y,"slot"+num);
+    slot.state = num;
+    this.slots.add(slot);
 }
 
 createMachine(x,y,type){

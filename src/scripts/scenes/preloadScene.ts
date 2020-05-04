@@ -28,10 +28,12 @@ export default class PreloadScene extends Phaser.Scene {
     this.load.image("box2complete", "assets/images/box2");
     this.load.image("box3complete", "assets/images/box3");
 
-    this.load.image("door0", "assets/images/door0.png");
-    this.load.image("door1", "assets/images/door1.png");
-    this.load.image("door2", "assets/images/door2.png");
-    this.load.image("door3", "assets/images/door3.png");
+    this.load.image("door", "assets/images/door.png");
+
+    this.load.image("slot0", "assets/images/slot0.png");
+    this.load.image("slot1", "assets/images/slot1.png");
+    this.load.image("slot2", "assets/images/slot2.png");
+    this.load.image("slot3", "assets/images/slot3.png");
 
     this.load.image("machine_increase", "assets/images/machine_increase.png");
 
@@ -60,6 +62,6 @@ export default class PreloadScene extends Phaser.Scene {
     //Other Stuff
 
 
-    this.scene.start('Level2');
+    this.scene.start('Level1');
   }
 }
