@@ -1,52 +1,8 @@
 import baseScene from "./baseScene";
+import Box from "../objects/box";
+import Player from "../objects/player";
 
 export default class Level2 extends baseScene {
-     //Backgrounds
-public background: Phaser.GameObjects.TileSprite;
-
-  //Indiviual objects
-public player: Phaser.Physics.Arcade.Sprite;
-
-public drag = 250;
-
-public box1: Phaser.Physics.Arcade.Sprite;
-public box2: Phaser.Physics.Arcade.Sprite;
-public box3: Phaser.Physics.Arcade.Sprite;
-
-
-
-public box1complete: Phaser.Physics.Arcade.Image;
-public box2complete: Phaser.Physics.Arcade.Image;
-public box3complete: Phaser.Physics.Arcade.Image; 
-public door0: Phaser.Physics.Arcade.Image;
-public door1: Phaser.Physics.Arcade.Image;
-public door2: Phaser.Physics.Arcade.Image;
-public door3: Phaser.Physics.Arcade.Image;
-public enemy: Phaser.Physics.Arcade.Sprite;
-public spike: Phaser.Physics.Arcade.Sprite;
-public door: Phaser.Physics.Arcade.Sprite;
-public wall: Phaser.Physics.Arcade.Sprite;
-public machine_increase: Phaser.Physics.Arcade.Sprite
-public nextlevel: Phaser.Physics.Arcade.Image
-
-  //Groups
-public pickups: Phaser.Physics.Arcade.Group;
-public enemies: Phaser.Physics.Arcade.Group;
-public spikes: Phaser.Physics.Arcade.Group;
-public boxes: Phaser.Physics.Arcade.Group;
-public platforms: Phaser.Physics.Arcade.Group;
-public walls: Phaser.Physics.Arcade.Group;
-public coins: Phaser.Physics.Arcade.Group;
-public machines: Phaser.Physics.Arcade.Group;
-
-  //Flags
-public level1complete: boolean = false;
-
-  //Other
-  public canJump; //set to 1 when jumps so cant again -- maybe a powerup for double jump, so canJump can be 0 then 1 THEN set to two to only allow 2 jumps
-public cursorKeys: Phaser.Types.Input.Keyboard.CursorKeys;
-public spacebar;
-
 
     
     constructor(key) {
@@ -54,68 +10,16 @@ public spacebar;
     }
 
     create() {
-    this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+      this.createCommon();
 
       //Background Scenes
     this.background = this.add.tileSprite(0, 0, this.scale.width, this.scale.height, "backgroundlvl1.png");
     this.background.setOrigin(0, 0);
 
       //Sprites / Images
-    this.player = this.physics.add.sprite(35,550,"player");
-    this.player.state = "nobox"
+      this.player = new Player(this, 35, 550);
     this.player.setCollideWorldBounds(true);
 
-    /*this.spike = this.physics.add.sprite(200,200,"spike");
-    this.enemy = this.physics.add.sprite(300,300,"enemy");*/
-
-      //Movable objects
-
-      //Spikes
-    this.spikes = this.physics.add.group({
-        immovable:true,
-        allowGravity:false
-    });
-
-      //Enemies
-    this.enemies = this.physics.add.group({
-        immovable:true,
-        allowGravity:false
-    });
-
-    this.coins = this.physics.add.group({
-        immovable: true,
-        allowGravity: false
-    });
-
-      //Platforms
-    this.platforms=this.physics.add.group({
-        immovable: true,
-        allowGravity: false
-    });
-
-      //Boxes
-    this.boxes = this.physics.add.group({
-        immovable: false,
-        allowGravity: true,
-        collideWorldBounds: true,
-        dragX: 150,
-        bounceX: 1
-    });
-
-      //this.boxes.class= Box;
-
-      //Doors
-    this.walls = this.physics.add.group({
-        immovable: true,
-        allowGravity: false
-    });
-
-    this.machines = this.physics.add.group({
-        immovable:true,
-        allowGravity:false
-    });
-
-    
     //Keyboard
     this.cursorKeys = this.input.keyboard.createCursorKeys();
 
@@ -178,5 +82,8 @@ public spacebar;
 
     this.createEnemy(700, 550);
     this.createLongSpike(830, 520, 4);
+
+    this.createBox(this,20, 20, 1);
+    this.createBox(this,500, 20, 2);
 }
 }
