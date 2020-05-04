@@ -195,13 +195,13 @@ this.physics.add.collider(this.platforms,this.box0);
      this.physics.add.collider(this.boxes, this.platforms);
      this.physics.add.collider(this.boxes,this.boxes);
      //this.physics.add.collider(this.boxes,this.player);
-     this.physics.add.overlap(this.boxes, this.player, this.handlePickup);
+     this.physics.add.overlap(this.player, this.boxes,  this.handlePickup);
      this.physics.add.collider(this.boxes, this.walls);
  
      this.physics.add.collider(this.boxes, this.doors, this.handleDoor);
 
     this.physics.add.collider(this.platforms,this.player);
-    //this.physics.add.collider(this.walls, this.player);
+    this.physics.add.collider(this.walls, this.player);
 
     this.physics.add.overlap(this.player, this.coins, this.pickupCoin);
     this.physics.add.overlap(this.player, this.enemies, this.hurtPlayer);

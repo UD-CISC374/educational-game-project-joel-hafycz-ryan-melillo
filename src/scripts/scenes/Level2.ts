@@ -26,10 +26,11 @@ export default class Level2 extends baseScene {
     //Set interactive
     this.physics.add.collider(this.platforms,this.boxes);
     this.physics.add.collider(this.boxes,this.boxes);
-    this.physics.add.collider(this.boxes,this.player);
+    //this.physics.add.collider(this.boxes,this.player);
     this.physics.add.collider(this.boxes, this.walls);
     this.physics.add.collider(this.platforms,this.player);
     this.physics.add.collider(this.walls, this.player);
+    this.physics.add.overlap(this.player, this.boxes,  this.handlePickup);
     
     //this.physics.add.collider(this.walls, this.player);
 
@@ -84,6 +85,6 @@ export default class Level2 extends baseScene {
     this.createLongSpike(830, 520, 4);
 
     this.createBox(this,20, 20, 1);
-    this.createBox(this,500, 20, 2);
+    this.createBox(this,800, 20, 2);
 }
 }

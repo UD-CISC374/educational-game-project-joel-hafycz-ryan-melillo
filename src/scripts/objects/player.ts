@@ -1,14 +1,14 @@
 import Box from "./box";
 
 export default class Player extends Phaser.Physics.Arcade.Sprite {
-    holding: Box
+    holding?: Box | undefined
   
     constructor(scene: Phaser.Scene, x: number, y: number)  {
       
   
           super(scene, x, y, "player");
-  
-          this.holding = new Box(scene, x,y,1);
+
+          //this. holding = new Box(scene, 0, 0, 1);
       
           scene.add.existing(this);
           scene.physics.add.existing(this);

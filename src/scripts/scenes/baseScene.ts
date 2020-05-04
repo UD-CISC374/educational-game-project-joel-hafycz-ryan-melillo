@@ -113,11 +113,12 @@ update() {
     this.canJump = 0;
     }
     if(this.player.holding){
-        console.log("in holding");
+        //console.log("in holding");
         const holding = this.player.holding as Box;
+        //holding.setGravity(0);
        holding.x = this.player.x;
         holding.y=this.player.y;
-        console.log(holding);
+        //console.log(holding);
     }
 }
 
@@ -130,13 +131,10 @@ handleDoor(box, door){
     }
 }
 
-handlePickup(box, player){
-        player.setHolding(box);
-        //player.holding = box;
-        console.log("pickup");
+handlePickup(player, box){
     //if(Phaser.Input.Keyboard.JustDown(this.spacebar)){
-
-    //}
+        player.holding = box;
+   // }
 }
    //currently unused, supposed to be for double jumping on key activation
 handleJump(){
@@ -210,8 +208,7 @@ createEnemy(x,y){
     //enemy.setDragX(this.drag);
 }
 
-   //Unused now with custom class
-
+//used with custom class now
    createBox(scene, x,y, num){
     var box = new Box (scene, x, y, num);
     this.boxes.add(box);
