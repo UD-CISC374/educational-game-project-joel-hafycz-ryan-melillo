@@ -68,10 +68,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/educational-game-project-joel-hafycz-ryan-melillo/betaassets/images/platform.png"
   },
   {
-    "revision": "bdec67d647328119ae8baf305b2e5d31",
-    "url": "/educational-game-project-joel-hafycz-ryan-melillo/betaassets/images/player.png"
-  },
-  {
     "revision": "e3739efb231a5f4a184d25f294fbec6c",
     "url": "/educational-game-project-joel-hafycz-ryan-melillo/betaassets/images/robotstanding.png"
   },
@@ -88,15 +84,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/educational-game-project-joel-hafycz-ryan-melillo/betafavicon.ico"
   },
   {
-    "revision": "5462b871ac069a9024c4",
-    "url": "/educational-game-project-joel-hafycz-ryan-melillo/betagen.main.c1078819da7e0a602c29.bundle.js"
+    "revision": "586f40e417a580e4f543",
+    "url": "/educational-game-project-joel-hafycz-ryan-melillo/betagen.main.e5e041b7b08a62ff5720.bundle.js"
   },
   {
     "revision": "11169d7ee1d44bc7faa3",
     "url": "/educational-game-project-joel-hafycz-ryan-melillo/betagen.vendors.b4a63638355cb693c278.bundle.js"
   },
   {
-    "revision": "73ea3c89157e15d48c90d8ff9cd93916",
+    "revision": "1ecfbc7236ebd1e1e9091671c159280b",
     "url": "/educational-game-project-joel-hafycz-ryan-melillo/betaindex.html"
   },
   {
