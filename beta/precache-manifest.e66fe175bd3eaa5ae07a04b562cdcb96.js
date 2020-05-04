@@ -88,15 +88,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/educational-game-project-joel-hafycz-ryan-melillo/betafavicon.ico"
   },
   {
-    "revision": "a377b05a18ae693cd501",
-    "url": "/educational-game-project-joel-hafycz-ryan-melillo/betagen.main.7b7eac265078f46eb755.bundle.js"
+    "revision": "5462b871ac069a9024c4",
+    "url": "/educational-game-project-joel-hafycz-ryan-melillo/betagen.main.c1078819da7e0a602c29.bundle.js"
   },
   {
-    "revision": "210b82913c8bdb919a16",
-    "url": "/educational-game-project-joel-hafycz-ryan-melillo/betagen.vendors.b9cb136a26266691a7fb.bundle.js"
+    "revision": "11169d7ee1d44bc7faa3",
+    "url": "/educational-game-project-joel-hafycz-ryan-melillo/betagen.vendors.b4a63638355cb693c278.bundle.js"
   },
   {
-    "revision": "41d564bc4340c5161efe603094a42305",
+    "revision": "73ea3c89157e15d48c90d8ff9cd93916",
     "url": "/educational-game-project-joel-hafycz-ryan-melillo/betaindex.html"
   },
   {
