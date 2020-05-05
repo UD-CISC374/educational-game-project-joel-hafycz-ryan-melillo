@@ -17,25 +17,26 @@ export default class Level1 extends baseScene{
     //Background Scenes
     this.background = this.add.tileSprite(0, 0, this.scale.width, this.scale.height, "backgroundlvl1.png");
     this.background.setOrigin(0, 0);
-    
 
+    
     //Sprites / Images
     this.player = new Player(this, 190,20);
     this.player.setCollideWorldBounds(true);
 
-    this.createSlot(90, 470, 0);
+    this.createSlot(125, 477, 0);
     this.createSlot(490, 575, 1);
     this.createSlot(520, 575, 2);
     this.createSlot(550, 575, 3);
 
     this.createBox(this,180,470,0);
+    this.createBox(this,750, 550, 0);
     this.createBox(this,300, 70,3);
     this.createBox(this,850,270,2);
     this.createBox(this,300,470,1);
 
     this.createLevelChanger(900,575,1);
   
-    this.door = this.physics.add.staticImage(800,575,"door");
+    this.door = this.physics.add.staticImage(800,550,"door");
     
     //Movable objects
 
@@ -93,7 +94,7 @@ export default class Level1 extends baseScene{
     this.createLongPlatforms(780, 500, 8);
 
     this.createLongPlatforms(0, 600, 10);
-    this.add.text(40,545, "Complete the program at the bottom to reach the next level", {
+    this.add.text(40,545, "Complete the array at the bottom to reach the next level", {
       font: "10px Arial",
       fill: "white"
     });
@@ -114,6 +115,15 @@ export default class Level1 extends baseScene{
 
     this.createLongPlatforms(890,600,2);
 
+    this.add.text(600,620, "The door doesnt work as intended, use this box to open the door for now", {
+      font: "10px Arial",
+      fill: "white"
+    });
+    this.add.text(600,630, "But only after you comlplete the level", {
+      font: "10px Arial",
+      fill: "white"
+    });
+
     //Keyboard
     this.cursorKeys = this.input.keyboard.createCursorKeys();
 
@@ -128,7 +138,7 @@ export default class Level1 extends baseScene{
     this.physics.add.collider(this.platforms,this.player);
     this.physics.add.collider(this.walls, this.player);
     this.physics.add.collider(this.player, this.levelchangers, this.handleLevelchange.bind(this));
-    //this.physics.add.collider(this.door, this.boxes, this.handleDoor);
+    this.physics.add.collider(this.door, this.boxes, this.handleDoor);
 
     this.physics.add.overlap(this.player, this.boxes,  this.handlePickup);
     this.physics.add.overlap(this.player, this.coins, this.pickupCoin);

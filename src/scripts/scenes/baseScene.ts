@@ -33,6 +33,11 @@ public wall: Phaser.Physics.Arcade.Sprite;
 public machine_increase: Phaser.Physics.Arcade.Sprite;
 public levelchanger: Phaser.Physics.Arcade.Image;
 
+  //Sounds
+public music: Phaser.Sound.BaseSound;
+public coinpickup: Phaser.Sound.BaseSound;
+public deathsound: Phaser.Sound.BaseSound;
+public boxcorrectsound: Phaser.Sound.BaseSound;
   //Groups
 public pickups: Phaser.Physics.Arcade.Group;
 public enemies: Phaser.Physics.Arcade.Group;
@@ -55,6 +60,26 @@ public spacebar;
 
 createCommon(){
     
+
+    this.music = this.sound.add("backgroundmusic");
+    var musicConfig = {
+    mute: false,
+    volume: 1,
+    rate: 1,
+    detune: 0,
+    seek: 0,
+    loop: true,
+    delay: 0
+    }
+
+    this.music.play(musicConfig);
+
+    
+/*this.coinpickup = this.sound.add("coinpickup");
+    this.deathsound = this.sound.add("deathsound");
+    this.boxcorrectsound = this.sound.add("boxcorrectsound");
+*/
+
     this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
       //Spikes
@@ -130,6 +155,7 @@ update() {
 
 pickupCoin(player, coin){
     coin.disableBody(true, true);
+    //this.coinpickup.play();
 }
 
 createPlatform(xpos, ypos){
@@ -262,7 +288,7 @@ movePlayerManager(){
     }
 
     handleDoor(door,box){
-        if (box.customValue==3){
+        if (box.customValue==0){
             box.destroy();
             door.destroy();
         }

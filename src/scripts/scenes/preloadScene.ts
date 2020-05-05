@@ -17,7 +17,7 @@ export default class PreloadScene extends Phaser.Scene {
     this.load.image("platform", "assets/images/platform.png");
     this.load.image("wall", "assets/images/wall.png");
     this.load.image("emptybox","assets/images/emptybox.png");
-    this.load.image("levelchanger1", "assets/images/levelchanger");
+    this.load.image("levelchanger1", "assets/images/levelchanger.png");
     
     this.load.image("box0", "assets/images/emptybox.png");
     this.load.image("box1", "assets/images/box1.png");
@@ -29,7 +29,7 @@ export default class PreloadScene extends Phaser.Scene {
 
     this.load.image("door", "assets/images/door.png");
 
-    this.load.image("slot0", "assets/images/slot0.png");
+    this.load.image("slot0", "assets/images/emptyslot.png");
     this.load.image("slot1", "assets/images/slot1.png");
     this.load.image("slot2", "assets/images/slot2.png");
     this.load.image("slot3", "assets/images/slot3.png");
@@ -44,6 +44,15 @@ export default class PreloadScene extends Phaser.Scene {
       frameWidth: 16,
       frameHeight: 16
     });
+
+
+
+
+
+    this.load.audio("backgroundmusic", "assets/sounds/backgroundmusic.mp3");
+    this.load.audio("coinpickup", "assets/sounds/coinpickup.mp3");
+    this.load.audio("deathsound", "assets/sounds/deathsound.mp3");
+    this.load.audio("boxcorrectspot", "assets/sounds/boxcorrectspot.mp3");
   }
 
   create() {

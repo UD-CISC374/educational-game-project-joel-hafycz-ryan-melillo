@@ -27,7 +27,7 @@ export default class Level2 extends baseScene {
     let PlayerSpawnY = 50;
     this.canJump = 0;//allow player to jump   
     
-    this.door = this.physics.add.staticImage(850,575,"door");
+    this.door = this.physics.add.staticImage(850,550,"door");
     
     this.createWalls(4,0,25);
     this.createWalls(935,0,16);
@@ -90,23 +90,12 @@ export default class Level2 extends baseScene {
     this.createBox(this,60, 200, 2);
     this.createBox(this,100, 200, 3);
 
+    this.add.text(310, 600, "Array = [           ]", {
+      font: "30px Arial",
+      fill: "white"
+  });
 
-    //colliders
-    this.physics.add.collider(this.boxes, this.platforms);
-    this.physics.add.collider(this.boxes,this.boxes);
-    this.physics.add.collider(this.boxes, this.walls);
-    this.physics.add.collider(this.player, this.slots);
-    //this.physics.add.collider(this.player, this.door);
-    this.physics.add.collider(this.boxes, this.slots, this.handleSlot);
-    this.physics.add.collider(this.platforms,this.player);
-    this.physics.add.collider(this.walls, this.player);
-    this.physics.add.collider(this.player, this.machines);
-    this.physics.add.collider(this.boxes, this.machines, this.handleMachine);
-    this.physics.add.collider(this.player, this.levelchangers, this.handleLevelchange);
 
-    this.physics.add.overlap(this.player, this.boxes,  this.handlePickup);
-    this.physics.add.overlap(this.player, this.coins, this.pickupCoin);
-    this.physics.add.overlap(this.player, this.enemies, this.hurtPlayer);
-    this.physics.add.overlap(this.player, this.spikes, this.hurtPlayer); 
+   
     }
 }
