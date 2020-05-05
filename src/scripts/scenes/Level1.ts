@@ -12,7 +12,6 @@ export default class Level1 extends baseScene{
 
 
   create() {
-    
     this.createCommon();
   
     //Background Scenes
@@ -57,6 +56,7 @@ export default class Level1 extends baseScene{
       font: "10px Arial",
       fill: "white"
     });
+  
 
     this.createLongPlatforms(525,200,3);
     this.createEnemy(580,170);
@@ -128,7 +128,8 @@ export default class Level1 extends baseScene{
     this.physics.add.collider(this.boxes, this.slots, this.handleSlot);
     this.physics.add.collider(this.platforms,this.player);
     this.physics.add.collider(this.walls, this.player);
-    this.physics.add.collider(this.player, this.levelchangers, this.handleLevelchange);
+    this.physics.add.collider(this.player, this.levelchangers, this.handleLevelchange.bind(this));
+    //this.physics.add.collider(this.door, this.boxes, this.handleDoor);
 
     this.physics.add.overlap(this.player, this.boxes,  this.handlePickup);
     this.physics.add.overlap(this.player, this.coins, this.pickupCoin);

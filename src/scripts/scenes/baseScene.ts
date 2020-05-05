@@ -14,22 +14,24 @@ public box0: Phaser.Physics.Arcade.Sprite;
 public box1: Phaser.Physics.Arcade.Sprite;
 public box2: Phaser.Physics.Arcade.Sprite;
 public box3: Phaser.Physics.Arcade.Sprite;
-public box1complete: Phaser.Physics.Arcade.Image;
-public box2complete: Phaser.Physics.Arcade.Image;
-public box3complete: Phaser.Physics.Arcade.Image; 
+public box4: Phaser.Physics.Arcade.Sprite;
+public box5: Phaser.Physics.Arcade.Sprite;
+public box6: Phaser.Physics.Arcade.Sprite;
+
 public slot0: Phaser.Physics.Arcade.Image;
 public slot1: Phaser.Physics.Arcade.Image;
 public slot2: Phaser.Physics.Arcade.Image;
 public slot3: Phaser.Physics.Arcade.Image;
+public slot4: Phaser.Physics.Arcade.Image;
+public slot5: Phaser.Physics.Arcade.Image;
+public slot6: Phaser.Physics.Arcade.Image;
+
 public enemy: Phaser.Physics.Arcade.Sprite;
 public spike: Phaser.Physics.Arcade.Sprite;
 public door: Phaser.Physics.Arcade.Image;
 public wall: Phaser.Physics.Arcade.Sprite;
 public machine_increase: Phaser.Physics.Arcade.Sprite;
 public levelchanger: Phaser.Physics.Arcade.Image;
-public platform_leftright: Phaser.Physics.Arcade.Sprite;
-public platform_updown: Phaser.Physics.Arcade.Sprite;
-public invisablewall: Phaser.Physics.Arcade.Image;
 
   //Groups
 public pickups: Phaser.Physics.Arcade.Group;
@@ -126,59 +128,6 @@ update() {
 
   //Helper Functions (movement, collecting, you name it)
 
-handleSlot(box, slot){
-    let counter = 0;
-    if (box.customValue == slot.state){
-        counter++;
-        if (box.customValue == 0){
-            box.destroy();
-            slot.destroy();
-        }
-        if (box.customValue == 1){
-            box.destroy();
-            (slot.body as Phaser.Physics.Arcade.StaticBody).reset(490, 607);
-        }
-        if (box.customValue == 2){
-            box.destroy();
-            (slot.body as Phaser.Physics.Arcade.StaticBody).reset(520, 607);
-        }
-        if (box.customValue == 3){
-            box.destroy();
-            (slot.body as Phaser.Physics.Arcade.StaticBody).reset(550, 607);
-        }
-        if (counter == 3){
-        this.door.destroy(); // doesnt work yet, but should destroy door
-        }
-    }
-}
-
-handlePickup(player, box){
-    //if(Phaser.Input.Keyboard.JustDown(this.spacebar)){
-        player.holding = box;
-   // }
-}
-   //currently unused, supposed to be for double jumping on key activation
-handleJump(){
-    if(this.canJump<2){
-    this.player.setVelocityY(-320);
-    this.canJump+=1;
-    }
-}
-
-hurtPlayer(player, enemy){
-    player.x = 80;
-    player.y = 20;
-}
-
-addOne(box, machine){
-    if(!box.valueChanged){
-
-    box.valueChanged = true;
-    box.customValue+=1;
-    box.setTexture("box" + box.customValue);
-    }
-}
-
 pickupCoin(player, coin){
     coin.disableBody(true, true);
 }
@@ -244,10 +193,6 @@ createLevelChanger(x,y,num){
     this.levelchangers.add(levelchanger);
 }
 
-handleLevelchange(){
-    this.scene.start('level2');
-}
-
 createSlot(x,y, num){
     var slot = this.physics.add.staticImage(x,y,"slot"+num);
     slot.state = num;
@@ -280,5 +225,87 @@ movePlayerManager(){
         this.canJump+=1;
       //console.log(this.canJump);
         }
+    }
+
+    handleSlot(box, slot){
+        let counter = 0;
+        if (box.customValue == slot.state){
+            if (box.customValue == 0){
+                box.destroy();
+                slot.destroy();
+            }
+            if (box.customValue == 1){
+                box.destroy();
+                (slot.body as Phaser.Physics.Arcade.StaticBody).reset(490, 607);
+            }
+            if (box.customValue == 2){
+                box.destroy();
+                (slot.body as Phaser.Physics.Arcade.StaticBody).reset(520, 607);
+            }
+            if (box.customValue == 3){
+                box.destroy();
+                (slot.body as Phaser.Physics.Arcade.StaticBody).reset(550, 607);
+            }
+            if (box.customValue == 4){
+                box.destroy();
+                (slot.body as Phaser.Physics.Arcade.StaticBody).reset(440, 607);
+            }
+            if (box.customValue == 5){
+                box.destroy();
+                (slot.body as Phaser.Physics.Arcade.StaticBody).reset(470, 607);
+            }
+            if (box.customValue == 6){
+                box.destroy();
+                (slot.body as Phaser.Physics.Arcade.StaticBody).reset(500, 607);
+            }
+        }
+    }
+
+    handleDoor(door,box){
+        if (box.customValue==3){
+            box.destroy();
+            door.destroy();
+        }
+    }
+    
+    handlePickup(player, box){
+        //if(Phaser.Input.Keyboard.JustDown(this.spacebar)){
+            player.holding = box;
+       // }
+    }
+       //currently unused, supposed to be for double jumping on key activation
+    handleJump(){
+        if(this.canJump<2){
+        this.player.setVelocityY(-320);
+        this.canJump+=1;
+        }
+    }
+    
+    hurtPlayer(player, enemy){
+        player.x = 80;
+        player.y = 20;
+    }
+    
+    handleMachine(box, machine){
+        if (!box.valueChanged){
+            box.valueChanged = true;
+            box.customValue+=3;
+            box.setTexture("box" + box.customValue);
+        }   
+    }
+
+    handleLevelchange(){
+        let counter = 1;
+        if (counter == 1){
+            this.scene.start('Level2');
+            counter++;
+        }
+        else if (counter == 2){
+            this.scene.start('Level3');
+            counter++;
+        } 
+        //else if (counter == 3){
+        //}
+    
     }
 }
