@@ -96,6 +96,22 @@ export default class Level2 extends baseScene {
   });
 
 
-   
+    //colliders
+    this.physics.add.collider(this.boxes, this.platforms);
+    this.physics.add.collider(this.boxes,this.boxes);
+    this.physics.add.collider(this.boxes, this.walls);
+    this.physics.add.collider(this.player, this.slots);
+    //this.physics.add.collider(this.player, this.door);
+    this.physics.add.collider(this.boxes, this.slots, this.handleSlot);
+    this.physics.add.collider(this.platforms,this.player);
+    this.physics.add.collider(this.walls, this.player);
+    this.physics.add.collider(this.player, this.machines);
+    this.physics.add.collider(this.boxes, this.machines, this.handleMachine);
+    this.physics.add.collider(this.player, this.levelchangers, this.handleLevelchange);
+
+    this.physics.add.overlap(this.player, this.boxes,  this.handlePickup);
+    this.physics.add.overlap(this.player, this.coins, this.pickupCoin);
+    this.physics.add.overlap(this.player, this.enemies, this.hurtPlayer);
+    this.physics.add.overlap(this.player, this.spikes, this.hurtPlayer); 
     }
 }
