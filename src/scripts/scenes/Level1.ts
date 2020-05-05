@@ -107,7 +107,6 @@ export default class Level1 extends baseScene{
 
     this.createLongSpike(770,480,4);
     this.createCoin(890,450);
-    this.createLongSpike(780,530,3);
     this.add.text(820, 493, "To Next Function", {
       font: "10px Arial",
       fill: "white"

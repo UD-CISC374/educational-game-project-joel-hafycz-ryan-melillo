@@ -85,7 +85,6 @@ export default class Level2 extends baseScene {
 
     this.createLongPlatforms(600,400,2);
     this.createEnemy(550, 550);
-    this.createLongSpike(830, 520, 4);
 
     this.createBox(this,20, 200, 1);
     this.createBox(this,60, 200, 2);
