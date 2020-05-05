@@ -34,7 +34,7 @@ export default class Level1 extends baseScene{
     this.createBox(this,850,270,2);
     this.createBox(this,300,470,1);
 
-    //this.createLevelChanger(800,575,1);
+    this.createLevelChanger(900,575,1);
   
     this.door = this.physics.add.staticImage(800,575,"door");
     
@@ -114,7 +114,6 @@ export default class Level1 extends baseScene{
     });
 
     this.createLongPlatforms(890,600,2);
-    //this.createLevelChanger(800,575,1);
 
     //Keyboard
     this.cursorKeys = this.input.keyboard.createCursorKeys();
@@ -129,7 +128,7 @@ export default class Level1 extends baseScene{
     this.physics.add.collider(this.boxes, this.slots, this.handleSlot);
     this.physics.add.collider(this.platforms,this.player);
     this.physics.add.collider(this.walls, this.player);
-    this.physics.add.collider(this.player, this.levelchanger, this.handleLevelchange);
+    this.physics.add.collider(this.player, this.levelchangers, this.handleLevelchange);
 
     this.physics.add.overlap(this.player, this.boxes,  this.handlePickup);
     this.physics.add.overlap(this.player, this.coins, this.pickupCoin);

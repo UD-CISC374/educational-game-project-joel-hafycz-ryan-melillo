@@ -41,7 +41,7 @@ public walls: Phaser.Physics.Arcade.Group;
 public coins: Phaser.Physics.Arcade.Group;
 public machines: Phaser.Physics.Arcade.Group;
 public slots: Phaser.Physics.Arcade.StaticGroup;
-public levelchangers:Phaser.Physics.Arcade.Group;
+public levelchangers:Phaser.Physics.Arcade.StaticGroup;
 
   //Other
 public canJump; //set to 1 when jumps so cant again -- maybe a powerup for double jump, so canJump can be 0 then 1 THEN set to two to only allow 2 jumps
@@ -98,6 +98,7 @@ createCommon(){
     });
     
     this.slots=this.physics.add.staticGroup();
+    this.levelchangers=this.physics.add.staticGroup();
 
 
     this.cursorKeys = this.input.keyboard.createCursorKeys();
