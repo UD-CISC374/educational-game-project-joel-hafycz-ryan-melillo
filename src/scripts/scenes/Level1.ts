@@ -113,25 +113,28 @@ export default class Level1 extends baseScene{
 
     this.createLongPlatforms(780, 500, 8);
 
-    this.createLongPlatforms(42, 600, 9);
+    this.createLongPlatforms(-10, 600, 10);
     this.add.text(20,545, "You are a robot completing the functions at the bottom, \ncomplete them to progress to the next level", {
       font: "10px Arial",
       fill: "white"
     });
 
-    this.add.text(20,610, "def create_array():\n    Array = [1,2,3];", {
-      font: "30x Arial",
+    this.add.text(20, 620, "def create_array():\n    Array = [1,2,3]", {
+      font: "20px Arial",
       fill: "white"
     });
 
     this.createLongPlatforms(598,600,10);
 
-
-
     this.createLongSpike(770,480,4);
     this.createCoin(890,450);
     this.add.text(770, 490, "To Next Function", {
       font: "20px Arial",
+      fill: "white"
+    });
+
+    this.add.text(600, 630, "This function creates an array in the order [1,2,3]", {
+      font: "15px Arial",
       fill: "white"
     });
 

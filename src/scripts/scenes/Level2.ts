@@ -95,6 +95,16 @@ export default class Level2 extends baseScene {
       fill: "white"
   });
 
+    this.add.text(20, 610, "def add_three(array):\n    for x in array:\n        x+3", {
+      font: "20px Arial",
+      fill: "white"
+    });
+
+    this.add.text(570, 630, "This function adds 3 to each element of the array", {
+      font: "15px Arial",
+      fill: "white"
+    });
+
 
     //colliders
     this.physics.add.collider(this.boxes, this.platforms);
