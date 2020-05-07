@@ -132,6 +132,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/educational-game-project-joel-hafycz-ryan-melillo/betaassets/sounds/backgroundmusic.mp3"
   },
   {
+    "revision": "e152dcacf45ae65e144f4d32e1513040",
+    "url": "/educational-game-project-joel-hafycz-ryan-melillo/betaassets/sounds/boop.wav"
+  },
+  {
     "revision": "5b96a12b44acbf9e359d54218b16c11a",
     "url": "/educational-game-project-joel-hafycz-ryan-melillo/betaassets/sounds/coinpickup.mp3"
   },
@@ -140,19 +144,31 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/educational-game-project-joel-hafycz-ryan-melillo/betaassets/sounds/deathsound.mp3"
   },
   {
+    "revision": "9f81d71575bba53a746144dae01e9e46",
+    "url": "/educational-game-project-joel-hafycz-ryan-melillo/betaassets/sounds/deny.wav"
+  },
+  {
+    "revision": "f477571d7a8004137a69f4423eaa24a1",
+    "url": "/educational-game-project-joel-hafycz-ryan-melillo/betaassets/sounds/drop.mp3"
+  },
+  {
+    "revision": "8eff7f8746571d70aa2320b1aa781037",
+    "url": "/educational-game-project-joel-hafycz-ryan-melillo/betaassets/sounds/pickup.wav"
+  },
+  {
     "revision": "53cefca2a0f75654486b180949686165",
     "url": "/educational-game-project-joel-hafycz-ryan-melillo/betafavicon.ico"
   },
   {
-    "revision": "a15f2075c3bc8194190c",
-    "url": "/educational-game-project-joel-hafycz-ryan-melillo/betagen.main.74a992dd78e6c6725a51.bundle.js"
+    "revision": "16f26e85efaa4f0252a2",
+    "url": "/educational-game-project-joel-hafycz-ryan-melillo/betagen.main.4bead0f5e85e1fa3704c.bundle.js"
   },
   {
     "revision": "79244101a84faa626992",
     "url": "/educational-game-project-joel-hafycz-ryan-melillo/betagen.vendors.b45a024788a7c2f75858.bundle.js"
   },
   {
-    "revision": "b11827ce0cf379150e84dd094a265180",
+    "revision": "9e955f15db7b362c2eb804bd6d8590be",
     "url": "/educational-game-project-joel-hafycz-ryan-melillo/betaindex.html"
   },
   {
