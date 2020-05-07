@@ -53,6 +53,10 @@ export default class PreloadScene extends Phaser.Scene {
     this.load.audio("coinpickup", "assets/sounds/coinpickup.mp3");
     this.load.audio("deathsound", "assets/sounds/deathsound.mp3");
     this.load.audio("boxcorrectspot", "assets/sounds/boxcorrectspot.mp3");
+    this.load.audio("boop", "assets/sounds/boop.wav");
+    this.load.audio("deny", "assets/sounds/deny.wav");
+    this.load.audio("pickup", "assets/sounds/pickup.wav");
+    this.load.audio("drop", "assets/sounds/drop.mp3");
   }
 
   create() {

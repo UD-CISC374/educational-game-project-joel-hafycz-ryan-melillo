@@ -71,7 +71,6 @@ export default class Level2 extends baseScene {
 
     this.createCoin(460,200);
 
-    this.createMachine(530, 200, "machine_increase");
 
     this.createLongPlatforms(492,240,7);
     this.createPlatform(910,320);
@@ -89,6 +88,7 @@ export default class Level2 extends baseScene {
     this.createBox(this,20, 200, 1);
     this.createBox(this,60, 200, 2);
     this.createBox(this,100, 200, 3);
+    this.createMachine(530, 200, "machine_increase");
 
     this.add.text(310, 600, "Array = [           ]", {
       font: "30px Arial",
@@ -101,17 +101,17 @@ export default class Level2 extends baseScene {
     this.physics.add.collider(this.boxes,this.boxes);
     this.physics.add.collider(this.boxes, this.walls);
     this.physics.add.collider(this.player, this.slots);
-    //this.physics.add.collider(this.player, this.door);
-    this.physics.add.collider(this.boxes, this.slots, this.handleSlot);
+    this.physics.add.collider(this.player, this.door);
+    this.physics.add.collider(this.boxes, this.slots, this.handleSlot.bind(this));
     this.physics.add.collider(this.platforms,this.player);
     this.physics.add.collider(this.walls, this.player);
     this.physics.add.collider(this.player, this.machines);
-    this.physics.add.collider(this.boxes, this.machines, this.handleMachine);
-    this.physics.add.collider(this.player, this.levelchangers, this.handleLevelchange);
+    this.physics.add.collider(this.machines, this.boxes, this.handleMachine.bind(this));
+    this.physics.add.collider(this.player, this.levelchangers, this.handleLevelchange.bind(this));
 
-    this.physics.add.overlap(this.player, this.boxes,  this.handlePickup);
+    this.physics.add.overlap(this.player, this.boxes,  this.handlePickup.bind(this));
     this.physics.add.overlap(this.player, this.coins, this.pickupCoin);
     this.physics.add.overlap(this.player, this.enemies, this.hurtPlayer);
-    this.physics.add.overlap(this.player, this.spikes, this.hurtPlayer); 
+    //this.physics.add.overlap(this.player, this.spikes, this.hurtPlayer); 
     }
 }

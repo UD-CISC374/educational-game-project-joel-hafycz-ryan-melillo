@@ -10,6 +10,8 @@ public player: Player;
 
 public drag = 250;
 
+public boxCount = 0;
+
 public box0: Phaser.Physics.Arcade.Sprite;
 public box1: Phaser.Physics.Arcade.Sprite;
 public box2: Phaser.Physics.Arcade.Sprite;
@@ -49,6 +51,7 @@ public coins: Phaser.Physics.Arcade.Group;
 public machines: Phaser.Physics.Arcade.Group;
 public slots: Phaser.Physics.Arcade.StaticGroup;
 public levelchangers:Phaser.Physics.Arcade.StaticGroup;
+public boxEmitter: Phaser.GameObjects.Particles.ParticleEmitter;
 
   //Other
 public canJump; //set to 1 when jumps so cant again -- maybe a powerup for double jump, so canJump can be 0 then 1 THEN set to two to only allow 2 jumps
@@ -60,19 +63,7 @@ public spacebar;
 
 createCommon(){
     
-
-    this.music = this.sound.add("backgroundmusic");
-    var musicConfig = {
-    mute: false,
-    volume: 1,
-    rate: 1,
-    detune: 0,
-    seek: 0,
-    loop: true,
-    delay: 0
-    }
-
-    this.music.play(musicConfig);
+    
 
     
 /*this.coinpickup = this.sound.add("coinpickup");
@@ -133,6 +124,17 @@ createCommon(){
     let PlayerSpawnX = 50;
     let PlayerSpawnY = 50;
     this.canJump = 0;//allow player to jump
+
+    this.boxEmitter = this.add.particles("box0").createEmitter({
+        on: true,
+        speed: {min: 50, max: 200},
+        scale: .25,
+        lifespan: 1000,
+        alpha: {start: 1, end: 0},
+        gravityY: 400,
+        blendMode: Phaser.BlendModes.SCREEN
+    });
+
     }
 
 update() {
@@ -210,7 +212,7 @@ createBox(scene, x,y, num){
     this.boxes.add(box);
     box.setCollideWorldBounds(true);
     box.setDragX(this.drag);
-    box.setBounceX(1);
+    box.setBounce(.5);
 } 
 
 createLevelChanger(x,y,num){
@@ -247,44 +249,62 @@ movePlayerManager(){
     }
 
     if((this.cursorKeys.up?.isDown) && this.canJump<1000) {
-        this.player.setVelocityY(-320);
+        this.player.setVelocityY(-280);
         this.canJump+=1;
       //console.log(this.canJump);
+        }
+        if(Phaser.Input.Keyboard.JustDown(this.spacebar) && this.player.holding){
+            this.player.holding.body.enable=true;
+            this.player.holding= undefined;
+            this.sound.play("drop");
         }
     }
 
     handleSlot(box, slot){
-        let counter = 0;
         if (box.customValue == slot.state){
+            box.disableBody();
+            this.sound.play("boop");
             if (box.customValue == 0){
                 box.destroy();
                 slot.destroy();
             }
-            if (box.customValue == 1){
-                box.destroy();
-                (slot.body as Phaser.Physics.Arcade.StaticBody).reset(490, 607);
-            }
-            if (box.customValue == 2){
-                box.destroy();
-                (slot.body as Phaser.Physics.Arcade.StaticBody).reset(520, 607);
-            }
-            if (box.customValue == 3){
-                box.destroy();
-                (slot.body as Phaser.Physics.Arcade.StaticBody).reset(550, 607);
-            }
-            if (box.customValue == 4){
-                box.destroy();
-                (slot.body as Phaser.Physics.Arcade.StaticBody).reset(440, 607);
-            }
-            if (box.customValue == 5){
-                box.destroy();
-                (slot.body as Phaser.Physics.Arcade.StaticBody).reset(470, 607);
-            }
-            if (box.customValue == 6){
-                box.destroy();
-                (slot.body as Phaser.Physics.Arcade.StaticBody).reset(500, 607);
+            if(box.customValue != 0){
+                //reset messes up the animation depending on the value, not sure why
+                //   
+                this.boxCount+=1;
+                this.tweens.add({
+                    targets:slot,
+                    ease: 'Linear',
+                    duration: 700,
+                    repeat: 0,
+                    x: slot.x,
+                    y: 620,
+                    onComplete: ()=> {
+                        (slot.body as Phaser.Physics.Arcade.StaticBody).reset(slot.body.x +15, 620); 
+                    }
+                });
+                this.tweens.add({
+                    targets:box,
+                    ease: 'Linear',
+                    duration: 750,
+                    repeat: 0,
+                    x: box.x,
+                    y: 595,
+                    onComplete: ()=> {
+                        //doesnt emit particles for whatever reason
+                        this.boxEmitter.setPosition(490, 595);
+                        this.boxEmitter.emitParticle(50);
+                        box.destroy();
+                    }
+                    
+                });
+
             }
         }
+        if (this.boxCount == 3){
+            this.door.destroy();
+        }
+      
     }
 
     handleDoor(door,box){
@@ -293,11 +313,39 @@ movePlayerManager(){
             door.destroy();
         }
     }
+
+    handlePass(player, door){
+        console.log("in pass: " + this.boxCount);
+        if (this.boxCount ==3){
+            console.log("in if");
+            this.boxCount = 0;
+            door.destroy();
+        }
+    }
     
     handlePickup(player, box){
-        //if(Phaser.Input.Keyboard.JustDown(this.spacebar)){
-            player.holding = box;
-       // }
+        if(Phaser.Input.Keyboard.JustDown(this.spacebar)){
+            if (player.holding){
+                this.sound.play("deny");
+                let warningMsg = this.add.text(box.x -120, box.y-50, "Drop the box\nyou're holding first!", 
+                {color:"brightred"
+            });
+                this.time.delayedCall(1000, () => {
+                    this.tweens.add({
+                        targets: warningMsg,
+                        duration: 2500,
+                        alpha: 0,
+                        onComplete: () => warningMsg.destroy()
+                    });
+                })
+            }
+            else {
+                this.sound.play("pickup");
+                player.holding = box;
+                box.disableBody();
+            }
+
+       }
     }
        //currently unused, supposed to be for double jumping on key activation
     handleJump(){
@@ -312,8 +360,14 @@ movePlayerManager(){
         player.y = 20;
     }
     
-    handleMachine(box, machine){
+    handleMachine(machine, box){
         if (!box.valueChanged){
+            box.setVelocityY(750);
+            box.setVelocityX(340);
+            //again doesnt work idk why
+            this.boxEmitter.setPosition(box.x, box.y);
+            this.boxEmitter.emitParticle(50);
+            this.sound.play("boop");
             box.valueChanged = true;
             box.customValue+=3;
             box.setTexture("box" + box.customValue);
