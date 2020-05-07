@@ -110,8 +110,8 @@ export default class Level2 extends baseScene {
     this.physics.add.collider(this.player, this.levelchangers, this.handleLevelchange.bind(this));
 
     this.physics.add.overlap(this.player, this.boxes,  this.handlePickup.bind(this));
-    this.physics.add.overlap(this.player, this.coins, this.pickupCoin);
-    this.physics.add.overlap(this.player, this.enemies, this.hurtPlayer);
-    //this.physics.add.overlap(this.player, this.spikes, this.hurtPlayer); 
+    this.physics.add.overlap(this.player, this.coins, this.pickupCoin.bind(this));
+    this.physics.add.overlap(this.player, this.enemies, this.hurtPlayer.bind(this));
+    this.physics.add.overlap(this.player, this.spikes, this.hurtPlayer.bind(this)); 
     }
 }

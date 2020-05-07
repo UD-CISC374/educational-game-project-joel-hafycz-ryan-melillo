@@ -37,9 +37,7 @@ public levelchanger: Phaser.Physics.Arcade.Image;
 
   //Sounds
 public music: Phaser.Sound.BaseSound;
-public coinpickup: Phaser.Sound.BaseSound;
-public deathsound: Phaser.Sound.BaseSound;
-public boxcorrectsound: Phaser.Sound.BaseSound;
+
   //Groups
 public pickups: Phaser.Physics.Arcade.Group;
 public enemies: Phaser.Physics.Arcade.Group;
@@ -157,6 +155,7 @@ update() {
 
 pickupCoin(player, coin){
     coin.disableBody(true, true);
+    this.sound.play("coinpickup");
     //this.coinpickup.play();
 }
 
@@ -358,6 +357,7 @@ movePlayerManager(){
     hurtPlayer(player, enemy){
         player.x = 80;
         player.y = 20;
+        this.sound.play("deathsound");
     }
     
     handleMachine(machine, box){
