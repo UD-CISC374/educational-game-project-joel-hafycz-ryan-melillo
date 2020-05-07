@@ -24,7 +24,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/educational-game-project-joel-hafycz-ryan-melillo/betaassets/icons/icons8-game-controller-16.png"
   },
   {
-    "revision": "ac5809ed819180ae307920993fde093a",
+    "revision": "6f7b30d943a8aaca95a5f1f570bcc2e2",
     "url": "/educational-game-project-joel-hafycz-ryan-melillo/betaassets/images/backgroundlvl1.png"
   },
   {
@@ -160,15 +160,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/educational-game-project-joel-hafycz-ryan-melillo/betafavicon.ico"
   },
   {
-    "revision": "16f26e85efaa4f0252a2",
-    "url": "/educational-game-project-joel-hafycz-ryan-melillo/betagen.main.4bead0f5e85e1fa3704c.bundle.js"
+    "revision": "09d8e37d861ce52a6b86",
+    "url": "/educational-game-project-joel-hafycz-ryan-melillo/betagen.main.eda7fee46e28b7e438d5.bundle.js"
   },
   {
     "revision": "79244101a84faa626992",
     "url": "/educational-game-project-joel-hafycz-ryan-melillo/betagen.vendors.b45a024788a7c2f75858.bundle.js"
   },
   {
-    "revision": "9e955f15db7b362c2eb804bd6d8590be",
+    "revision": "345a76b7dbf987269b4351996555616e",
     "url": "/educational-game-project-joel-hafycz-ryan-melillo/betaindex.html"
   },
   {

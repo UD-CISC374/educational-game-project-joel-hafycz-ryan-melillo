@@ -76,15 +76,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/educational-game-project-joel-hafycz-ryan-melillo/alphafavicon.ico"
   },
   {
-    "revision": "723e75ec69a66816f985",
-    "url": "/educational-game-project-joel-hafycz-ryan-melillo/alphagen.main.9b118ce72ebc591b0d2a.bundle.js"
+    "revision": "beb548e0f41601de9467",
+    "url": "/educational-game-project-joel-hafycz-ryan-melillo/alphagen.main.b50834dc8015462e82d3.bundle.js"
   },
   {
     "revision": "5e69403aa42e950fedff",
     "url": "/educational-game-project-joel-hafycz-ryan-melillo/alphagen.vendors.0805bb80903235d40eaf.bundle.js"
   },
   {
-    "revision": "74d308a8370a682d47bb79986f34d0bd",
+    "revision": "9fd79fef1d0903b020826b7b16af8729",
     "url": "/educational-game-project-joel-hafycz-ryan-melillo/alphaindex.html"
   },
   {
