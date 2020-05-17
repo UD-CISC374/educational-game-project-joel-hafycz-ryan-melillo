@@ -1,6 +1,7 @@
 import Box from "../objects/box";
 import Machine from "../objects/machine";
 import Player from "../objects/player";
+import LevelChanger from "../objects/levelchanger";
 
 export default class baseScene extends Phaser.Scene  {
 //Backgrounds
@@ -38,7 +39,10 @@ public machine2: Phaser.Physics.Arcade.Sprite;
 public machine3: Phaser.Physics.Arcade.Sprite;
 public machine4: Phaser.Physics.Arcade.Sprite;
 public machine5: Phaser.Physics.Arcade.Sprite;
-public levelchanger: Phaser.Physics.Arcade.Image;
+
+public levelchanger1: Phaser.Physics.Arcade.Image;
+public levelchanger2: Phaser.Physics.Arcade.Image;
+
 
   //Sounds
 public music: Phaser.Sound.BaseSound;
@@ -53,7 +57,7 @@ public walls: Phaser.Physics.Arcade.Group;
 public coins: Phaser.Physics.Arcade.Group;
 public machines: Phaser.Physics.Arcade.Group;
 public slots: Phaser.Physics.Arcade.StaticGroup;
-public levelchangers:Phaser.Physics.Arcade.StaticGroup;
+public levelchangers:Phaser.Physics.Arcade.Group;
 public boxEmitter: Phaser.GameObjects.Particles.ParticleEmitter;
 
   //Other
@@ -117,15 +121,16 @@ createCommon(){
         immovable:true,
         allowGravity:false
     });
+
+    this.levelchangers = this.physics.add.group({
+        immovable:true,
+        allowGravity:false
+    });
     
     this.slots=this.physics.add.staticGroup();
-    this.levelchangers=this.physics.add.staticGroup();
-
 
     this.cursorKeys = this.input.keyboard.createCursorKeys();
 
-    let PlayerSpawnX = 50;
-    let PlayerSpawnY = 50;
     this.canJump = 0;//allow player to jump
 
     this.boxEmitter = this.add.particles("box0").createEmitter({
@@ -219,9 +224,8 @@ createBox(scene, x,y, num){
     box.setBounce(.5);
 } 
 
-createLevelChanger(x,y,num){
-    var levelchanger = this.physics.add.staticImage(x,y,"levelchanger"+num);
-    levelchanger.state = num;
+createLevelChanger(scene,x,y,num){
+    var levelchanger = new LevelChanger(scene,x,y,num);
     this.levelchangers.add(levelchanger);
 }
 
@@ -405,14 +409,12 @@ movePlayerManager(){
         }
     }
 
-    handleLevelchange(){
-        var counter = 1;
-        if (counter == 1){
-            this.scene.start('Level2');
+    handleLevelchange(levelchanger,player){
+        if (levelchanger.customValue == 1){
+            this.scene.start('level2');
         }
-        else if (counter == 2){
-            this.scene.start('Level3');
+        else if (levelchanger.customValue == 2){
+            this.scene.start('level3');
         }
-        counter++;
     }
 }

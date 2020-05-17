@@ -38,7 +38,7 @@ export default class Level2 extends baseScene {
     this.createLongPlatforms(0, 600, 9);
     this.createLongPlatforms(541, 600, 9);
 
-    this.createLevelChanger(900,575,1);
+    this.createLevelChanger(this,900,575,2);
 
     this.createSlot(440,575,4);
     this.createSlot(470,575,5);
