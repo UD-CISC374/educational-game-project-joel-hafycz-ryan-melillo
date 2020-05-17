@@ -88,7 +88,7 @@ export default class Level2 extends baseScene {
     this.createBox(this,20, 200, 1);
     this.createBox(this,60, 200, 2);
     this.createBox(this,100, 200, 3);
-    this.createMachine(530, 200, "machine_increase");
+    this.createMachine(this,530, 200, 1);
 
     this.add.text(310, 600, "Array = [           ]", {
       font: "30px Arial",

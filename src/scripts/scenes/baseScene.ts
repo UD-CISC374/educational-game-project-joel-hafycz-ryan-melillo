@@ -1,4 +1,5 @@
 import Box from "../objects/box";
+import Machine from "../objects/machine";
 import Player from "../objects/player";
 
 export default class baseScene extends Phaser.Scene  {
@@ -32,7 +33,8 @@ public enemy: Phaser.Physics.Arcade.Sprite;
 public spike: Phaser.Physics.Arcade.Sprite;
 public door: Phaser.Physics.Arcade.Image;
 public wall: Phaser.Physics.Arcade.Sprite;
-public machine_increase: Phaser.Physics.Arcade.Sprite;
+public machine1: Phaser.Physics.Arcade.Sprite;
+public machine2: Phaser.Physics.Arcade.Sprite;
 public levelchanger: Phaser.Physics.Arcade.Image;
 
   //Sounds
@@ -226,10 +228,12 @@ createSlot(x,y, num){
     this.slots.add(slot);
 }
 
-createMachine(x,y,type){
-    var machine_increase = this.physics.add.sprite(x,y,type);
-    this.machines.add(machine_increase);
+createMachine(scene,x,y,type){
+    var machine = new Machine(scene,x,y,type);
+    this.machines.add(machine);
 }
+
+
 
 movePlayerManager(){
     if(this.cursorKeys.left?.isDown){
@@ -343,9 +347,9 @@ movePlayerManager(){
                 player.holding = box;
                 box.disableBody();
             }
-
-       }
+        }
     }
+
        //currently unused, supposed to be for double jumping on key activation
     handleJump(){
         if(this.canJump<2){
@@ -361,17 +365,25 @@ movePlayerManager(){
     }
     
     handleMachine(machine, box){
-        if (!box.valueChanged){
-            box.setVelocityY(750);
-            box.setVelocityX(340);
-            //again doesnt work idk why
-            this.boxEmitter.setPosition(box.x, box.y);
-            this.boxEmitter.emitParticle(50);
-            this.sound.play("boop");
-            box.valueChanged = true;
-            box.customValue+=3;
-            box.setTexture("box" + box.customValue);
-        }   
+        if (machine.customValue == 1){
+            if (!box.valueChanged){
+                box.setVelocityY(750);
+                box.setVelocityX(340);
+                //again doesnt work idk why
+                this.boxEmitter.setPosition(box.x, box.y);
+                this.boxEmitter.emitParticle(50);
+                this.sound.play("boop");
+                box.valueChanged = true;
+                box.customValue+=3;
+                box.setTexture("box" + box.customValue);
+            }
+        }
+        else if (machine.customValue == 2){
+            if (!box.valueChanged){
+                this.sound.play("boop");
+                box.destroy();
+            }
+        }
     }
 
     handleLevelchange(){
