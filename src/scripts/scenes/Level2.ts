@@ -111,7 +111,7 @@ export default class Level2 extends baseScene {
     this.physics.add.collider(this.boxes,this.boxes);
     this.physics.add.collider(this.boxes, this.walls);
     this.physics.add.collider(this.player, this.slots);
-    this.physics.add.collider(this.player, this.door);
+    //this.physics.add.collider(this.player, this.door);
     this.physics.add.collider(this.boxes, this.slots, this.handleSlot.bind(this));
     this.physics.add.collider(this.platforms,this.player);
     this.physics.add.collider(this.walls, this.player);

@@ -39,6 +39,9 @@ export default class PreloadScene extends Phaser.Scene {
 
     this.load.image("machine1", "assets/images/machine_increase.png");
     this.load.image("machine2", "assets/images/machine_destroy.png");
+    this.load.image("machine3", "assets/images/machine-1.png");
+    this.load.image("machine4", "assets/images/machine+1.png");
+    this.load.image("machine5", "assets/images/button.png");
 
     //Load SpriteSheets
     this.load.spritesheet("death", "assets/spritesheets/death.png",{
@@ -78,6 +81,6 @@ export default class PreloadScene extends Phaser.Scene {
     //Other Stuff
 
 
-    this.scene.start('Level2');
+    this.scene.start('Level3');
   }
 }

@@ -154,7 +154,6 @@ export default class Level1 extends baseScene{
     this.physics.add.collider(this.platforms,this.player);
     this.physics.add.collider(this.walls, this.player);
     this.physics.add.collider(this.player, this.levelchangers, this.handleLevelchange.bind(this));
-    this.physics.add.collider(this.player, this.door);
 
     this.physics.add.overlap(this.player, this.boxes,  this.handlePickup.bind(this));
     this.physics.add.overlap(this.player, this.coins, this.pickupCoin.bind(this));

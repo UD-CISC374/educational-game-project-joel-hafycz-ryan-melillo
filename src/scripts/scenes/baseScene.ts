@@ -35,6 +35,9 @@ public door: Phaser.Physics.Arcade.Image;
 public wall: Phaser.Physics.Arcade.Sprite;
 public machine1: Phaser.Physics.Arcade.Sprite;
 public machine2: Phaser.Physics.Arcade.Sprite;
+public machine3: Phaser.Physics.Arcade.Sprite;
+public machine4: Phaser.Physics.Arcade.Sprite;
+public machine5: Phaser.Physics.Arcade.Sprite;
 public levelchanger: Phaser.Physics.Arcade.Image;
 
   //Sounds
@@ -384,20 +387,32 @@ movePlayerManager(){
                 box.destroy();
             }
         }
+        else if (machine.customValue == 3){
+            this.sound.play("boop");
+            box.customValue-=1;
+            box.setTexture("box" + box.customValue);
+        }
+        else if (machine.customValue == 4){
+            this.sound.play("boop");
+            box.customValue+=1;
+            box.setTexture("box" + box.customValue);
+        }
+    }
+
+    handleButton(machine,player){
+        if (machine.customValue == 5){
+            this.createBox(this,50,50,0);
+        }
     }
 
     handleLevelchange(){
-        let counter = 1;
+        var counter = 1;
         if (counter == 1){
             this.scene.start('Level2');
-            counter++;
         }
         else if (counter == 2){
             this.scene.start('Level3');
-            counter++;
-        } 
-        //else if (counter == 3){
-        //}
-    
+        }
+        counter++;
     }
 }
