@@ -156,8 +156,6 @@ export default class Level1 extends baseScene{
     this.physics.add.overlap(this.player, this.enemies, this.hurtPlayer.bind(this));
     this.physics.add.overlap(this.player, this.spikes, this.hurtPlayer.bind(this)); 
 
-    let PlayerSpawnX = 50;
-    let PlayerSpawnY = 50;
     this.canJump = 0;//allow player to jump
 
 
