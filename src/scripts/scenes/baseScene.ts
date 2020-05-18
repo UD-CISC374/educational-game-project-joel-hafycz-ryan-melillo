@@ -57,8 +57,10 @@ public walls: Phaser.Physics.Arcade.Group;
 public coins: Phaser.Physics.Arcade.Group;
 public machines: Phaser.Physics.Arcade.Group;
 public slots: Phaser.Physics.Arcade.StaticGroup;
-public levelchangers:Phaser.Physics.Arcade.Group;
 public boxEmitter: Phaser.GameObjects.Particles.ParticleEmitter;
+
+public levelchangers1:Phaser.Physics.Arcade.Group;
+public levelchangers2:Phaser.Physics.Arcade.Group;
 
   //Other
 public canJump; //set to 1 when jumps so cant again -- maybe a powerup for double jump, so canJump can be 0 then 1 THEN set to two to only allow 2 jumps
@@ -122,7 +124,12 @@ createCommon(){
         allowGravity:false
     });
 
-    this.levelchangers = this.physics.add.group({
+    this.levelchangers1 = this.physics.add.group({
+        immovable:true,
+        allowGravity:false
+    });
+
+    this.levelchangers2 = this.physics.add.group({
         immovable:true,
         allowGravity:false
     });
@@ -224,9 +231,14 @@ createBox(scene, x,y, num){
     box.setBounce(.5);
 } 
 
-createLevelChanger(scene,x,y,num){
+createLevelChanger1(scene,x,y,num){
     var levelchanger = new LevelChanger(scene,x,y,num);
-    this.levelchangers.add(levelchanger);
+    this.levelchangers1.add(levelchanger);
+}
+
+createLevelChanger2(scene,x,y,num){
+    var levelchanger = new LevelChanger(scene,x,y,num);
+    this.levelchangers2.add(levelchanger);
 }
 
 createSlot(x,y, num){
@@ -372,6 +384,7 @@ movePlayerManager(){
     }
     
     handleMachine(machine, box){
+        console.log(machine.customValue);
         if (machine.customValue == 1){
             if (!box.valueChanged){
                 box.setVelocityY(750);
@@ -409,12 +422,11 @@ movePlayerManager(){
         }
     }
 
-    handleLevelchange(levelchanger,player){
-        if (levelchanger.customValue == 1){
-            this.scene.start('level2');
-        }
-        else if (levelchanger.customValue == 2){
-            this.scene.start('level3');
-        }
+    handleLevelchange1(){
+        this.scene.start('Level2');
+    }
+
+    handleLevelchange2(){
+        this.scene.start('Level3');
     }
 }

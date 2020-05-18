@@ -62,7 +62,7 @@ export default class Level3 extends baseScene {
         this.physics.add.collider(this.walls, this.player);
         this.physics.add.collider(this.player, this.machines);
         this.physics.add.collider(this.machines, this.boxes, this.handleMachine.bind(this));
-        this.physics.add.collider(this.player, this.levelchangers, this.handleLevelchange.bind(this));
+        //this.physics.add.collider(this.player, this.levelchangers, this.handleLevelchange.bind(this));
         //this.physics.add.collider(this.player,this.machines, this.handleButton.bind(this));
 
         this.physics.add.overlap(this.player, this.boxes,  this.handlePickup.bind(this));

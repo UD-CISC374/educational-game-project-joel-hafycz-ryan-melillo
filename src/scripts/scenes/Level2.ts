@@ -1,6 +1,7 @@
 import baseScene from "./baseScene";
 import Box from "../objects/box";
 import Player from "../objects/player";
+import LevelChanger from "../objects/levelchanger";
 
 export default class Level2 extends baseScene {
 
@@ -38,7 +39,7 @@ export default class Level2 extends baseScene {
     this.createLongPlatforms(0, 600, 9);
     this.createLongPlatforms(541, 600, 9);
 
-    this.createLevelChanger(this,900,575,2);
+    this.createLevelChanger2(this,900,575,2);
 
     this.createSlot(440,575,4);
     this.createSlot(470,575,5);
@@ -117,7 +118,7 @@ export default class Level2 extends baseScene {
     this.physics.add.collider(this.walls, this.player);
     this.physics.add.collider(this.player, this.machines);
     this.physics.add.collider(this.machines, this.boxes, this.handleMachine.bind(this));
-    this.physics.add.collider(this.player, this.levelchangers, this.handleLevelchange.bind(this));
+    this.physics.add.collider(this.levelchangers2, this.player, this.handleLevelchange2.bind(this));
 
     this.physics.add.overlap(this.player, this.boxes,  this.handlePickup.bind(this));
     this.physics.add.overlap(this.player, this.coins, this.pickupCoin.bind(this));

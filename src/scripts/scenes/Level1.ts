@@ -54,7 +54,7 @@ export default class Level1 extends baseScene{
     this.createBox(this,850,270,2);
     this.createBox(this,300,470,1);
 
-    this.createLevelChanger(this,950,575,1);
+    this.createLevelChanger1(this,950,575,1);
   
     this.door = this.physics.add.staticImage(920,550,"door");
     
@@ -153,7 +153,7 @@ export default class Level1 extends baseScene{
     this.physics.add.collider(this.boxes, this.slots, this.handleSlot.bind(this));
     this.physics.add.collider(this.platforms,this.player);
     this.physics.add.collider(this.walls, this.player);
-    this.physics.add.collider(this.player, this.levelchangers, this.handleLevelchange.bind(this));
+    this.physics.add.collider(this.levelchangers1, this.player, this.handleLevelchange1.bind(this));
     
     this.physics.add.overlap(this.player, this.boxes,  this.handlePickup.bind(this));
     this.physics.add.overlap(this.player, this.coins, this.pickupCoin.bind(this));
