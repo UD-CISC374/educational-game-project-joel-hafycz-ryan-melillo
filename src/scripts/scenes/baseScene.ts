@@ -21,6 +21,8 @@ public box3: Phaser.Physics.Arcade.Sprite;
 public box4: Phaser.Physics.Arcade.Sprite;
 public box5: Phaser.Physics.Arcade.Sprite;
 public box6: Phaser.Physics.Arcade.Sprite;
+public box7: Phaser.Physics.Arcade.Sprite;
+public box8: Phaser.Physics.Arcade.Sprite;
 
 public slot0: Phaser.Physics.Arcade.Image;
 public slot1: Phaser.Physics.Arcade.Image;
@@ -40,9 +42,10 @@ public machine3: Phaser.Physics.Arcade.Sprite;
 public machine4: Phaser.Physics.Arcade.Sprite;
 public machine5: Phaser.Physics.Arcade.Sprite;
 
+public levelchanger0: Phaser.Physics.Arcade.Image;
 public levelchanger1: Phaser.Physics.Arcade.Image;
 public levelchanger2: Phaser.Physics.Arcade.Image;
-
+public levelchanger3: Phaser.Physics.Arcade.Image;
 
   //Sounds
 public music: Phaser.Sound.BaseSound;
@@ -59,8 +62,10 @@ public machines: Phaser.Physics.Arcade.Group;
 public slots: Phaser.Physics.Arcade.StaticGroup;
 public boxEmitter: Phaser.GameObjects.Particles.ParticleEmitter;
 
+public levelchangers0:Phaser.Physics.Arcade.Group;
 public levelchangers1:Phaser.Physics.Arcade.Group;
 public levelchangers2:Phaser.Physics.Arcade.Group;
+public levelchangers3:Phaser.Physics.Arcade.Group;
 
   //Other
 public canJump; //set to 1 when jumps so cant again -- maybe a powerup for double jump, so canJump can be 0 then 1 THEN set to two to only allow 2 jumps
@@ -124,12 +129,22 @@ createCommon(){
         allowGravity:false
     });
 
+    this.levelchangers0 = this.physics.add.group({
+        immovable:true,
+        allowGravity:false
+    });
+
     this.levelchangers1 = this.physics.add.group({
         immovable:true,
         allowGravity:false
     });
 
     this.levelchangers2 = this.physics.add.group({
+        immovable:true,
+        allowGravity:false
+    });
+
+    this.levelchangers3 = this.physics.add.group({
         immovable:true,
         allowGravity:false
     });
@@ -231,6 +246,11 @@ createBox(scene, x,y, num){
     box.setBounce(.5);
 } 
 
+createLevelChanger0(scene,x,y,num){
+    var levelchanger = new LevelChanger(scene,x,y,num);
+    this.levelchangers0.add(levelchanger);
+}
+
 createLevelChanger1(scene,x,y,num){
     var levelchanger = new LevelChanger(scene,x,y,num);
     this.levelchangers1.add(levelchanger);
@@ -239,6 +259,11 @@ createLevelChanger1(scene,x,y,num){
 createLevelChanger2(scene,x,y,num){
     var levelchanger = new LevelChanger(scene,x,y,num);
     this.levelchangers2.add(levelchanger);
+}
+
+createLevelChanger3(scene,x,y,num){
+    var levelchanger = new LevelChanger(scene,x,y,num);
+    this.levelchangers3.add(levelchanger);
 }
 
 createSlot(x,y, num){
@@ -405,14 +430,22 @@ movePlayerManager(){
             }
         }
         else if (machine.customValue == 3){
+            box.setVelocityY(-200);
+            box.setVelocityX(200);
             this.sound.play("boop");
-            box.customValue-=1;
-            box.setTexture("box" + box.customValue);
+            if (box.customValue !== 0){
+                box.customValue-=1;
+                box.setTexture("box" + box.customValue);
+            }            
         }
         else if (machine.customValue == 4){
+            box.setVelocityY(-200);
+            box.setVelocityX(-200);
             this.sound.play("boop");
-            box.customValue+=1;
-            box.setTexture("box" + box.customValue);
+            if (box.customValue !== 8){
+                box.customValue+=1;
+                box.setTexture("box" + box.customValue);
+            }
         }
     }
 
@@ -422,11 +455,19 @@ movePlayerManager(){
         }
     }
 
+    handleLevelchange0(){
+        this.scene.start('Level1');
+    }
+
     handleLevelchange1(){
         this.scene.start('Level2');
     }
 
     handleLevelchange2(){
         this.scene.start('Level3');
+    }
+
+    handleLevelchange3(){
+        this.scene.start('Level4');
     }
 }

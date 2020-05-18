@@ -1,15 +1,11 @@
-import Level2 from "./Level2";
 import baseScene from "./baseScene";
-import Box from "../objects/box";
 import Player from "../objects/player";
 
 export default class Level1 extends baseScene{
 
-
   constructor() {
     super({ key: 'Level1' });
   }
-
 
   create() {
     this.createCommon();

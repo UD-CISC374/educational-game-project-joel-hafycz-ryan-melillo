@@ -6,9 +6,11 @@ export default class PreloadScene extends Phaser.Scene {
   preload() {
 
     //Load Images
+    this.load.image("backgroundlvl0.png", "assets/images/backgroundlvl1.png");
     this.load.image("backgroundlvl1.png", "assets/images/backgroundlvl1.png");
-    this.load.image("backgroundlvl2.png", "assets/images/backgroundlvl2.png");
-    this.load.image("backgroundlvl3.png", "assets/images/backgroundlvl3.png");
+    this.load.image("backgroundlvl2.png", "assets/images/backgroundlvl1.png");
+    this.load.image("backgroundlvl3.png", "assets/images/backgroundlvl1.png");
+    this.load.image("backgroundlvl4.png", "assets/images/backgroundlvl1.png");
 
     this.load.image("player", "assets/images/robotstanding.png");
     this.load.image("coin", "assets/images/coin.png");
@@ -28,6 +30,8 @@ export default class PreloadScene extends Phaser.Scene {
     this.load.image("box4", "assets/images/box4.png");
     this.load.image("box5", "assets/images/box5.png");
     this.load.image("box6", "assets/images/box6.png");
+    this.load.image("box7", "assets/images/box7.png");
+    this.load.image("box8", "assets/images/box8.png");
 
     this.load.image("door", "assets/images/door.png");
 
@@ -38,6 +42,8 @@ export default class PreloadScene extends Phaser.Scene {
     this.load.image("slot4", "assets/images/slot4.png");
     this.load.image("slot5", "assets/images/slot5.png");
     this.load.image("slot6", "assets/images/slot6.png");
+    this.load.image("slot7", "assets/images/slot7.png");
+    this.load.image("slot8", "assets/images/slot8.png");
 
     this.load.image("machine1", "assets/images/machine_increase.png");
     this.load.image("machine2", "assets/images/machine_destroy.png");
@@ -83,6 +89,6 @@ export default class PreloadScene extends Phaser.Scene {
     //Other Stuff
 
 
-    this.scene.start('Level1');
+    this.scene.start('Level0');
   }
 }

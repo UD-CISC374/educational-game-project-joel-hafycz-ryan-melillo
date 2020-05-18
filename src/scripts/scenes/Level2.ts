@@ -1,7 +1,5 @@
 import baseScene from "./baseScene";
-import Box from "../objects/box";
 import Player from "../objects/player";
-import LevelChanger from "../objects/levelchanger";
 
 export default class Level2 extends baseScene {
 

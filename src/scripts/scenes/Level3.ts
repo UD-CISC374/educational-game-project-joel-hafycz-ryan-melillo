@@ -1,5 +1,4 @@
 import baseScene from "./baseScene";
-import Box from "../objects/box";
 import Player from "../objects/player";
 
 export default class Level3 extends baseScene {
@@ -17,20 +16,23 @@ export default class Level3 extends baseScene {
         this.player = new Player(this, 35, 550);
         this.player.setCollideWorldBounds(true);
 
-        this.createSlot(490, 575, 4);
-        this.createSlot(520, 575, 5);
-        this.createSlot(550, 575, 6);
+        this.createSlot(490, 575, 2);
+        this.createSlot(520, 575, 8);
+        this.createSlot(550, 575, 5);
 
         this.door = this.physics.add.staticImage(850,550,"door");
 
-        /*
-        this.createBox(this,300, 70,3);
-        this.createBox(this,850,270,2);*/
-        this.createBox(this,300,470,1);
+        
+        this.createBox(this,540,100,0);
+        this.createBox(this,520,100,0);
+        this.createBox(this,500,100,0);
 
         this.createLongPlatforms(0,8,20);
         this.createWalls(5,0,24);
         this.createWalls(935,-15,17);
+
+        this.createLongPlatforms(210,200,2);
+        this.createEnemy(240,173);
 
         this.createLongPlatforms(850,200,3);
         this.createMachine(this,897,165,2);
