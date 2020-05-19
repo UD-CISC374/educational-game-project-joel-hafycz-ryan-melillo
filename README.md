@@ -14,4 +14,4 @@ Use the left and right arrow keys to move back and forth, and the up arrow key t
 Screenshot:
 ![Our Logo](https://github.com/UD-CISC374/educational-game-project-joel-hafycz-ryan-melillo/tree/master/src/assets/screenshots/robothelperlarge.png)
 
-Gameplay Video[https://youtu.be/VuRvvs15zKA]
+[Gameplay Video](https://youtu.be/VuRvvs15zKA)
