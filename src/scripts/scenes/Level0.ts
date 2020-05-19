@@ -82,7 +82,7 @@ export default class Level0 extends baseScene{
     this.physics.add.collider(this.walls, this.player);
     this.physics.add.collider(this.levelchangers1, this.player, this.handleLevelchange1.bind(this));
     this.physics.add.collider(this.enemies, this.levelchangers3, this.bounceEnemy.bind(this));
-
+//resets jumps
     this.physics.add.collider(this.player, this.slots, this.handleJump.bind(this));
     this.physics.add.collider(this.player, this.platforms, this.handleJump.bind(this));
     
