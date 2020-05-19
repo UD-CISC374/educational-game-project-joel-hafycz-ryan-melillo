@@ -7,7 +7,7 @@
 
 As someone who had no experience with Computer Science before college, I was obviously intimidated by computer programming. Any time I would see someone working on a program, I would see the console and immediately realize I had no clue what was going on, let alone simple functions, loops, etc. Going into college, these concepts were difficult for me to grasp right away, so I understand the struggles of new Computer Scientists. Our game’s goal is to teach simple concepts of computer programming, to take away the intimidation factor that comes with novice programming.
 
-By being slowly introduced to basic computer science mechanics (without the menacing terminology), our game builds upo its levels to give the players a visual insight into how bits of code execute. A simple for loop that adds 3 to each item is boring and inconsequential in real life. But the thrill of avoiding enemies and watching the game physically respond to each step of the puzzle that you complete emphasizes these concepts in a more familiar part of the brain
+By being slowly introduced to basic computer science mechanics (without the menacing terminology), our game builds upo its levels to give the players a visual insight into how bits of code execute. A simple for loop that adds 3 to each item is boring and inconsequential in real life. But the thrill of avoiding enemies and watching the game physically respond to each step of the puzzle that you complete emphasizes these concepts in a more familiar part of the brain.
 
 
 
