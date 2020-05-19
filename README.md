@@ -17,6 +17,6 @@ Help the Robot finish the code! Use the left and right arrow keys to move back a
 
 
 
-![Our Logo](https://raw.github.com/UD-CISC374/educational-game-project-joel-hafycz-ryan-melillo/tree/master/src/assets/screenshots/robothelperlarge.png?raw=true)
+![Our Logo](/src/assets/screenshots/robothelperlarge.png?raw=true)
 
 [Gameplay Video](https://youtu.be/VuRvvs15zKA)
