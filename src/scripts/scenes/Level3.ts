@@ -23,10 +23,6 @@ export default class Level3 extends baseScene {
         this.door = this.physics.add.staticImage(850, 550, "door");
 
 
-        this.createBox(this, 540, 100, 0);
-        this.createBox(this, 520, 100, 0);
-        this.createBox(this, 500, 100, 0);
-
         this.createLongPlatforms(0, 8, 20);
         this.createWalls(5, 0, 24);
         this.createWalls(935, -15, 17);
@@ -41,10 +37,35 @@ export default class Level3 extends baseScene {
 
         this.createLongPlatforms(30, 200, 2);
         this.createMachine(this, 55, 185, 5);
+        this.add.text(20, 100, "Press space on the platform", {
+            font: "12px Arial",
+            fill: "white"
+        });
 
         this.createLongPlatforms(390, 200, 7);
         this.createMachine(this, 425, 185, 3);
         this.createMachine(this, 652, 185, 4);
+
+        this.createLongPlatforms(300, 300, 2);
+        this.createLongPlatforms(0, 300, 4);
+        this.createLongPlatforms(120, 400, 3);
+        this.createCoin(140, 350);
+        this.createSpike(160, 315);
+        this.createLongPlatforms(600, 400, 2);
+        this.createLongPlatforms(770, 300, 4);
+        this.createCoin(900, 270);
+        this.createEnemy(650, 350);
+        this.createLevelChanger0(this, 550, 370, 0);
+        this.createLevelChanger0(this, 700, 370, 0);
+
+        this.createLongPlatforms(400, 500, 3);
+        this.createLongPlatforms(220, 500, 2);
+        this.createSpike(400, 480);
+        this.createEnemy(270, 550);
+        this.createLevelChanger0(this, 200, 550, 0);
+        this.createLevelChanger0(this, 300, 550, 0);
+
+        this.createLevelChanger3(this, 900, 550, 3);
 
 
 
@@ -66,7 +87,7 @@ export default class Level3 extends baseScene {
 
         this.physics.add.collider(this.walls, this.player);
         this.physics.add.collider(this.machines, this.boxes, this.handleMachine.bind(this));
-        //this.physics.add.collider(this.player, this.levelchangers, this.handleLevelchange.bind(this));
+        this.physics.add.collider(this.player, this.levelchangers3, this.handleLevelchange3.bind(this));
         this.physics.add.collider(this.player, this.machines, this.handleButton.bind(this));
 
         this.physics.add.overlap(this.player, this.boxes, this.handlePickup.bind(this));

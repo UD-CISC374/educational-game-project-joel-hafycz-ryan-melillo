@@ -3,19 +3,19 @@ export default class Box extends Phaser.Physics.Arcade.Sprite {
   valueChanged: boolean
   pickedUp: boolean
 
-  constructor(scene: Phaser.Scene, x: number, y: number, value: number)  {
-    
+  constructor(scene: Phaser.Scene, x: number, y: number, value: number) {
 
-        super(scene, x, y, ("box" + value));
 
-        this.customValue = value;
-        this.valueChanged = false;
-        this.pickedUp = false;
+    super(scene, x, y, ("box" + value));
 
-    
-        scene.add.existing(this);
-        scene.physics.add.existing(this);
+    this.customValue = value;
+    this.valueChanged = false;
+    this.pickedUp = false;
 
-        scene.physics.world.enableBody(this);
-    }
+
+    scene.add.existing(this);
+    scene.physics.add.existing(this);
+
+    scene.physics.world.enableBody(this);
+  }
 }

@@ -18,7 +18,7 @@ const config: GameConfig = {
         parent: 'phaser-game',
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
-        width: DEFAULT_WIDTH, 
+        width: DEFAULT_WIDTH,
         height: DEFAULT_HEIGHT
     },
     scene: [PreloadScene, Level0, Level1, Level2, Level3, Level4],
@@ -27,7 +27,7 @@ const config: GameConfig = {
         arcade: {
             debug: false,
             gravity: { y: 600 }
-        
+
         }
     }
 };

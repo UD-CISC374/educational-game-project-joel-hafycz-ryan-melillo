@@ -322,12 +322,12 @@ export default class baseScene extends Phaser.Scene {
             //this.player.setVelocityX(0);
             this.player.setDragX(this.drag);//cool sliding stuff
         }
-/** for infinite jump
-        if(this.cursorKeys.up?.isDown){
-            this.player.setVelocityY(-280);
-        }
-*/
-       if (Phaser.Input.Keyboard.JustDown(this.uparrow) && this.canJump < 2) {
+        /** for infinite jump
+                if(this.cursorKeys.up?.isDown){
+                    this.player.setVelocityY(-280);
+                }
+        */
+        if (Phaser.Input.Keyboard.JustDown(this.uparrow) && this.canJump < 2) {
             this.player.setVelocityY(-280);
             this.canJump++;
         }
