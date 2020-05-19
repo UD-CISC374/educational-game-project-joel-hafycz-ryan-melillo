@@ -77,9 +77,13 @@ export default class Level1 extends baseScene{
 
     this.createLongPlatforms(525,200,3);
     this.createEnemy(580,170);
+    this.createLevelChanger0(this, 478, 170, 0);
+    this.createLevelChanger0(this, 668, 170, 0);
 
     this.createLongPlatforms(130, 300, 6);
     this.createEnemy(120,270);
+    
+    this.createLevelChanger0(this, 80, 270, 0);
     this.add.text(90,220, "And Workers", {
       font: "10px Arial",
       fill: "white"
@@ -105,7 +109,8 @@ export default class Level1 extends baseScene{
       fill: "white"
     });
 
-    this.createEnemy(340,400);
+    this.createEnemy(340,470);
+    this.createLevelChanger0(this, 424, 470, 0);
 
     this.createLongPlatforms(780, 500, 8);
 
@@ -155,6 +160,7 @@ export default class Level1 extends baseScene{
     this.physics.add.overlap(this.player, this.coins, this.pickupCoin.bind(this));
     this.physics.add.overlap(this.player, this.enemies, this.hurtPlayer.bind(this));
     this.physics.add.overlap(this.player, this.spikes, this.hurtPlayer.bind(this)); 
+
 
     this.canJump = 0;//allow player to jump
 

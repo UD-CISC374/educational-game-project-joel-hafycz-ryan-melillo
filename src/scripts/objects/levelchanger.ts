@@ -12,5 +12,6 @@ export default class LevelChanger extends Phaser.Physics.Arcade.Sprite {
         scene.physics.add.existing(this);
 
         scene.physics.world.enableBody(this);
+        //this.setVisible(false);
     }
 }

@@ -1,3 +1,4 @@
+
 import baseScene from "./baseScene";
 import Player from "../objects/player";
 
@@ -20,8 +21,55 @@ export default class Level0 extends baseScene{
     this.background.setOrigin(0, 0);
     
     //Sprites / Images
-    this.player = new Player(this, 190,20);
+    this.player = new Player(this, 50,50);
     this.player.setCollideWorldBounds(true);
+
+    this.createLongPlatforms(0,8,20);
+    this.createWalls(5,0,24);
+    this.createWalls(935,-15,25);
+    this.createLongPlatforms(30,150,16);
+    this.add.text(170, 60, "Use the arrow keys to move arround", {
+      font: "15px Arial",
+      fill: "white"
+    });
+    this.add.text(550, 60, "Avoid Spikes and Workers", {
+      font: "15px Arial",
+      fill: "white"
+    });
+    this.createEnemy(565,120);
+    this.createSpike(725,133);
+    this.add.text(530, 200, "Press space to pick up/drop boxes", {
+      font: "15px Arial",
+      fill: "white"
+    });
+    this.createBox(this,650,250,0);
+    this.createSlot(302, 280,0);
+    this.add.text(200, 200, "Place the boxes in their slot", {
+      font: "15px Arial",
+      fill: "white"
+    });
+    this.createBox(this,302,400,0);
+    this.add.text(200, 350, "Place boxes on the Green pads to increase by 1 or the Red pads to decrease by 1", {
+      font: "15px Arial",
+      fill: "white"
+    });
+    this.createMachine(this,400,435,3);
+    this.createMachine(this,600,435,4);
+    this.add.text(450, 500, "Try to figure out what these machines do", {
+      font: "15px Arial",
+      fill: "white"
+    });
+    this.createMachine(this,600,565,1);
+    this.createBox(this,700,565,0);
+    this.createMachine(this,350,565,2);
+    this.createBox(this,450,565,0);
+    this.add.text(20, 500, "Follow the functions on the bottom to complete the levels", {
+      font: "15px Arial",
+      fill: "white"
+    });
+    this.createLongPlatforms(140,300,18);
+    this.createLongPlatforms(30,450,16);
+    this.createLongPlatforms(140,600,19);
 
     this.physics.add.collider(this.boxes, this.platforms);
     this.physics.add.collider(this.boxes,this.boxes);
