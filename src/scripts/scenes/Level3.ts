@@ -46,6 +46,7 @@ export default class Level3 extends baseScene {
         this.createMachine(this, 425, 185, 3);
         this.createMachine(this, 652, 185, 4);
 
+        this.createLevelChanger3(this,900,550,3);
         this.createLongPlatforms(300, 300, 2);
         this.createLongPlatforms(0, 300, 4);
         this.createLongPlatforms(120, 400, 3);
