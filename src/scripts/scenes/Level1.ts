@@ -10,18 +10,6 @@ export default class Level1 extends baseScene {
   create() {
     this.createCommon();
 
-    this.music = this.sound.add("backgroundmusic");
-    var musicConfig = {
-      mute: false,
-      volume: .5,
-      rate: 1,
-      detune: 0,
-      seek: 0,
-      loop: true,
-      delay: 0
-    }
-
-    this.music.play(musicConfig);
 
 
 

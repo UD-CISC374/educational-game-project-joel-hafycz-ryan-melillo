@@ -428,7 +428,6 @@ export default class baseScene extends Phaser.Scene {
 
 
     hurtPlayer(player, enemy) {
-        this.sound.play("deathsound");
         this.tweens.add({
             targets: player,
             ease: 'Circular',
@@ -448,6 +447,7 @@ export default class baseScene extends Phaser.Scene {
             }
         });
         if (!player.isHurt) {
+            this.sound.play("deathsound");
             player.isHurt = true;
             let ouchMsg = this.add.text(player.x, player.y - 50, "Owch!!!", { color: "orange" });
             this.time.delayedCall(1000, () => {

@@ -10,6 +10,19 @@ export default class Level0 extends baseScene {
 
   create() {
     this.createCommon();
+
+    this.music = this.sound.add("backgroundmusic");
+    var musicConfig = {
+      mute: false,
+      volume: .5,
+      rate: 1,
+      detune: 0,
+      seek: 0,
+      loop: true,
+      delay: 0
+    }
+
+    this.music.play(musicConfig);
     this.background = this.add.tileSprite(0, 0, this.scale.width, this.scale.height, "backgroundlvl1.png");
     this.background.setOrigin(0, 0);
 
