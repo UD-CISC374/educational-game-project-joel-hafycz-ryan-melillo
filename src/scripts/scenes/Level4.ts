@@ -23,6 +23,11 @@ export default class Level4 extends baseScene{
     this.player = new Player(this, 190,20);
     this.player.setCollideWorldBounds(true);
 
+    this.add.text(400, 400, "The End", {
+      font: "30px Arial",
+      fill: "white"
+    });
+
     this.physics.add.collider(this.boxes, this.platforms);
     this.physics.add.collider(this.boxes,this.boxes);
     this.physics.add.collider(this.boxes, this.walls);
