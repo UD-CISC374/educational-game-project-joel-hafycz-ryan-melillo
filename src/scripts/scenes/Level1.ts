@@ -36,7 +36,7 @@ export default class Level1 extends baseScene{
     });
     
     //Sprites / Images
-    this.player = new Player(this, 190,20);
+    this.player = new Player(this, 50,50);
     this.player.setCollideWorldBounds(true);
 
     this.createSlot(490, 575, 1);
