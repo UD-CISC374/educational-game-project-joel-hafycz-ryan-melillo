@@ -46,26 +46,27 @@ export default class Level3 extends baseScene {
         this.createMachine(this, 425, 185, 3);
         this.createMachine(this, 652, 185, 4);
 
-        this.createLongPlatforms(300,300,2);
-        this.createLongPlatforms(0,300,4);
-        this.createLongPlatforms(120,400,3);
-        this.createCoin(140,350);
-        this.createSpike(160,315);
-        this.createLongPlatforms(600,400,2);
-        this.createLongPlatforms(770,300,4);
-        this.createCoin(900,270);
-        this.createEnemy(650,350);
-        this.createLevelChanger0(this,550,370,0);
-        this.createLevelChanger0(this,700,370,0);
-
-        this.createLongPlatforms(400,500,3);
-        this.createLongPlatforms(220,500,2);
-        this.createSpike(400,480);
-        this.createEnemy(270,550);
-        this.createLevelChanger0(this,200,550,0);
-        this.createLevelChanger0(this,300,550,0);
-
         this.createLevelChanger3(this,900,550,3);
+        this.createLongPlatforms(300, 300, 2);
+        this.createLongPlatforms(0, 300, 4);
+        this.createLongPlatforms(120, 400, 3);
+        this.createCoin(140, 350);
+        this.createSpike(160, 315);
+        this.createLongPlatforms(600, 400, 2);
+        this.createLongPlatforms(770, 300, 4);
+        this.createCoin(900, 270);
+        this.createEnemy(650, 350);
+        this.createLevelChanger0(this, 550, 370, 0);
+        this.createLevelChanger0(this, 700, 370, 0);
+
+        this.createLongPlatforms(400, 500, 3);
+        this.createLongPlatforms(220, 500, 2);
+        this.createSpike(400, 480);
+        this.createEnemy(270, 550);
+        this.createLevelChanger0(this, 200, 550, 0);
+        this.createLevelChanger0(this, 300, 550, 0);
+
+        this.createLevelChanger3(this, 900, 550, 3);
 
 
 

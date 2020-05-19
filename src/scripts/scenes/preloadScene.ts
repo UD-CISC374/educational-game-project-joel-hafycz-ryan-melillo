@@ -18,11 +18,11 @@ export default class PreloadScene extends Phaser.Scene {
     this.load.image("spike", "assets/images/spike.png");
     this.load.image("platform", "assets/images/platform.png");
     this.load.image("wall", "assets/images/wall.png");
-    this.load.image("emptybox","assets/images/emptybox.png");
-    
+    this.load.image("emptybox", "assets/images/emptybox.png");
+
     //this.load.image("levelchanger1", "assets/images/levelchanger1.png");
     //this.load.image("levelchanger2", "assets/images/levelchanger2.png");
-    
+
     this.load.image("box0", "assets/images/emptybox.png");
     this.load.image("box1", "assets/images/box1.png");
     this.load.image("box2", "assets/images/box2.png");
@@ -52,7 +52,7 @@ export default class PreloadScene extends Phaser.Scene {
     this.load.image("machine5", "assets/images/button.png");
 
     //Load SpriteSheets
-    this.load.spritesheet("death", "assets/spritesheets/death.png",{
+    this.load.spritesheet("death", "assets/spritesheets/death.png", {
       frameWidth: 16,
       frameHeight: 16
     });
@@ -76,7 +76,7 @@ export default class PreloadScene extends Phaser.Scene {
     //Create Animations
     this.anims.create({
       key: "restart",
-      frames: this.anims.generateFrameNames("restart",{
+      frames: this.anims.generateFrameNames("restart", {
         start: 0,
         end: 4
       }),
@@ -89,6 +89,6 @@ export default class PreloadScene extends Phaser.Scene {
     //Other Stuff
 
 
-    this.scene.start('Level3');
+    this.scene.start('Level0');
   }
 }
