@@ -1,3 +1,4 @@
+
 import baseScene from "./baseScene";
 import Player from "../objects/player";
 

@@ -27,6 +27,7 @@ export default class Level2 extends baseScene {
     this.canJump = 0;//allow player to jump   
     
     this.door = this.physics.add.staticImage(850,550,"door");
+    this.createLevelChanger0(this, 850, 550, 0);
     
     this.createWalls(4,0,25);
     this.createWalls(935,0,16);
@@ -49,6 +50,8 @@ export default class Level2 extends baseScene {
     });
     this.createLongPlatforms(0,300,3);
     this.createEnemy(400,270);
+    this.createLevelChanger0(this, 296, 270, 0);
+    this.createLevelChanger0(this, 436, 270, 0);
 
     this.createCoin(900, 450);
 
@@ -59,6 +62,7 @@ export default class Level2 extends baseScene {
     this.createCoin(30,170);
 
     this.createEnemy(40,470);
+    this.createLevelChanger0(this, 142, 470, 0);
     this.createEnemy(300,550);
     
     this.createWalls(473,0,8);

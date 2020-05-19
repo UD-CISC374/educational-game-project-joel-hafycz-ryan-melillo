@@ -71,6 +71,7 @@ public levelchangers3:Phaser.Physics.Arcade.Group;
 public canJump; //set to 1 when jumps so cant again -- maybe a powerup for double jump, so canJump can be 0 then 1 THEN set to two to only allow 2 jumps
 public cursorKeys: Phaser.Types.Input.Keyboard.CursorKeys;
 public spacebar; 
+public enemyVelocity = 35;
     constructor(key) {
         super(key);
     }
@@ -95,8 +96,8 @@ createCommon(){
 
       //Enemies
     this.enemies = this.physics.add.group({
-        immovable:true,
-        allowGravity:false
+        immovable:false,
+        allowGravity:true
     });
 
     this.coins = this.physics.add.group({
@@ -165,7 +166,25 @@ createCommon(){
         blendMode: Phaser.BlendModes.SCREEN
     });
 
+    this.physics.add.collider(this.enemies, this.platforms);
+    this.physics.add.collider(this.enemies, this.walls, this.bounceEnemy.bind(this));
+    this.physics.add.collider(this.enemies, this.levelchangers0, this.bounceEnemy.bind(this));
+    this.physics.add.collider(this.enemies, this.slots, this.bounceEnemy.bind(this));
+
+
+
     }
+
+bounceEnemy(enemy, object){
+    if(enemy.state == -1){
+        enemy.setVelocity(this.enemyVelocity);
+        enemy.state = 1;
+    }
+    else {
+        enemy.setVelocity(-this.enemyVelocity);
+        enemy.state =(-1);
+    }
+}
 
 update() {
     this.movePlayerManager();
@@ -233,7 +252,10 @@ createSpike(x,y){
 createEnemy(x,y){
     var enemy = this.physics.add.sprite(x,y, "enemy");
     this.enemies.add(enemy);
-    //enemy.setCollideWorldBounds(true);
+    enemy.setVelocityX(-this.enemyVelocity);
+    //enemy.body.velocity.x = -50;
+    enemy.setCollideWorldBounds(true);
+    enemy.setState(-1);
     //enemy.setDragX(this.drag);
 }
 
@@ -276,6 +298,7 @@ createMachine(scene,x,y,type){
     var machine = new Machine(scene,x,y,type);
     this.machines.add(machine);
 }
+
 
 
 
