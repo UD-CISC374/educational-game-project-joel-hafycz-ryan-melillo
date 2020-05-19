@@ -39,16 +39,24 @@ export default class Level1 extends baseScene{
     this.player = new Player(this, 190,20);
     this.player.setCollideWorldBounds(true);
 
-    this.createSlot(125, 477, 0);
     this.createSlot(490, 575, 1);
     this.createSlot(520, 575, 2);
     this.createSlot(550, 575, 3);
 
-    this.createBox(this,180,470,0);
-    //this.createBox(this,750, 550, 0);
-    this.createBox(this,300, 70,3);
-    this.createBox(this,850,270,2);
+    this.createSpike(700,580);
+
+    this.createBox(this,100,250,3);
+    this.createBox(this,600,165,2);
+    this.createSpike(640,180);
     this.createBox(this,300,470,1);
+    this.createLevelChanger0(this,225,165,0);
+    this.createLevelChanger0(this,385,165,0);
+    this.createEnemy(335,165);
+    this.createLevelChanger0(this,200,465,0);
+    this.createCoin(35,470);
+    this.createEnemy(100,450);
+    this.createEnemy(850,260);
+    this.createLevelChanger0(this,725,260,0);
 
     this.createLevelChanger1(this,950,575,1);
   
@@ -59,67 +67,28 @@ export default class Level1 extends baseScene{
     //Build Level
     this.createLongPlatforms(0,8,20);
     this.createWalls(6,14,25);
-    this.createWalls(240,14,16);
     this.createLongPlatforms(0,693,20);
-    this.createLongPlatforms(130,100,6);
+    this.createLongPlatforms(3,100,4);
     this.createLongPlatforms(780,100,4);
     this.createWalls(936,14,16);
-    this.createCoin(850,60);
+    this.createCoin(900,260);
     this.createWalls(936,610,4);
+    this.createSpike(280,380);  
 
-    this.createLongPlatforms(0,200,4);
-    this.createSpike(160,180);
-    this.add.text(90,130, "Avoid Spikes", {
-      font: "10px Arial",
-      fill: "white"
-    });
-  
-
-    this.createLongPlatforms(525,200,3);
-    this.createEnemy(580,170);
-    this.createLevelChanger0(this, 478, 170, 0);
-    this.createLevelChanger0(this, 668, 170, 0);
-
-    this.createLongPlatforms(130, 300, 6);
-    this.createEnemy(120,270);
-    
-    this.createLevelChanger0(this, 80, 270, 0);
-    this.add.text(90,220, "And Workers", {
-      font: "10px Arial",
-      fill: "white"
-    });
-    this.createLongSpike(380,280,2);
-
-    
+    this.createLongPlatforms(580,200,2);
+    this.createLongPlatforms(280,200,2);
     this.createLongPlatforms(780,300,4);
 
-    this.createLongPlatforms(0,400,4);
-    this.createCoin(120,360);
-    this.add.text(90,330, "Collect Coins", {
-      font: "10px Arial",
-      fill: "white"
-    });
-
-    this.createLongPlatforms(525,400,3);
+    this.createLongPlatforms(0,300,4);
+    this.createLongPlatforms(435,300,2);
+    this.createLongPlatforms(585,400,2);
+    this.createLongPlatforms(280,400,2);
+    this.createLongPlatforms(3,500,4);
+    this.createLongPlatforms(435,500,2);
     this.createLongSpike(585,380,1);
-
-    this.createLongPlatforms(130, 500, 6);
-    this.add.text(20,420, "Press SPACEBAR to pickup or drop boxes,\n and put them in the correct spots", {
-      font: "10px Arial",
-      fill: "white"
-    });
-
-    this.createEnemy(340,470);
-    this.createLevelChanger0(this, 424, 470, 0);
-
     this.createLongPlatforms(780, 500, 8);
 
     this.createLongPlatforms(-10, 600, 10);
-    this.add.text(20,545, "You are a robot completing the functions at the bottom, \ncomplete them to progress to the next level", {
-      font: "10px Arial",
-      fill: "white"
-    });
-
     this.add.text(20, 620, "def create_array():\n    Array = [1,2,3]", {
       font: "20px Arial",
       fill: "white"
