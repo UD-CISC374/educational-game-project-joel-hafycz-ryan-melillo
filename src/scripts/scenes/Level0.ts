@@ -37,6 +37,7 @@ export default class Level0 extends baseScene{
       fill: "white"
     });
     this.createEnemy(565,120);
+    this.createLevelChanger3(this, 822, 120, 3);
     this.createSpike(725,133);
     this.add.text(530, 200, "Press space to pick up/drop boxes", {
       font: "15px Arial",
@@ -74,17 +75,22 @@ export default class Level0 extends baseScene{
     this.physics.add.collider(this.boxes, this.platforms);
     this.physics.add.collider(this.boxes,this.boxes);
     this.physics.add.collider(this.boxes, this.walls);
-    this.physics.add.collider(this.player, this.slots);
+
     //this.physics.add.collider(this.player, this.door);
     this.physics.add.collider(this.boxes, this.slots, this.handleSlot.bind(this));
-    this.physics.add.collider(this.platforms,this.player);
+
     this.physics.add.collider(this.walls, this.player);
     this.physics.add.collider(this.levelchangers1, this.player, this.handleLevelchange1.bind(this));
+    this.physics.add.collider(this.enemies, this.levelchangers3, this.bounceEnemy.bind(this));
+
+    this.physics.add.collider(this.player, this.slots, this.handleJump.bind(this));
+    this.physics.add.collider(this.player, this.platforms, this.handleJump.bind(this));
     
     this.physics.add.overlap(this.player, this.boxes,  this.handlePickup.bind(this));
     this.physics.add.overlap(this.player, this.coins, this.pickupCoin.bind(this));
     this.physics.add.overlap(this.player, this.enemies, this.hurtPlayer.bind(this));
     this.physics.add.overlap(this.player, this.spikes, this.hurtPlayer.bind(this)); 
+
 
     this.canJump = 0;//allow player to jump
   }

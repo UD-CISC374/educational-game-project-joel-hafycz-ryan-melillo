@@ -64,6 +64,7 @@ export default class Level2 extends baseScene {
     this.createEnemy(40,470);
     this.createLevelChanger0(this, 142, 470, 0);
     this.createEnemy(300,550);
+  
     
     this.createWalls(473,0,8);
     this.createSpike(460,30);
@@ -78,6 +79,7 @@ export default class Level2 extends baseScene {
     this.createLongPlatforms(492,240,7);
     this.createPlatform(910,320);
     this.createEnemy(650, 200);
+    this.createLevelChanger0(this, 836, 210, 0);
         
     this.createLongPlatforms(840, 400, 3);
     this.createCoin(625,300);
@@ -113,10 +115,13 @@ export default class Level2 extends baseScene {
     this.physics.add.collider(this.boxes, this.platforms);
     this.physics.add.collider(this.boxes,this.boxes);
     this.physics.add.collider(this.boxes, this.walls);
-    this.physics.add.collider(this.player, this.slots);
+
     //this.physics.add.collider(this.player, this.door);
     this.physics.add.collider(this.boxes, this.slots, this.handleSlot.bind(this));
-    this.physics.add.collider(this.platforms,this.player);
+
+    this.physics.add.collider(this.player, this.slots, this.handleJump.bind(this));
+    this.physics.add.collider(this.player, this.platforms, this.handleJump.bind(this));
+
     this.physics.add.collider(this.walls, this.player);
     this.physics.add.collider(this.player, this.machines);
     this.physics.add.collider(this.machines, this.boxes, this.handleMachine.bind(this));
